@@ -1,0 +1,45 @@
+<span *ngIf="type === 'DATETIME'">
+  {{ value | date: format }}
+</span>
+
+<span *ngIf="type === 'CURRENCY'">
+  <ng-container *ngIf="value; else currencyZero">
+    {{ value | formatPrice: null }}
+  </ng-container>
+  <ng-template #currencyZero> 0 </ng-template>
+</span>
+
+<span *ngIf="type === 'STATUS'">
+  <app-pl-status-element
+    [statusType]="format"
+    [statusValue]="value"
+    [externalValue]="externalValue"
+  >
+  </app-pl-status-element>
+</span>
+
+<span *ngIf="type === 'CHECK'">
+  <app-pl-check-element [statusValue]="value"> </app-pl-check-element>
+</span>
+
+<span *ngIf="type === 'NUMBER'">
+  {{ value }}
+</span>
+
+<span *ngIf="type === 'PERCENT'">
+  <ng-container *ngIf="value; else zero">
+    {{ value | percent }}
+  </ng-container>
+  <ng-template #zero>
+    {{ 0 | percent }}
+  </ng-template>
+</span>
+
+<span *ngIf="type === 'HYPERLINK'">
+  <a [href]="format" target="_blank" class="router">{{ value || "N/A" }}</a>
+</span>
+
+<!-- EOF -->
+<span *ngIf="!type || type === 'TEXT'">
+  {{ value || "N/A" }}
+</span>

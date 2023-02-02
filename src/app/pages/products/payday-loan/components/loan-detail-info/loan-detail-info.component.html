@@ -1,0 +1,230 @@
+<div class="container-fluid">
+  <div class="row p-3">
+    <!--  Info  -->
+    <section class="col-12">
+      <div class="row">
+        <!-- Left Column -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <ul class="pl-list">
+            <li class="pl-list-item" *ngFor="let leftColumnEle of leftColumn">
+              <p class="pl-list-item-label">
+                {{ leftColumnEle?.title }}
+              </p>
+              <p class="pl-list-item-content">
+                <!-- {{ leftColumnEle.value }} -->
+                <app-format-data
+                  [type]="leftColumnEle?.type"
+                  [format]="leftColumnEle?.format"
+                  [value]="leftColumnEle?.value"
+                ></app-format-data>
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Middle Column -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <ul class="pl-list">
+            <li
+              class="pl-list-item"
+              *ngFor="let middleColumnEle of middleColumn"
+            >
+              <p class="pl-list-item-label">
+                {{ middleColumnEle?.title }}
+              </p>
+              <div
+                *ngIf="middleColumnEle.title === 'Tổng phí dịch vụ'"
+                class="service-fee"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 21 21"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.9996 -0.0010376C16.5233 -0.0010376 21.0011 4.4768 21.0011 10.0005C21.0011 15.5242 16.5233 20.0021 10.9996 20.0021C5.47589 20.0021 0.998047 15.5242 0.998047 10.0005C0.998047 4.4768 5.47589 -0.0010376 10.9996 -0.0010376ZM10.9958 8.24959C10.483 8.24989 10.0605 8.63619 10.0031 9.13359L9.9964 9.25019L10 14.7518L10.0068 14.8684C10.0649 15.3657 10.4879 15.7515 11.0007 15.7511C11.5135 15.7508 11.936 15.3645 11.9934 14.8671L12 14.7505L11.9964 9.24889L11.9896 9.13229C11.9316 8.63499 11.5086 8.24919 10.9958 8.24959ZM11 4.49999C10.3089 4.49999 9.7485 5.06031 9.7485 5.75151C9.7485 6.44271 10.3089 7.00303 11 7.00303C11.6912 7.00303 12.2516 6.44271 12.2516 5.75151C12.2516 5.06031 11.6912 4.49999 11 4.49999Z"
+                    fill="black"
+                  />
+                </svg>
+                <div class="customer-disable-form-container-expand">
+                  <div class="arrow">
+                    <span class="sprite-group-7-popup-arrow-down"></span>
+                  </div>
+                  <div class="card op-card op-drop-shadow">
+                    <div class="card-title d-flex align-items-center gap-1">
+                      {{
+                      "loan_app.loan_info.total_service_charge" | translate
+                      }}
+                    </div>
+                    <div class="card-body">
+                      <div
+                        *ngIf="loanDetail?.companyInfo?.groupName === 'HMG'"
+                        class="service-fee-container d-flex gap-3 flex-column"
+                      >
+                        <div
+                          *ngFor="let fee of serviceFeeHmg"
+                          class="
+                            item
+                            d-flex
+                            justify-content-between
+                            align-items-center
+                          "
+                        >
+                          <div class="left">
+                            <p>{{ fee.title }}</p>
+                            <span>{{ fee.subTitle }}</span>
+                          </div>
+                          <div class="right">
+                            <app-format-data
+                              [type]="fee?.type"
+                              [format]="fee?.format"
+                              [value]="fee?.value"
+                            ></app-format-data>
+                            ₫
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="loanDetail?.companyInfo?.groupName === 'TNG'"
+                        class="service-fee-container d-flex gap-3 flex-column"
+                      >
+                        <div
+                          *ngFor="let fee of serviceFeeTng"
+                          class="
+                            item
+                            d-flex
+                            justify-content-between
+                            align-items-center
+                          "
+                        >
+                          <div class="left">
+                            <p>{{ fee.title }}</p>
+                            <span>{{ fee.subTitle }}</span>
+                          </div>
+                          <div class="right">
+                            <app-format-data
+                              [type]="fee?.type"
+                              [format]="fee?.format"
+                              [value]="fee?.value"
+                            ></app-format-data>
+                            ₫
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        *ngIf="loanDetail?.companyInfo?.groupName === 'VAC'"
+                        class="service-fee-container d-flex gap-3 flex-column"
+                      >
+                        <div
+                          *ngFor="let fee of serviceFeeVac"
+                          class="
+                            item
+                            d-flex
+                            justify-content-between
+                            align-items-center
+                          "
+                        >
+                          <div class="left">
+                            <p>{{ fee.title }}</p>
+                            <span>{{ fee.subTitle }}</span>
+                          </div>
+                          <div class="right">
+                            <app-format-data
+                              [type]="fee?.type"
+                              [format]="fee?.format"
+                              [value]="fee?.value"
+                            ></app-format-data>
+                            ₫
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p class="pl-list-item-content">
+                <app-format-data
+                  [type]="middleColumnEle?.type"
+                  [format]="middleColumnEle?.format"
+                  [value]="middleColumnEle?.value"
+                ></app-format-data>
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <ul class="pl-list">
+            <li class="pl-list-item" *ngFor="let rightColumnEle of rightColumn">
+              <p class="pl-list-item-label">
+                {{ rightColumnEle?.title }}
+              </p>
+              <p class="pl-list-item-content">
+                <app-format-data
+                  [type]="rightColumnEle?.type"
+                  [format]="rightColumnEle?.format"
+                  [value]="rightColumnEle?.value"
+                ></app-format-data>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!--  Actions -->
+
+  <div class="row mt-3 mb-3">
+    <div class="col-12 d-flex gap-2 justify-content-end">
+      <ng-container
+        *ngxPermissionsOnly="[
+          'hmgPaydayLoans:changeLoanStatus',
+          'paydays:changeLoanStatusTng',
+          'paydays:changeLoanStatusVac'
+        ]"
+      >
+        <ng-container>
+          <button
+            mat-flat-button
+            color="warn"
+            (click)="changeLoanStatus(prevLoanStatus, prevLoanStatusDisplay)"
+            [hidden]="!prevLoanStatus || prevLoanStatus === 'UNKNOWN_STATUS'"
+          >
+            {{ prevLoanStatusDisplay }}
+          </button>
+        </ng-container>
+
+        <ng-container>
+          <button
+            mat-flat-button
+            color="accent"
+            (click)="changeLoanStatus(nextLoanStatus, nextLoanStatusDisplay)"
+            [hidden]="nextLoanStatus === 'UNKNOWN_STATUS'"
+          >
+            {{ nextLoanStatusDisplay }}
+          </button>
+        </ng-container>
+
+        <ng-container>
+          <button
+            mat-flat-button
+            color="warn"
+            (click)="
+              changeLoanStatus(rejectLoanStatus, rejectLoanStatusDisplay)
+            "
+            [hidden]="rejectLoanStatus === 'UNKNOWN_STATUS'"
+          >
+            <span class="sprite-group-7-dismiss"></span>
+            {{ rejectLoanStatusDisplay }}
+          </button>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>

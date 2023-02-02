@@ -1,0 +1,154 @@
+<div class="container-fluid op-background-container">
+  <div class="container">
+    <div class="dashboard-content">
+      <!-- Overview -->
+      <section class="row g-2 g-md-1 g-lg-2">
+        <article class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="card op-card">
+            <div class="card-title d-flex align-items-center gap-1">
+              <span class="sprite-group-5-coin-green"></span>
+              <h2 class="card-name">Khoản ứng</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <p class="card-info-title">Tổng khoản ứng</p>
+                  <p class="card-info-content">999</p>
+                </div>
+                <div class="col-8">
+                  <p class="card-info-title">Tổng giá trị</p>
+                  <p class="card-info-content">{{ 100000000 | formatPrice: null }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="card op-card">
+            <div class="card-title d-flex align-items-center gap-1">
+              <span class="sprite-group-5-coin-green"></span>
+              <h2 class="card-name">Bảo hiểm</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <p class="card-info-title">Tổng khoản ứng</p>
+                  <p class="card-info-content">999</p>
+                </div>
+                <div class="col-8">
+                  <p class="card-info-title">Tổng giá trị</p>
+                  <p class="card-info-content">{{ 100000000 | formatPrice: null }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="card op-card">
+            <div class="card-title d-flex align-items-center gap-1">
+              <span class="sprite-group-5-coin-green"></span>
+              <h2 class="card-name">Khách hàng</h2>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <p class="card-info-title">Tổng khoản ứng</p>
+                  <p class="card-info-content">999</p>
+                </div>
+                <div class="col-8">
+                  <p class="card-info-title">Tổng giá trị</p>
+                  <p class="card-info-content">{{ 100000000 | formatPrice: null }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!--  Chart  -->
+      <section class="row g-2 g-md-1 g-lg-2 mt-2">
+        <!--  Left chart  -->
+        <article class="col-12 col-sm-12 col-md-8 col-lg-8">
+          <div class="card op-card h-100">
+            <div
+              class="
+                card-title
+                d-flex
+                align-items-center
+                justify-content-between
+                gap-1
+              "
+            >
+              <h2 class="card-name">Sale performance</h2>
+              <span class="sprite-group-5-setting"></span>
+            </div>
+            <div class="card-body">
+              <div class="chart-wrapper">
+                <canvas
+                  baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins"
+                >
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!--  Right chart  -->
+        <article class="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div class="card op-card h-100">
+            <div
+              class="
+                card-title
+                d-flex
+                align-items-center
+                justify-content-between
+                gap-1
+              "
+            >
+              <h2 class="card-name">Top categories</h2>
+              <a>
+                <span class="sprite-group-5-setting"></span>
+              </a>
+            </div>
+            <div class="card-body">
+              <div class="chart-wrapper">
+                <canvas
+                  baseChart
+                  [data]="doughnutChartData"
+                  [labels]="doughnutChartLabels"
+                  [chartType]="doughnutChartType"
+                >
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!--  Table  -->
+      <section class="row mt-2">
+        <div class="col">
+          <app-base-expanded-table
+            [dataSource]="dataSource"
+            [pageIndex]="pageIndex"
+            [allColumns]="allColumns"
+            [totalItems]="totalItems"
+            [pageSizeOptions]="pageSizeOptions"
+            [detailElementTemplate]="detailElementTemplate"
+          >
+          </app-base-expanded-table>
+          <ng-template #detailElementTemplate>
+            <app-customer-detail-element class="w-100"></app-customer-detail-element>
+          </ng-template>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

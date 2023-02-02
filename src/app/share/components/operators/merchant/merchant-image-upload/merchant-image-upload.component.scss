@@ -1,0 +1,23 @@
+@import "src/styles/op/pl-expansion-panel";
+
+.expansion-panel-content {
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  article {
+    display: inline-block;
+  }
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.error-msg {
+  font-family: $sfPro;
+  color: $system-color-red;
+  font-size: 0.7em;
+  padding-top: 4px;
+}

@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+
+    <div class="card-title title">
+      {{dialogTitle}}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="submitForm()" autocomplete="off">
+        <div class="row">
+          <!--  Info  -->
+          <section class="col-12">
+            <div class="row">
+
+              <!-- Left Individual Info -->
+              <div class="col-12 pr-2">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100" floatLabel="never">
+                    <mat-label>{{ "product_status.code" | translate}}</mat-label>
+                    <input (blur)="isCodeInputFocus = false"
+                           (focus)="isCodeInputFocus = true"
+                           [ngClass]="
+                        isCodeInputFocus ? 'is-focused-input' : ''
+                      " [placeholder]="'product_status.name' | translate"
+                           formControlName="code"
+                           autocomplete="chrome-off"
+                           aria-autocomplete="none"
+                           required
+                           matInput
+                           type="text"
+                    >
+                    <show-errors
+                      [control]="form.controls['code']"
+                      [controlLabel]="
+                        'product_status.code' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100" floatLabel="never">
+                    <mat-label>{{ "product_status.name" | translate}}</mat-label>
+                    <input (blur)="isAccountNameInputFocus = false"
+                           (focus)="isAccountNameInputFocus = true"
+                           [ngClass]="
+                        isAccountNameInputFocus ? 'is-focused-input' : ''
+                      " [placeholder]="'product_status.name' | translate"
+                           formControlName="name"
+                           autocomplete="chrome-off"
+                           aria-autocomplete="none"
+                           required
+                           matInput
+                           type="text"
+                    >
+                    <show-errors
+                      [control]="form.controls['name']"
+                      [controlLabel]="
+                        'product_status.name' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "product_status.description" | translate
+                      }}</mat-label>
+                    <textarea
+                      style="height: 180px"
+                      matInput
+                      class="text-area"
+                      id="review"
+                      name="review"
+                      formControlName="description"
+                      [placeholder]="'product_status.description' | translate"
+                    ></textarea>
+                    <show-errors
+                      [control]="form.controls['description']"
+                      [controlLabel]="
+                        'product_status.description' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <!--                <div>-->
+                <!--                  <mat-checkbox formControlName="status"-->
+                <!--                                class="example-margin">{{"product_status.active" | translate}}</mat-checkbox>-->
+                <!--                </div>-->
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!--  Actions -->
+        <div class="row mt-2">
+          <div class="col-12 d-flex gap-2 justify-content-end">
+            <button class="bg-grey"
+                    mat-button
+                    mat-dialog-close
+            >
+              {{ "account.info.cancel_update" | translate }}
+            </button>
+            <button
+              type="submit"
+              color="accent"
+              mat-flat-button>
+              <span class="sprite-group-5-save-white"></span>
+              <span class="ms-1">{{ "account.info.save_update" | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

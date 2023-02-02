@@ -1,0 +1,48 @@
+<mat-tab-group dynamicHeight class="op-tab-group">
+  <!--  Loan Info-->
+  <mat-tab [label]="'bnpl.tabs.loan_info' | translate">
+    <ng-template matTabContent>
+      <app-bnpl-detail-info
+        [loanDetail]="loanDetail"
+        (triggerChangeStatusBnplApplication)="
+          changeStatusBnplApplication($event)
+        "
+        (triggerRepaymentBnplApplication)="repaymentBnplApplication($event)"
+      ></app-bnpl-detail-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Repayment transaction -->
+  <mat-tab [label]="'bnpl.tabs.repayment_transaction_info' | translate">
+    <ng-template matTabContent>
+      <app-bnpl-repayment-transaction
+        [loanDetail]="loanDetail"
+        (triggerChangeStatusBnplApplication)="
+          changeStatusBnplApplication($event)
+        "
+        (triggerRepaymentBnplApplication)="repaymentBnplApplication($event)"
+      ></app-bnpl-repayment-transaction>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Contract-->
+  <ng-container *ngxPermissionsOnly="[]">
+    <mat-tab [label]="'bnpl.tabs.loan_contract' | translate">
+      <ng-template matTabContent>
+        <app-bnpl-contract [loanDetail]="loanDetail"></app-bnpl-contract>
+      </ng-template>
+    </mat-tab>
+  </ng-container>
+
+  <!--  Note  -->
+  <ng-container *ngxPermissionsOnly="[]">
+    <mat-tab [label]="'bnpl.tabs.loan_note' | translate">
+      <ng-template matTabContent>
+        <app-bnpl-note
+          [loanDetail]="loanDetail"
+          (triggerUpdateLoanInfo)="triggerUpdateLoanInfo($event)"
+        ></app-bnpl-note>
+      </ng-template>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>

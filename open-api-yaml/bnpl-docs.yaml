@@ -1,0 +1,1369 @@
+---
+openapi: 3.0.3
+info:
+  title: bnpl-service API
+  version: 1.0-SNAPSHOT
+paths:
+  /v1/admin/application/{id}/change-status:
+    post:
+      tags:
+      - Admin Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeLoanStatusRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseLoanDetailDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - application:changeStatus
+      - SecurityScheme:
+        - application:changeStatus
+  /v1/admin/application/{id}/repayment:
+    post:
+      tags:
+      - Admin Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorePaymentRequest'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCorePaymentTransactionResponseDto'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - application:repayment
+      - SecurityScheme:
+        - application:repayment
+  /v1/admin/merchants:
+    get:
+      tags:
+      - Admin Controller
+      parameters:
+      - name: bdStaff
+        in: query
+        schema:
+          type: string
+      - name: code
+        in: query
+        schema:
+          type: string
+      - name: email
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: mobile
+        in: query
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+      - name: productType
+        in: query
+        schema:
+          type: string
+      - name: status
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseListMerchant'
+    post:
+      tags:
+      - Admin Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMerchantRequestDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMerchant'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - merchants:create
+      - SecurityScheme:
+        - merchants:create
+  /v1/admin/merchants/{id}:
+    put:
+      tags:
+      - Admin Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMerchantRequestDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMerchant'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - merchants:update
+      - SecurityScheme:
+        - merchants:update
+    delete:
+      tags:
+      - Admin Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseString'
+        "401":
+          description: Not Authorized
+        "403":
+          description: Not Allowed
+      security:
+      - SecurityScheme:
+        - merchants:delete
+      - SecurityScheme:
+        - merchants:delete
+  /v1/application:
+    get:
+      tags:
+      - Bnpl Controller
+      parameters:
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/BnplStatus'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseListBnplApplication'
+    post:
+      tags:
+      - Bnpl Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLoanRequestDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseLoanDetailDto'
+  /v1/application/active:
+    get:
+      tags:
+      - Bnpl Controller
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseLoanDetailDto'
+  /v1/application/cde:
+    get:
+      tags:
+      - Bnpl Controller
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCdeData'
+    post:
+      tags:
+      - Bnpl Controller
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseCdeData'
+  /v1/application/qrcode:
+    post:
+      tags:
+      - Bnpl Controller
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateMerchantQrRequestDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseString'
+  /v1/application/{id}:
+    get:
+      tags:
+      - Bnpl Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseLoanDetailDto'
+  /v1/application/{loanId}:
+    put:
+      tags:
+      - Bnpl Controller
+      parameters:
+      - name: loanId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLoanRequestDto'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseBnplApplication'
+  /v1/application/{loanId}/approve:
+    put:
+      tags:
+      - Bnpl Controller
+      parameters:
+      - name: loanId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseLoanDetailDto'
+  /v1/cronJobs/cronJobWithExpressionInConfig:
+    post:
+      tags:
+      - Cron Job Controller
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseString'
+  /v1/merchants:
+    get:
+      tags:
+      - Merchant Controller
+      parameters:
+      - name: code
+        in: query
+        schema:
+          type: string
+      - name: email
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: mobile
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseListMerchant'
+  /v1/merchants/{id}:
+    get:
+      tags:
+      - Merchant Controller
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMerchant'
+components:
+  schemas:
+    ApiResponseBnplApplication:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/BnplApplication'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseCdeData:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CdeData'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseCorePaymentTransactionResponseDto:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/CorePaymentTransactionResponseDto'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseListBnplApplication:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BnplApplication'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseListMerchant:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/Merchant'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseLoanDetailDto:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/LoanDetailDto'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseMerchant:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/Merchant'
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    ApiResponseString:
+      type: object
+      properties:
+        result:
+          type: string
+        errorCode:
+          type: string
+        message:
+          type: string
+        responseCode:
+          format: int32
+          type: integer
+    BnplApplication:
+      type: object
+      properties:
+        id:
+          type: string
+        loanCode:
+          type: string
+        customerId:
+          type: string
+        cdeDataId:
+          type: string
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        loanAmount:
+          format: int32
+          type: integer
+        latePenaltyPayment:
+          format: int32
+          type: integer
+        productId:
+          type: string
+        status:
+          type: string
+        oldStatus:
+          type: string
+        coreLoanId:
+          format: int32
+          type: integer
+        contract:
+          type: string
+        note:
+          type: string
+        staffId:
+          type: string
+        approvedAt:
+          type: string
+        periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
+        completedAt:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    BnplStatus:
+      enum:
+      - APPROVE
+      - COMPLETED
+      - CONTRACT_ACCEPTED
+      - CONTRACT_AWAITING
+      - DISBURSE
+      - PENDING
+      - UNDOAPPROVAL
+      - WITHDRAW
+      type: string
+    CdeData:
+      type: object
+      properties:
+        id:
+          type: string
+        customerId:
+          type: string
+        customerInfo:
+          $ref: '#/components/schemas/CustomerInfoDto'
+        totalLimitAmount:
+          format: int32
+          type: integer
+        remainLimitAmount:
+          format: int32
+          type: integer
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    ChangeLoanStatusRequest:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          pattern: \S
+          type: string
+          nullable: false
+    CoreLoanDetailDto:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        accountNo:
+          format: int32
+          type: integer
+        coreStatus:
+          $ref: '#/components/schemas/CoreStatusDto'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        principal:
+          format: int32
+          type: integer
+        termFrequency:
+          format: int32
+          type: integer
+        repaymentSchedule:
+          $ref: '#/components/schemas/MifosCalculateRepaymentDto'
+        paymentTransactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CorePaymentTransactionDto'
+    CorePaymentRequest:
+      required:
+      - transactionAmount
+      type: object
+      properties:
+        transactionAmount:
+          format: int32
+          type: integer
+          nullable: false
+    CorePaymentTransactionDto:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        officeId:
+          format: int32
+          type: integer
+        officeName:
+          type: string
+        type:
+          $ref: '#/components/schemas/Type'
+        date:
+          type: array
+          items:
+            format: int32
+            type: integer
+        amount:
+          format: int32
+          type: integer
+        netDisbursalAmount:
+          format: int32
+          type: integer
+        principalPortion:
+          format: int32
+          type: integer
+        interestPortion:
+          format: int32
+          type: integer
+        feeChargesPortion:
+          format: int32
+          type: integer
+        penaltyChargesPortion:
+          format: int32
+          type: integer
+        overpaymentPortion:
+          format: int32
+          type: integer
+        unrecognizedIncomePortion:
+          format: int32
+          type: integer
+        outstandingLoanBalance:
+          format: int32
+          type: integer
+        submittedOnDate:
+          type: array
+          items:
+            format: int32
+            type: integer
+        manuallyReversed:
+          format: int32
+          type: integer
+        numberOfRepayments:
+          format: int32
+          type: integer
+    CorePaymentTransactionResponseDto:
+      type: object
+      properties:
+        changes:
+          $ref: '#/components/schemas/CoreTransactionChangeDto'
+        clientId:
+          format: int32
+          type: integer
+        loanId:
+          format: int32
+          type: integer
+        officeId:
+          format: int32
+          type: integer
+        resourceId:
+          format: int32
+          type: integer
+    CoreStatusDto:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        code:
+          type: string
+        description:
+          type: string
+        pendingApproval:
+          type: boolean
+        waitingForDisbursal:
+          type: boolean
+        active:
+          type: boolean
+        closedObligationsMet:
+          type: boolean
+        closedWrittenOff:
+          type: boolean
+        closedRescheduled:
+          type: boolean
+        closed:
+          type: boolean
+        overpaid:
+          type: boolean
+    CoreTransactionChangeDto:
+      type: object
+      properties:
+        transactionDate:
+          type: string
+        transactionAmount:
+          type: string
+        locale:
+          type: string
+        dateFormat:
+          type: string
+    CreateAgentInformationDto:
+      type: object
+      properties:
+        position:
+          maxLength: 256
+          type: string
+        mobile:
+          type: string
+        email:
+          maxLength: 256
+          type: string
+    CreateLoanRequestDto:
+      required:
+      - merchantId
+      - loanAmount
+      - loanTerm
+      - numberOfRepayments
+      - repaymentEvery
+      type: object
+      properties:
+        merchantId:
+          pattern: \S
+          type: string
+          nullable: false
+        loanAmount:
+          format: int32
+          type: integer
+          nullable: false
+        loanTerm:
+          format: int32
+          type: integer
+          nullable: false
+        numberOfRepayments:
+          format: int32
+          type: integer
+          nullable: false
+        repaymentEvery:
+          format: int32
+          type: integer
+          nullable: false
+    CreateMerchantRequestDto:
+      required:
+      - name
+      - address
+      - bdStaffId
+      - mobile
+      - email
+      - website
+      - identificationNumber
+      - productTypes
+      - merchantServiceFee
+      - customerServiceFee
+      - status
+      - logo
+      - createAgentInformationDto
+      type: object
+      properties:
+        name:
+          pattern: \S
+          type: string
+          nullable: false
+        address:
+          maxLength: 256
+          pattern: \S
+          type: string
+          nullable: false
+        ward:
+          type: string
+        district:
+          type: string
+        province:
+          type: string
+        bdStaffId:
+          pattern: \S
+          type: string
+          nullable: false
+        merchantManagerId:
+          type: string
+        merchantSellType:
+          $ref: '#/components/schemas/MerchantSellType'
+        mobile:
+          pattern: \S
+          type: string
+          nullable: false
+        email:
+          maxLength: 256
+          pattern: \S
+          type: string
+          nullable: false
+        website:
+          maxLength: 256
+          pattern: \S
+          type: string
+          nullable: false
+        identificationNumber:
+          pattern: \S
+          type: string
+          nullable: false
+        establishTime:
+          type: string
+        productTypes:
+          type: array
+          items:
+            type: string
+          nullable: false
+        merchantServiceFee:
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+          nullable: false
+        customerServiceFee:
+          format: double
+          maximum: 100
+          minimum: 0
+          type: number
+          nullable: false
+        status:
+          allOf:
+          - $ref: '#/components/schemas/MerchantStatus'
+          - nullable: false
+        logo:
+          pattern: \S
+          type: string
+          nullable: false
+        description:
+          type: string
+        descriptionImg:
+          type: array
+          items:
+            type: string
+        createAgentInformationDto:
+          allOf:
+          - $ref: '#/components/schemas/CreateAgentInformationDto'
+          - nullable: false
+        merchantFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantFeature'
+        merchantParentId:
+          type: string
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        decimalPlaces:
+          type: string
+        inMultiplesOf:
+          type: string
+        nameCode:
+          type: string
+        displayLabel:
+          type: string
+    CustomerInfoDto:
+      type: object
+      properties:
+        personalData:
+          $ref: '#/components/schemas/PersonalData'
+        financialData:
+          $ref: '#/components/schemas/FinancialData'
+    FinancialData:
+      type: object
+      properties:
+        bankName:
+          type: string
+        bankCode:
+          type: string
+        accountNumber:
+          type: string
+    GenerateMerchantQrRequestDto:
+      required:
+      - merchantId
+      type: object
+      properties:
+        merchantId:
+          pattern: \S
+          type: string
+          nullable: false
+        merchantOrderId:
+          type: string
+        totalAmount:
+          format: int32
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemDto'
+    LoanDetailDto:
+      type: object
+      properties:
+        id:
+          type: string
+        loanCode:
+          type: string
+        customerId:
+          type: string
+        cdeDataId:
+          type: string
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+        loanAmount:
+          format: int32
+          type: integer
+        productId:
+          type: string
+        contract:
+          type: string
+        status:
+          type: string
+        oldStatus:
+          type: string
+        coreLoanDetail:
+          $ref: '#/components/schemas/CoreLoanDetailDto'
+        note:
+          type: string
+        staffId:
+          type: string
+        approvedAt:
+          type: string
+        completedAt:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    Merchant:
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+        ward:
+          type: string
+        district:
+          type: string
+        province:
+          type: string
+        bdStaffId:
+          type: string
+        merchantManagerId:
+          type: string
+        merchantSellType:
+          type: string
+        mobile:
+          type: string
+        email:
+          type: string
+        website:
+          type: string
+        identificationNumber:
+          type: string
+        establishTime:
+          type: string
+        productTypes:
+          type: array
+          items:
+            type: string
+        merchantServiceFee:
+          format: double
+          type: number
+        customerServiceFee:
+          format: double
+          type: number
+        status:
+          type: string
+        logo:
+          type: string
+        descriptionImg:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        merchantFeatures:
+          type: array
+          items:
+            type: string
+        merchantParentId:
+          type: string
+        agentInformation:
+          $ref: '#/components/schemas/CreateAgentInformationDto'
+        createdAt:
+          type: string
+        createdBy:
+          type: string
+        updatedAt:
+          type: string
+        updatedBy:
+          type: string
+    MerchantFeature:
+      enum:
+      - DISPLAY
+      - HOT_BRAND
+      - PROMOTION
+      type: string
+    MerchantSellType:
+      enum:
+      - ALL
+      - OFFLINE
+      - ONLINE
+      type: string
+    MerchantStatus:
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - LOCKED
+      type: string
+    MifosCalculateRepaymentDto:
+      type: object
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        loanTermInDays:
+          format: int32
+          type: integer
+        totalPrincipalDisbursed:
+          format: int32
+          type: integer
+        totalPrincipalExpected:
+          format: int32
+          type: integer
+        totalPrincipalPaid:
+          format: int32
+          type: integer
+        totalInterestCharged:
+          format: int32
+          type: integer
+        totalFeeChargesCharged:
+          format: int32
+          type: integer
+        totalPenaltyChargesCharged:
+          format: int32
+          type: integer
+        totalRepaymentExpected:
+          format: int32
+          type: integer
+        totalOutstanding:
+          format: int32
+          type: integer
+        periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/Period'
+    OrderItemDto:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          format: int32
+          type: integer
+        numberOfItems:
+          format: int32
+          type: integer
+        totalPrice:
+          format: int32
+          type: integer
+    Period:
+      type: object
+      properties:
+        period:
+          format: int32
+          type: integer
+        fromDate:
+          type: array
+          items:
+            format: int32
+            type: integer
+        dueDate:
+          type: array
+          items:
+            format: int32
+            type: integer
+        complete:
+          type: boolean
+        daysInPeriod:
+          format: int32
+          type: integer
+        principalDisbursed:
+          format: int32
+          type: integer
+        principalLoanBalanceOutstanding:
+          format: int32
+          type: integer
+        feeChargesDue:
+          format: int32
+          type: integer
+        feeChargesOutstanding:
+          format: int32
+          type: integer
+        totalOriginalDueForPeriod:
+          format: int32
+          type: integer
+        totalDueForPeriod:
+          format: int32
+          type: integer
+        totalOutstandingForPeriod:
+          format: int32
+          type: integer
+        totalActualCostOfLoanForPeriod:
+          format: int32
+          type: integer
+        principalOriginalDue:
+          format: int32
+          type: integer
+        principalDue:
+          format: int32
+          type: integer
+        principalOutstanding:
+          format: int32
+          type: integer
+        interestOriginalDue:
+          format: int32
+          type: integer
+        interestOutstanding:
+          format: int32
+          type: integer
+        penaltyChargesDue:
+          format: int32
+          type: integer
+        totalPaidForPeriod:
+          format: int32
+          type: integer
+        totalInstallmentAmountForPeriod:
+          format: int32
+          type: integer
+    PersonalData:
+      type: object
+      properties:
+        firstName:
+          type: string
+        gender:
+          type: string
+        dateOfBirth:
+          type: string
+        identityNumberSix:
+          type: string
+        emailAddress:
+          type: string
+        mobileNumber:
+          type: string
+        addressTwoLine1:
+          type: string
+        addressOneLine1:
+          type: string
+        borrowerDetailTextVariable1:
+          type: string
+        maritalStatus:
+          type: string
+        educationType:
+          type: string
+        idDocumentType:
+          type: string
+        identityNumberOne:
+          type: string
+        idIssuePlace:
+          type: string
+        idIssueDate:
+          type: string
+        idFeatures:
+          type: string
+        idExpiredDate:
+          type: string
+        idOrigin:
+          type: string
+        employeeCode:
+          type: string
+        officeCode:
+          type: string
+        organizationName:
+          type: string
+        officeName:
+          type: string
+        annualIncome:
+          format: float
+          type: number
+        workingDay:
+          format: float
+          type: number
+        borrowerEmploymentHistoryTextVariable1:
+          type: string
+        stepOne:
+          type: string
+        stepTwoIndividual:
+          type: string
+        stepThreeEmployment:
+          type: string
+        paydayLoanStatus:
+          type: string
+        acceptContractCreated:
+          type: string
+        collateralDocument:
+          type: string
+        salaryDocument:
+          type: string
+        contractDocumentPath:
+          type: string
+        frontID:
+          type: string
+        backID:
+          type: string
+        selfie:
+          type: string
+    Type:
+      type: object
+      properties:
+        id:
+          format: int32
+          type: integer
+        code:
+          type: string
+        value:
+          type: string
+        disbursement:
+          type: boolean
+        repaymentAtDisbursement:
+          type: boolean
+        repayment:
+          type: boolean
+        contra:
+          type: boolean
+        waiveInterest:
+          type: boolean
+        waiveCharges:
+          type: boolean
+        accrual:
+          type: boolean
+        writeOff:
+          type: boolean
+        recoveryRepayment:
+          type: boolean
+        initiateTransfer:
+          type: boolean
+        approveTransfer:
+          type: boolean
+        withdrawTransfer:
+          type: boolean
+        rejectTransfer:
+          type: boolean
+        chargePayment:
+          type: boolean
+        refund:
+          type: boolean
+        refundForActiveLoans:
+          type: boolean
+    UpdateAgentInformationDto:
+      type: object
+      properties:
+        position:
+          type: string
+        mobile:
+          type: string
+        email:
+          type: string
+    UpdateLoanRequestDto:
+      type: object
+      properties:
+        cdeDataId:
+          type: string
+        merchantId:
+          type: string
+        loanAmount:
+          format: int32
+          type: integer
+        latePenaltyPayment:
+          format: int32
+          type: integer
+        productId:
+          type: string
+        status:
+          $ref: '#/components/schemas/BnplStatus'
+        coreLoanId:
+          format: int32
+          type: integer
+        contract:
+          type: string
+        note:
+          type: string
+        staffId:
+          type: string
+    UpdateMerchantRequestDto:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        address:
+          maxLength: 256
+          type: string
+        ward:
+          type: string
+        district:
+          type: string
+        province:
+          type: string
+        bdStaffId:
+          type: string
+        merchantManagerId:
+          type: string
+        merchantSellType:
+          $ref: '#/components/schemas/MerchantSellType'
+        mobile:
+          maxLength: 12
+          type: string
+        email:
+          maxLength: 256
+          type: string
+        website:
+          maxLength: 256
+          type: string
+        identificationNumber:
+          type: string
+        establishTime:
+          type: string
+        productTypes:
+          type: array
+          items:
+            type: string
+        merchantServiceFee:
+          format: double
+          type: number
+        customerServiceFee:
+          format: double
+          type: number
+        status:
+          $ref: '#/components/schemas/MerchantStatus'
+        logo:
+          type: string
+        appendDescImageMerchant:
+          type: array
+          items:
+            type: string
+        deleteDescImageMerchant:
+          type: array
+          items:
+            type: string
+        description:
+          type: string
+        updateAgentInformationDto:
+          $ref: '#/components/schemas/UpdateAgentInformationDto'
+        merchantFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/MerchantFeature'
+        merchantParentId:
+          type: string

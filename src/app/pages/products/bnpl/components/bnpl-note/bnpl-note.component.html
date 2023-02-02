@@ -1,0 +1,64 @@
+<div class="container">
+  <form [formGroup]="loanInfoForm" class="note-form" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="standard" color="accent" class="w-100">
+      <mat-label
+        class="d-flex align-items-center gap-2 op-text-area-label-content"
+      >
+        <span class="sprite-group-5-pen-grey"></span>
+        <span class="op-text-area-label">{{
+          "bnpl.loan_note.note" | translate
+        }}</span>
+      </mat-label>
+
+      <textarea
+        matInput
+        class="text-area"
+        id="review"
+        name="review"
+        formControlName="note"
+        [placeholder]="'bnpl.loan_note.type_note' | translate"
+      ></textarea>
+    </mat-form-field>
+
+    <ng-template #elseBlock>
+      <mat-form-field appearance="standard" color="accent" class="w-100">
+        <mat-label
+          class="d-flex align-items-center gap-2 op-text-area-label-content"
+        >
+          <span class="sprite-group-5-pen-grey"></span>
+          <span class="op-text-area-label">{{
+            "bnpl.loan_note.note" | translate
+          }}</span>
+        </mat-label>
+
+        <textarea
+          matInput
+          class="text-area"
+          id="review1"
+          name="review1"
+          readonly
+          disabled
+          [value]="loanInfoForm.controls.note.value"
+          [placeholder]="'bnpl.loan_note.type_note' | translate"
+        ></textarea>
+      </mat-form-field>
+    </ng-template>
+
+    <!--  Actions -->
+    <div class="row mt-2">
+      <div class="col-12 d-flex gap-2 justify-content-end">
+        <button
+          type="submit"
+          color="accent"
+          mat-flat-button
+          *ngxPermissionsOnly="[]"
+        >
+          <span class="sprite-group-5-save-white"></span>
+          <span class="ms-1">{{
+            "bnpl.loan_note.save_update" | translate
+          }}</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

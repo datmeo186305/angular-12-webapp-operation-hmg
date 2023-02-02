@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="row d-flex justify-content-between pt-2">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+      <ul class="pl-list">
+        <li class="pl-list-item">
+          <p class="pl-list-item-label">
+            {{ "loan_app.loan_contract.loan_status" | translate }}
+          </p>
+          <p class="pl-list-item-content highlight">
+            <app-format-data
+              [format]="displayStatus?.format"
+              [type]="displayStatus?.type"
+              [value]="displayStatus?.value"
+            ></app-format-data>
+          </p>
+        </li>
+      </ul>
+    </div>
+
+    <!--ACTION-->
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+      <div class="d-flex justify-content-end">
+        <ng-container *ngxPermissionsOnly="['contracts:adminSignContract']">
+          <button (click)="onClickSign()" stype="margin-right: 8px" *ngIf="enableSign" color="primary" mat-flat-button>
+            <span class="sprite-group-7-sign-contract"></span>
+            {{ "loan_app.loan_contract.contract_signing" | translate }}
+          </button>
+        </ng-container>
+
+        <button (click)="onClickDownload()" *ngIf="downloadable" color="accent" mat-flat-button>
+          <span class="sprite-group-7-download"></span>
+          {{ "loan_app.loan_contract.download" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--  CONTRACT VIEW-->
+  <div class="row pb-3">
+    <div class="col-12">
+      <div *ngIf="loanContractData" [innerHTML]="loanContractView" class="pdfView"></div>
+      <div *ngIf="!loanContractData" class="no-contract">{{ "loan_app.loan_contract.no_contract" | translate }}</div>
+    </div>
+  </div>
+</div>

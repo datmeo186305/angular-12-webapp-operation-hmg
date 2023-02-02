@@ -1,0 +1,46 @@
+<app-base-management-layout
+  (onClickBtnExport)="onClickBtnExport($event)"
+  (onExpandElementChange)="onExpandElementChange($event)"
+  (onFilterActionTrigger)="onFilterActionTrigger($event)"
+  (onFilterChange)="onFilterFormChange($event)"
+  (onPageChange)="onPageChange($event)"
+  (onSortChange)="onSortChange($event)"
+  (onSubmitSearchForm)="onSubmitSearchForm($event)"
+  (onRefreshTrigger)="onRefreshTrigger($event)"
+  [allColumns]="allColumns"
+  [breadcrumbOptions]="breadcrumbOptions"
+  [dataSource]="dataSource"
+  [detailElementTemplate]="detailElementTemplate"
+  [filterOptions]="filterOptions"
+  [orderBy]="filterForm.controls.orderBy?.value"
+  [pageIndex]="pageIndex"
+  [pageLength]="pageLength"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSize"
+  [sortDirection]="filterForm.controls.sortDirection?.value"
+  [tableTitle]="tableTitle"
+  [totalItems]="totalItems"
+  [overviewItems]="overviewItems"
+  [showRefreshBtn]="true"
+>
+</app-base-management-layout>
+
+<ng-template #detailElementTemplate>
+  <app-loan-detail
+    *ngxPermissionsOnly="[
+      listPermission.getListTNG,
+      listPermission.getListVAC,
+      listPermission.getByIdHMG
+    ]"
+    (detectUpdateLoanAfterSign)="updateElementInfo($event)"
+    (loanDetailTriggerUpdateStatus)="updateElementInfo($event)"
+    [customerId]="expandedElementCustomerId"
+    [groupName]="filterForm.controls.groupName.value"
+    [loanId]="expandedElementLoanId"
+    [loanDetail]="expandedElementLoanDetail"
+    [userInfo]="expandedElementLoanDetail.customerInfo"
+    [companyOptions]="companyList"
+    [bankOptions]="bankList"
+    class="w-100"
+  ></app-loan-detail>
+</ng-template>

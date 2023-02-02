@@ -1,0 +1,220 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+
+    <div class="card-title title">
+      {{ title }}
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="applicationDocumentForm"
+        (ngSubmit)="submitForm()"
+        autocomplete="off"
+      >
+        <div class="row">
+          <!--  Info  -->
+          <div class="col-12 pr-2">
+            <!-- Name -->
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              floatLabel="never"
+            >
+              <mat-label>{{
+                "system.system_config.application_document.name" | translate
+              }}</mat-label>
+              <input
+                [placeholder]="
+                  'system.system_config.application_document.name' | translate
+                "
+                formControlName="name"
+                required
+                matInput
+                appTypeMaxLength
+                maxlength="100"
+                type="text"
+              />
+              <show-errors
+                [control]="applicationDocumentForm.controls['name']"
+                [controlLabel]="
+                  'system.system_config.application_document.name' | translate
+                "
+                [hasIconPrefix]="false"
+              >
+              </show-errors>
+            </mat-form-field>
+
+            <!-- Application Document type -->
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{
+                "system.system_config.application_document.application_document_type"
+                  | translate
+              }}</mat-label>
+              <mat-select
+                disableOptionCentering="true"
+                formControlName="requiredDocumentGroupId"
+              >
+                <mat-option>
+                  <ngx-mat-select-search
+                    [formControl]="selectSearchCtrl"
+                    [placeholderLabel]="
+                      'system.system_config.application_document.search_document_type'
+                        | translate
+                    "
+                    [noEntriesFoundLabel]="
+                      'system.system_config.application_document.empty_document_type'
+                        | translate
+                    "
+                  ></ngx-mat-select-search>
+                </mat-option>
+                <mat-option
+                  *ngFor="let option of filteredDocumentTypeItems"
+                  [value]="option.id"
+                  >{{ option.name }}</mat-option
+                >
+              </mat-select>
+              <show-errors
+                [control]="
+                  applicationDocumentForm.controls['requiredDocumentGroupId']
+                "
+                [controlLabel]="
+                  'system.system_config.application_document.application_document_type'
+                    | translate
+                "
+                [hasIconPrefix]="false"
+              >
+              </show-errors>
+            </mat-form-field>
+
+            <!-- File type -->
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              floatLabel="never"
+            >
+              <mat-label>{{
+                "system.system_config.application_document.file_type"
+                  | translate
+              }}</mat-label>
+              <mat-chip-list
+                #chipList
+                required
+                aria-label="File type selection"
+                [formControl]="fileTypeControl"
+              >
+                <mat-chip
+                  *ngFor="let fileType of fileTypes"
+                  (removed)="removeFileType(fileType)"
+                >
+                  {{ fileType }}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input
+                  [placeholder]="
+                    'system.system_config.application_document.new_file_type'
+                      | translate
+                  "
+                  #fileTypeInput
+                  formControlName="fileType"
+                  required
+                  [matAutocomplete]="fileTypeAuto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="addFileType($event)"
+                />
+              </mat-chip-list>
+              <mat-autocomplete
+                #fileTypeAuto="matAutocomplete"
+                (optionSelected)="selected($event)"
+              >
+                <mat-option
+                  *ngFor="let fileType of filteredFileTypes | async"
+                  [value]="fileType"
+                >
+                  {{ fileType }}
+                </mat-option>
+              </mat-autocomplete>
+
+              <show-errors
+                [control]="applicationDocumentForm.controls['fileType']"
+                [controlLabel]="
+                  'system.system_config.application_document.file_type'
+                    | translate
+                "
+                [hasIconPrefix]="false"
+              >
+              </show-errors>
+            </mat-form-field>
+
+            <!--  Description  -->
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              floatLabel="never"
+            >
+              <mat-label>{{
+                "system.system_config.application_document.description"
+                  | translate
+              }}</mat-label>
+              <textarea
+                matInput
+                class="text-area"
+                name="description"
+                formControlName="description"
+                appTypeMaxLength
+                maxlength="256"
+                [placeholder]="
+                  'system.system_config.application_document.description'
+                    | translate
+                "
+              ></textarea>
+              <show-errors
+                [control]="applicationDocumentForm.controls['description']"
+                [controlLabel]="
+                  'system.system_config.application_document.description'
+                    | translate
+                "
+                [hasIconPrefix]="false"
+              >
+              </show-errors>
+            </mat-form-field>
+
+            <div class="row">
+              <div class="col-6">
+                <mat-checkbox formControlName="isMandatory">{{
+                  "system.system_config.application_document.is_mandatory"
+                    | translate
+                }}</mat-checkbox>
+              </div>
+              <div class="col-6">
+                <mat-checkbox formControlName="isDisplayed">{{
+                  "system.system_config.application_document.is_display"
+                    | translate
+                }}</mat-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--  Actions -->
+        <div class="row mt-4">
+          <div class="col-12 d-flex gap-2 justify-content-end">
+            <button class="bg-grey" mat-button mat-dialog-close>
+              {{ "account.info.cancel_update" | translate }}
+            </button>
+            <button type="submit" color="accent" mat-flat-button>
+              <span class="sprite-group-5-save-white"></span>
+              <span class="ms-1">{{
+                "account.info.save_update" | translate
+              }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

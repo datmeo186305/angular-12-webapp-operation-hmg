@@ -1,0 +1,11 @@
+@import "../../../../../styles/variables";
+
+.pl-status-label-success {
+  background: $dim-light-green;
+  color: $system-color-green;
+}
+
+.pl-status-label-cancel {
+  background: #FFF3F2;
+  color: $system-color-red;
+}

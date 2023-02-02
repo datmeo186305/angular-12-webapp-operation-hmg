@@ -1,0 +1,62 @@
+<header>
+  <div class="container-fluid">
+    <header>
+      <!-- Top  Header  -->
+      <div id="monex-op-header">
+        <div class="header-container">
+          <div class="container justify-content-center">
+            <div
+              id="monex-op-header-content"
+              class="d-flex justify-content-between align-items-center"
+            >
+              <a
+                (click)="navigateToHomePage()"
+                href="javascript:void(0)"
+                id="logo-monex-container"
+                class="d-flex align-items-center"
+              >
+                <img [src]="logoSrc" alt="logo-monex" id="logo-monex" />
+                <span class="divider-monex-logo" *ngIf="!responsive">|</span>
+                <span id="title-monex-op" *ngIf="!responsive">{{
+                  "header.op" | translate
+                }}</span>
+              </a>
+
+              <!-- Profile toolbar -->
+              <ng-container *ngIf="showProfileBtn">
+                <app-profile-toolbar
+                  [responsive]="responsive"
+                ></app-profile-toolbar>
+              </ng-container>
+              <!-- END: Profile toolbar -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End: Top  Header  -->
+
+      <!-- Top nav bar -->
+      <div id="navigation-bar" *ngIf="showProfileBtn">
+        <div class="container p-0">
+          <!-- Menu Mobile  -->
+          <app-mobile-menu
+            *ngIf="responsive; else desktopMenu"
+            [menuItems]="menuItems"
+            [selectedNavItem]="selectedNavItem"
+          ></app-mobile-menu>
+          <!-- End: Menu Mobile  -->
+
+          <!-- Menu Desktop -->
+          <ng-template #desktopMenu>
+            <app-desktop-menu
+              [menuItems]="menuItems"
+              [selectedNavItem]="selectedNavItem"
+            ></app-desktop-menu>
+          </ng-template>
+          <!-- End: Menu Desktop -->
+        </div>
+      </div>
+      <!-- End: Top nav bar   -->
+    </header>
+  </div>
+</header>

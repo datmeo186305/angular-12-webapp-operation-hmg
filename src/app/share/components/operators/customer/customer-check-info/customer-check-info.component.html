@@ -1,0 +1,69 @@
+  <!--  MAT TABLE-->
+  <div class="card-body p-2">
+    <div class="overflow-auto">
+      <table
+        (matSortChange)="announceSortChange($event)"
+        [dataSource]="dataSource"
+        [matSortActive]="orderBy"
+        [matSortDirection]="sortDirection"
+        mat-table
+        matSort
+        matSortDisableClear
+        multiTemplateDataRows
+        (contentChanged)="resizeTableAfterContentChanged()"
+        class="expanded-table"
+      >
+        <ng-container
+          *ngFor="let column of displayColumns"
+          matColumnDef="{{ column?.key }}"
+        >
+          <th
+            *matHeaderCellDef
+            arrowPosition="before"
+            mat-header-cell
+            mat-sort-header
+            sortActionDescription="Sort by field"
+          >
+            {{ column?.title }}
+          </th>
+
+          <td *matCellDef="let element" mat-cell>
+            <app-table-cell-format-data
+              [format]="column?.format"
+              [type]="column?.type"
+              [value]="getPropByString(element, column?.key)"
+              class="table-cell-format-data"
+            ></app-table-cell-format-data>
+          </td>
+        </ng-container>
+        <tr
+          *matHeaderRowDef="displayColumnRowDef"
+          class="gap-2"
+          mat-header-row
+        ></tr>
+        <tr
+          (click)="openDialogDetailEkyc(element)"
+          *matRowDef="let element; columns: displayColumnRowDef"
+          class="op-element-row gap-2 d-flex"
+          mat-row
+        ></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr *matNoDataRow class="mat-row">
+          <td [attr.colspan]="displayColumns.length" class="mat-cell">
+            {{ "common.no_matching_records" | translate }}
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator
+        (page)="onPageChange($event)"
+        [length]="totalItems"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageSize]="pageSize"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </div>

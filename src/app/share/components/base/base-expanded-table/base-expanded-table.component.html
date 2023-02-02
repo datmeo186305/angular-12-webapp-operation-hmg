@@ -1,0 +1,286 @@
+<div class="card op-card h-100">
+  <div
+    *ngIf="!showSelectedPanel && !hiddenTableMenuFunc"
+    class="card-title d-flex align-items-center gap-1"
+  >
+    <h2 [innerHTML]="tableTitle" class="card-name"></h2>
+
+    <div class="me-3" style="margin-left: auto">
+      <ng-container *ngIf="overviewItems">
+        <div class="overview-data">
+          <div *ngFor="let item of overviewItems">
+            <span class="field">{{ item.field }}</span
+            >:
+            <span class="value">{{
+              item.value ? (item.value | formatPrice: null) : 0
+            }}</span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div>
+      <!--   Reload  -->
+      <button
+        *ngIf="showRefreshBtn"
+        (click)="onClickRefreshBtn($event)"
+        mat-flat-button
+        type="button"
+        [matTooltip]="'common.refresh' | translate"
+      >
+        <span class="sprite-group-1-arrow-counterclockwise"></span>
+      </button>
+
+      <!-- Display Column -->
+      <button
+        (click)="panelOpenState = !panelOpenState"
+        mat-flat-button
+        type="button"
+      >
+        <span class="sprite-group-7-filter"></span>
+      </button>
+      <mat-accordion (mouseleave)="panelOpenState = false" class="filter-panel">
+        <mat-expansion-panel [expanded]="panelOpenState" hideToggle>
+          <div class="card op-card">
+            <div
+              class="
+                card-title
+                filter-description
+                d-flex
+                align-items-center
+                gap-1
+              "
+            >
+              {{ "common.field" | translate }}
+              <button
+                (click)="resetDisplayFields()"
+                class="reset-btn"
+                mat-button
+              >
+                {{ "common.reset" | translate }}
+              </button>
+            </div>
+            <div class="card-body filter-fields">
+              <div *ngFor="let ele of selectedFields" class="field">
+                <mat-checkbox
+                  (change)="changeFilter(ele)"
+                  [checked]="ele.showed"
+                  class="checkbox"
+                  color="primary"
+                  >{{ ele?.title }}</mat-checkbox
+                >
+              </div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <div
+    *ngIf="showSelectedPanel"
+    class="
+      card-title
+      d-flex
+      align-items-center
+      justify-content-between
+      gap-1
+      selected
+    "
+  >
+    <div class="d-flex align-items-center">
+      <span class="sprite-group-7-tick"></span>
+      <h2
+        [innerHTML]="
+          'system.system_management.selected_user'
+            | translate: { numSelected: numSelected }
+        "
+        class="card-name"
+      ></h2>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <ng-container *ngFor="let button of selectButtons">
+        <button
+          *ngIf="!button.hidden"
+          (click)="onMultipleElementActionClick(button.action)"
+          [color]="button?.color"
+          [style]="button?.style"
+          mat-flat-button
+        >
+          <img *ngIf="button?.imageSrc" [src]="button?.imageSrc" alt="" />
+          <span
+            *ngIf="button?.classImgSrc"
+            [ngClass]="button?.classImgSrc"
+          ></span>
+          {{ button?.content }}
+        </button>
+      </ng-container>
+
+      <span
+        (click)="deselectAll()"
+        class="sprite-group-7-close-white clickable"
+      ></span>
+    </div>
+  </div>
+
+  <!--  MAT TABLE-->
+  <div class="card-body p-2">
+    <div class="overflow-auto">
+      <table
+        (matSortChange)="announceSortChange($event)"
+        [dataSource]="dataSource"
+        [matSortActive]="orderBy"
+        [matSortDirection]="sortDirection"
+        class="expanded-table"
+        mat-table
+        matSort
+        matSortDisableClear
+        multiTemplateDataRows
+        (contentChanged)="resizeTableAfterContentChanged()"
+      >
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th *matHeaderCellDef mat-header-cell>
+            <mat-checkbox
+              color="primary"
+              (change)="$event ? masterToggle() : null"
+              [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()"
+            >
+            </mat-checkbox>
+          </th>
+          <td *matCellDef="let row" mat-cell>
+            <mat-checkbox
+              color="primary"
+              (change)="$event ? this.selection.toggle(row) : null"
+              (click)="$event.stopPropagation()"
+              [checked]="selection.isSelected(row)"
+            >
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <!-- END: Checkbox Column -->
+
+        <ng-container
+          *ngFor="let column of displayColumns; let i = index"
+          matColumnDef="{{ column?.key }}"
+        >
+          <th
+            *matHeaderCellDef
+            mat-header-cell
+            [resizeColumn]="true"
+            [index]="hasSelect ? i + 1 : i"
+          >
+            <ng-container *ngIf="sortable; else hiddenSort">
+              <span
+                arrowPosition="before"
+                mat-sort-header
+                sortActionDescription="Sort by field"
+              >
+                {{ column?.title }}
+              </span>
+            </ng-container>
+            <ng-template #hiddenSort>
+              <span>
+                {{ column?.title }}
+              </span>
+            </ng-template>
+          </th>
+
+          <td *matCellDef="let element" mat-cell>
+            <app-table-cell-format-data
+              [format]="column?.format"
+              [type]="column?.type"
+              [value]="getPropByString(element, column?.key)"
+              [externalValue]="getPropByString(element, column?.externalKey)"
+              [externalValue2]="getPropByString(element, column?.externalKey2)"
+              class="table-cell-format-data"
+            ></app-table-cell-format-data>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "common.action" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <ng-container *ngFor="let button of actionButtons">
+              <button
+                *ngIf="!button.hidden"
+                mat-icon-button
+                (click)="onTableActionClick(button.action, element)"
+                [color]="button?.color"
+                [style]="button?.style"
+                [matTooltip]="button?.tooltip"
+              >
+                <img *ngIf="button?.imageSrc" [src]="button?.imageSrc" alt="" />
+                <span
+                  *ngIf="button?.classImgSrc"
+                  [ngClass]="button?.classImgSrc"
+                ></span>
+                {{ button?.content }}
+              </button>
+            </ng-container>
+          </td>
+        </ng-container>
+        <!-- END: Actions Column -->
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td
+            *matCellDef="let element"
+            [attr.colspan]="displayColumns.length"
+            [class.expanded-active]="element == expandedElement"
+            mat-cell
+          >
+            <div
+              [@detailExpand]="
+                element == expandedElement ? 'expanded' : 'collapsed'
+              "
+              class="op-element-detail w-100"
+            >
+              <ng-container
+                *ngIf="element == expandedElement"
+                [ngTemplateOutlet]="detailElementTemplate"
+                class="w-100"
+              ></ng-container>
+            </div>
+          </td>
+        </ng-container>
+        <tr *matHeaderRowDef="displayColumnKeys" class="" mat-header-row></tr>
+        <tr
+          (click)="expandElement(element)"
+          *matRowDef="let element; columns: displayColumnKeys"
+          [class.op-expanded-row]="expandedElement === element"
+          [class.selected-user]="selection.isSelected(element)"
+          class="op-element-row"
+          mat-row
+        ></tr>
+        <tr
+          *matRowDef="let row; columns: ['expandedDetail']"
+          class="op-detail-row"
+          mat-row
+        ></tr>
+
+        <!-- Row shown when there is no matching data. -->
+        <tr *matNoDataRow class="mat-row">
+          <td [attr.colspan]="displayColumns.length" class="mat-cell">
+            {{ "common.no_matching_records" | translate }}
+          </td>
+        </tr>
+      </table>
+
+      <mat-paginator
+        [hidden]="hiddenPaginator"
+        (page)="onPageChange($event)"
+        [length]="totalItems"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageSize]="pageSize"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

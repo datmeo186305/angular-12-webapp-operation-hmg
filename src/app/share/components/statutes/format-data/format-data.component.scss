@@ -1,0 +1,9 @@
+@import "src/styles/_variables.scss";
+.router {
+  color: $monex-color-00;
+  cursor: pointer !important;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

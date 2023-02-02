@@ -1,0 +1,283 @@
+@import "../../../../../../styles/variables";
+@import "../../../../../../styles/op/common";
+@import "../../../../../../styles/op/pl-form";
+
+.text-area {
+  width: 100%;
+  border: none;
+  min-height: 50px;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+
+  &::placeholder {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: $grey-04;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.note-form {
+  ::ng-deep .mat-form-field-infix {
+    padding-left: 16px;
+  }
+}
+
+.op-text-area-label-content {
+  padding-left: 16px;
+}
+
+.op-text-area-label {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: $grey-08;
+}
+
+.op-customer-avatar {
+  background: $white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: content-box;
+  border-radius: 8px;
+  position: relative;
+  cursor: zoom-in;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  flex: none;
+  overflow: hidden;
+
+  .op-customer-avatar-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .op-customer-avatar-img-zoom {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+  }
+}
+
+.op-customer-name {
+  .op-customer-name-content {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $grey-10;
+    word-break: break-word;
+  }
+
+  .op-customer-name-title {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: $grey-06;
+  }
+}
+
+.title {
+  font-family: $sfPro;
+  font-weight: 600;
+  font-size: 20px !important;
+  line-height: 24px;
+  color: $grey-10;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.bg-grey {
+  background-color: #F7F7FC;
+}
+
+.fixed-width {
+  width: 123.77px;
+}
+
+.profile-icon, .role-icon, .phone-icon, .email-icon, .note-icon {
+  width: 20px;
+  height: 20px;
+  background-color: $grey-06;
+}
+
+.is-focused-icon {
+  background-color: $grey-08;
+}
+
+.profile-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-5/svg/profile.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-5/svg/profile.svg') no-repeat center;
+}
+
+.role-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-5/svg/role.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-5/svg/role.svg') no-repeat center;
+}
+
+.phone-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-5/svg/phone-num.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-5/svg/phone-num.svg') no-repeat center;
+}
+
+.email-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-5/svg/email.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-5/svg/email.svg') no-repeat center;
+}
+
+.note-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-5/svg/edit.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-5/svg/edit.svg') no-repeat center;
+}
+
+.caption {
+  background-color: #FAFAFA;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  font-family: $sfPro;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  color: $grey-10;
+  box-shadow: inset 0px 1px 0px #e5e5ea;
+}
+
+.settings {
+  div {
+    font-family: $sfPro;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: $grey-10;
+  }
+
+  p {
+    font-family: $sfPro;
+    font-size: 14px;
+    line-height: 18px;
+    color: $grey-08;
+    font-weight: normal;
+  }
+
+  .current {
+    color: $monex-color-00;
+  }
+
+  .logged_out {
+    color: $system-color-orange;
+  }
+}
+
+.username-icon, .password-pre-icon, .clear-icon, .password-suffix-icon {
+  width: 20px;
+  height: 20px;
+  background-color: $grey-06;
+}
+
+.username-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-1/svg/smart-phone-icon.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-1/svg/smart-phone-icon.svg') no-repeat center;
+}
+
+.password-pre-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-1/svg/lock-password-icon.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-1/svg/lock-password-icon.svg') no-repeat center;
+}
+
+.clear-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-1/svg/x-clear-icon.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-1/svg/x-clear-icon.svg') no-repeat center;
+}
+
+.password-show-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-1/svg/show-password-icon.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-1/svg/show-password-icon.svg') no-repeat center;
+}
+
+.password-hide-icon {
+  -webkit-mask: url('../../../../../../assets/img/icon/group-1/svg/hide-password-icon.svg') no-repeat center;
+  mask: url('../../../../../../assets/img/icon/group-1/svg/hide-password-icon.svg') no-repeat center;
+}
+
+
+.profile-icon, .role-icon, .phone-icon, .email-icon, .note-icon, .password-icon {
+  width: 20px;
+  height: 20px;
+  background-color: $grey-06;
+}
+
+.is-focused-icon {
+  background-color: $grey-08;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.title {
+  font-family: $sfPro;
+  font-weight: 600;
+  font-size: 20px !important;
+  line-height: 24px;
+  color: $grey-10;
+}
+
+#change-password-section {
+  transition: 0.5s;
+  height: 0;
+  overflow: hidden;
+
+  .pass-input {
+    margin-top: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .op-customer-avatar {
+    width: 56px;
+    height: 56px;
+
+    .op-customer-avatar-img {
+      width: 56px;
+      height: 56px;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .text-area {
+    height: 70px;
+    padding: 8px;
+  }
+}

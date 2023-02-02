@@ -1,0 +1,99 @@
+/*
+Responsive CSS Sprite created using: https://responsive-css.us/
+*/
+
+.Add, .Add-1, .Arrow Counterclockwise, .Arrow Down, .Arrow Left, .Arrow Right, .Arrow Up, .Calendar, .Call, .Camera, .Card, .Caret Down, .Caret Left, .Caret Right, .Caret Up, .Chat, .Checked, .Checkmark, .Checkmark Circle, .Chevron Down, .Chevron Left, .Chevron Right, .Chevron Up, .Coin, .Customer, .Dismiss, .Dismiss Circle, .Document, .Download, .Edit, .Eye 2, .Eye Hide, .Eye Show, .Face Id, .Faq, .Filter, .Fingerprint, .Gift, .Hand Shake, .Help, .History, .Home, .Hotline, .Id Card Back, .Id Card Front, .Image, .Image Library, .Info, .Invest, .Lock, .Mail, .Management, .Mark All Read, .Menu, .Navigate First, .Navigate Last, .Navigate Next, .Navigate Prev, .News, .Note, .Notification, .Notification On, .Person Roll, .Phone, .Profile, .Protect, .QR, .Radio Checked, .Radio Unchecked, .Save, .Search, .Selfie, .Send, .Setting, .Shield Check, .Sign Out, .Signature, .Sort Down, .Sort Inactive, .Sort Up, .Subtract, .Tag, .Ticket, .Tranfer, .Trash, .Unchecked, .Unlock, .Upload, .Video, .Warning, .Zoom 
+{display:inline-block; overflow:hidden; background-repeat: no-repeat;
+background-image:url(sprite.png);}
+
+.Add {width: 24px; height: 24px; background-position: 96.3115% 0.862069%; background-size: 2133.33%; }
+.Add-1 {width: 24px; height: 24px; background-position: 0.409836% 12.0690%; background-size: 2133.33%; }
+.Arrow Counterclockwise {width: 24px; height: 24px; background-position: 5.73770% 12.0690%; background-size: 2133.33%; }
+.Arrow Down {width: 24px; height: 24px; background-position: 11.0656% 12.0690%; background-size: 2133.33%; }
+.Arrow Left {width: 24px; height: 24px; background-position: 16.3934% 12.0690%; background-size: 2133.33%; }
+.Arrow Right {width: 24px; height: 24px; background-position: 21.7213% 12.0690%; background-size: 2133.33%; }
+.Arrow Up {width: 24px; height: 24px; background-position: 27.0492% 12.0690%; background-size: 2133.33%; }
+.Calendar {width: 24px; height: 24px; background-position: 32.3770% 12.0690%; background-size: 2133.33%; }
+.Call {width: 24px; height: 24px; background-position: 37.7049% 12.0690%; background-size: 2133.33%; }
+.Camera {width: 24px; height: 24px; background-position: 43.0328% 12.0690%; background-size: 2133.33%; }
+.Card {width: 24px; height: 24px; background-position: 48.3607% 12.0690%; background-size: 2133.33%; }
+.Caret Down {width: 24px; height: 24px; background-position: 53.6885% 12.0690%; background-size: 2133.33%; }
+.Caret Left {width: 24px; height: 24px; background-position: 59.0164% 12.0690%; background-size: 2133.33%; }
+.Caret Right {width: 24px; height: 24px; background-position: 64.3443% 12.0690%; background-size: 2133.33%; }
+.Caret Up {width: 24px; height: 24px; background-position: 69.6721% 12.0690%; background-size: 2133.33%; }
+.Chat {width: 24px; height: 24px; background-position: 75.0000% 12.0690%; background-size: 2133.33%; }
+.Checked {width: 24px; height: 24px; background-position: 80.3279% 12.0690%; background-size: 2133.33%; }
+.Checkmark {width: 24px; height: 24px; background-position: 90.9836% 12.0690%; background-size: 2133.33%; }
+.Checkmark Circle {width: 24px; height: 24px; background-position: 85.6557% 12.0690%; background-size: 2133.33%; }
+.Chevron Down {width: 24px; height: 24px; background-position: 96.3115% 12.0690%; background-size: 2133.33%; }
+.Chevron Left {width: 24px; height: 24px; background-position: 0.409836% 23.2759%; background-size: 2133.33%; }
+.Chevron Right {width: 24px; height: 24px; background-position: 5.73770% 23.2759%; background-size: 2133.33%; }
+.Chevron Up {width: 24px; height: 24px; background-position: 11.0656% 23.2759%; background-size: 2133.33%; }
+.Coin {width: 24px; height: 24px; background-position: 16.3934% 23.2759%; background-size: 2133.33%; }
+.Customer {width: 24px; height: 24px; background-position: 21.7213% 23.2759%; background-size: 2133.33%; }
+.Dismiss {width: 24px; height: 24px; background-position: 32.3770% 23.2759%; background-size: 2133.33%; }
+.Dismiss Circle {width: 24px; height: 24px; background-position: 27.0492% 23.2759%; background-size: 2133.33%; }
+.Document {width: 24px; height: 24px; background-position: 37.7049% 23.2759%; background-size: 2133.33%; }
+.Download {width: 24px; height: 24px; background-position: 43.0328% 23.2759%; background-size: 2133.33%; }
+.Edit {width: 24px; height: 24px; background-position: 48.3607% 23.2759%; background-size: 2133.33%; }
+.Eye 2 {width: 24px; height: 24px; background-position: 53.6885% 23.2759%; background-size: 2133.33%; }
+.Eye Hide {width: 24px; height: 24px; background-position: 59.0164% 23.2759%; background-size: 2133.33%; }
+.Eye Show {width: 24px; height: 24px; background-position: 64.3443% 23.2759%; background-size: 2133.33%; }
+.Face Id {width: 24px; height: 24px; background-position: 69.6721% 23.2759%; background-size: 2133.33%; }
+.Faq {width: 24px; height: 24px; background-position: 75.0000% 23.2759%; background-size: 2133.33%; }
+.Filter {width: 24px; height: 24px; background-position: 80.3279% 23.2759%; background-size: 2133.33%; }
+.Fingerprint {width: 24px; height: 24px; background-position: 85.6557% 23.2759%; background-size: 2133.33%; }
+.Gift {width: 24px; height: 24px; background-position: 90.9836% 23.2759%; background-size: 2133.33%; }
+.Hand Shake {width: 24px; height: 24px; background-position: 96.3115% 23.2759%; background-size: 2133.33%; }
+.Help {width: 24px; height: 24px; background-position: 0.409836% 34.4828%; background-size: 2133.33%; }
+.History {width: 24px; height: 24px; background-position: 5.73770% 34.4828%; background-size: 2133.33%; }
+.Home {width: 24px; height: 24px; background-position: 11.0656% 34.4828%; background-size: 2133.33%; }
+.Hotline {width: 24px; height: 24px; background-position: 16.3934% 34.4828%; background-size: 2133.33%; }
+.Id Card Back {width: 24px; height: 24px; background-position: 21.7213% 34.4828%; background-size: 2133.33%; }
+.Id Card Front {width: 24px; height: 24px; background-position: 27.0492% 34.4828%; background-size: 2133.33%; }
+.Image {width: 24px; height: 24px; background-position: 37.7049% 34.4828%; background-size: 2133.33%; }
+.Image Library {width: 24px; height: 24px; background-position: 32.3770% 34.4828%; background-size: 2133.33%; }
+.Info {width: 24px; height: 24px; background-position: 43.0328% 34.4828%; background-size: 2133.33%; }
+.Invest {width: 24px; height: 24px; background-position: 48.3607% 34.4828%; background-size: 2133.33%; }
+.Lock {width: 24px; height: 24px; background-position: 53.6885% 34.4828%; background-size: 2133.33%; }
+.Mail {width: 24px; height: 24px; background-position: 59.0164% 34.4828%; background-size: 2133.33%; }
+.Management {width: 24px; height: 24px; background-position: 64.3443% 34.4828%; background-size: 2133.33%; }
+.Mark All Read {width: 24px; height: 24px; background-position: 69.6721% 34.4828%; background-size: 2133.33%; }
+.Menu {width: 24px; height: 24px; background-position: 75.0000% 34.4828%; background-size: 2133.33%; }
+.Navigate First {width: 24px; height: 24px; background-position: 80.3279% 34.4828%; background-size: 2133.33%; }
+.Navigate Last {width: 24px; height: 24px; background-position: 85.6557% 34.4828%; background-size: 2133.33%; }
+.Navigate Next {width: 24px; height: 24px; background-position: 90.9836% 34.4828%; background-size: 2133.33%; }
+.Navigate Prev {width: 24px; height: 24px; background-position: 96.3115% 34.4828%; background-size: 2133.33%; }
+.News {width: 24px; height: 24px; background-position: 0.409836% 45.6897%; background-size: 2133.33%; }
+.Note {width: 24px; height: 24px; background-position: 5.73770% 45.6897%; background-size: 2133.33%; }
+.Notification {width: 24px; height: 24px; background-position: 16.3934% 45.6897%; background-size: 2133.33%; }
+.Notification On {width: 24px; height: 24px; background-position: 11.0656% 45.6897%; background-size: 2133.33%; }
+.Person Roll {width: 24px; height: 24px; background-position: 21.7213% 45.6897%; background-size: 2133.33%; }
+.Phone {width: 24px; height: 24px; background-position: 27.0492% 45.6897%; background-size: 2133.33%; }
+.Profile {width: 24px; height: 24px; background-position: 32.3770% 45.6897%; background-size: 2133.33%; }
+.Protect {width: 24px; height: 24px; background-position: 37.7049% 45.6897%; background-size: 2133.33%; }
+.QR {width: 24px; height: 24px; background-position: 43.0328% 45.6897%; background-size: 2133.33%; }
+.Radio Checked {width: 24px; height: 24px; background-position: 48.3607% 45.6897%; background-size: 2133.33%; }
+.Radio Unchecked {width: 24px; height: 24px; background-position: 53.6885% 45.6897%; background-size: 2133.33%; }
+.Save {width: 24px; height: 24px; background-position: 59.0164% 45.6897%; background-size: 2133.33%; }
+.Search {width: 24px; height: 24px; background-position: 64.3443% 45.6897%; background-size: 2133.33%; }
+.Selfie {width: 24px; height: 24px; background-position: 69.6721% 45.6897%; background-size: 2133.33%; }
+.Send {width: 24px; height: 24px; background-position: 75.0000% 45.6897%; background-size: 2133.33%; }
+.Setting {width: 24px; height: 24px; background-position: 0.409836% 0.862069%; background-size: 2133.33%; }
+.Shield Check {width: 24px; height: 24px; background-position: 5.73770% 0.862069%; background-size: 2133.33%; }
+.Sign Out {width: 24px; height: 24px; background-position: 11.0656% 0.862069%; background-size: 2133.33%; }
+.Signature {width: 24px; height: 24px; background-position: 16.3934% 0.862069%; background-size: 2133.33%; }
+.Sort Down {width: 24px; height: 24px; background-position: 21.7213% 0.862069%; background-size: 2133.33%; }
+.Sort Inactive {width: 24px; height: 24px; background-position: 27.0492% 0.862069%; background-size: 2133.33%; }
+.Sort Up {width: 24px; height: 24px; background-position: 32.3770% 0.862069%; background-size: 2133.33%; }
+.Subtract {width: 24px; height: 24px; background-position: 37.7049% 0.862069%; background-size: 2133.33%; }
+.Tag {width: 24px; height: 24px; background-position: 43.0328% 0.862069%; background-size: 2133.33%; }
+.Ticket {width: 24px; height: 24px; background-position: 48.3607% 0.862069%; background-size: 2133.33%; }
+.Tranfer {width: 24px; height: 24px; background-position: 53.6885% 0.862069%; background-size: 2133.33%; }
+.Trash {width: 24px; height: 24px; background-position: 59.0164% 0.862069%; background-size: 2133.33%; }
+.Unchecked {width: 24px; height: 24px; background-position: 64.3443% 0.862069%; background-size: 2133.33%; }
+.Unlock {width: 24px; height: 24px; background-position: 69.6721% 0.862069%; background-size: 2133.33%; }
+.Upload {width: 24px; height: 24px; background-position: 75.0000% 0.862069%; background-size: 2133.33%; }
+.Video {width: 24px; height: 24px; background-position: 80.3279% 0.862069%; background-size: 2133.33%; }
+.Warning {width: 24px; height: 24px; background-position: 85.6557% 0.862069%; background-size: 2133.33%; }
+.Zoom {width: 24px; height: 24px; background-position: 90.9836% 0.862069%; background-size: 2133.33%; }

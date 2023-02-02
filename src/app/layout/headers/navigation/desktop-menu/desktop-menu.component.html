@@ -1,0 +1,80 @@
+<div id="op-top-navigation" class="justify-content-between">
+  <ul class="nav m-auto gap-3">
+    <ng-container *ngFor="let menuItem of menuItems">
+      <li class="nav-item" *ngxPermissionsOnly="menuItem.canActivate">
+        <!--  Has sub items  -->
+        <div
+          *ngIf="
+            menuItem.subItems && menuItem.subItems.length > 0;
+            else hasNotSubItems
+          "
+        >
+          <a
+            class="nav-link d-inline-flex align-items-center gap-1 op-nav-link"
+            [ngClass]="{
+              active: selectedNavItem === menuItem.navItem
+            }"
+            [matMenuTriggerFor]="menuDesktop"
+            #subMenuTrigger="matMenuTrigger"
+            (mousemove)="subMenuTrigger.openMenu()"
+          >
+            <span
+              [ngClass]="[
+                selectedNavItem === menuItem.navItem
+                  ? menuItem.activeIconClass
+                  : menuItem.defaultIconClass
+              ]"
+            ></span>
+            <span>{{ menuItem.title }}</span>
+          </a>
+
+          <!-- Submenu-->
+          <mat-menu
+            #menuDesktop="matMenu"
+            [overlapTrigger]="false"
+            class="sub-menu-desktop"
+          >
+            <span (mouseleave)="subMenuTrigger.closeMenu()">
+              <ng-container *ngFor="let subItem of menuItem.subItems">
+                <button
+                  mat-menu-item
+                  *ngxPermissionsOnly="subItem.canActivate"
+                  class="sub-menu-desktop-item gap-2 d-flex align-items-center"
+                  [routerLink]="subItem.path"
+                  [queryParams]="subItem.queryParams"
+                >
+                  <span [ngClass]="subItem.iconClass"></span>
+                  <span>{{ subItem.title }}</span>
+                </button>
+              </ng-container>
+            </span>
+          </mat-menu>
+          <!--  End submenu -->
+        </div>
+        <!--  End: has sub items  -->
+
+        <!--  Hasnot sub items  -->
+        <ng-template #hasNotSubItems>
+          <a
+            [routerLink]="menuItem.path"
+            [queryParams]="menuItem.queryParams"
+            class="nav-link d-inline-flex align-items-center gap-1 op-nav-link"
+            [ngClass]="{
+              active: selectedNavItem === menuItem.navItem
+            }"
+          >
+            <span
+              [ngClass]="[
+                selectedNavItem === menuItem.navItem
+                  ? menuItem.activeIconClass
+                  : menuItem.defaultIconClass
+              ]"
+            ></span>
+            <span>{{ menuItem.title }}</span>
+          </a>
+        </ng-template>
+        <!--  End: Hasnot sub items  -->
+      </li>
+    </ng-container>
+  </ul>
+</div>

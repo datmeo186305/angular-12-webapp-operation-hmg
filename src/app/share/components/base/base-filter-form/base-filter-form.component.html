@@ -1,0 +1,115 @@
+<div class="filter-form-container py-3">
+  <!-- Mobile view -->
+  <mat-accordion
+    *ngIf="responsive; else desktopView"
+    (mouseleave)="panelOpenState = false"
+  >
+    <mat-expansion-panel
+      class="shadow-none rounded-0"
+      [expanded]="panelOpenState"
+    >
+      <mat-expansion-panel-header
+        id="expand-panel-filter"
+        class="pb-2 pt-2 ps-3 pe-3"
+      >
+        <mat-panel-title>{{
+          "filter.filter_expand_title" | translate
+        }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="expansion-panel-content">
+        <ng-container *ngFor="let filterOption of filterOptions">
+
+          <!--    Date filter      -->
+          <app-datetime-filter
+            *ngIf="filterOption.type === 'DATETIME'"
+            [filterOption]="filterOption"
+            (completeFilter)="completeFilter($event)"
+          ></app-datetime-filter>
+          <!--   END: Date filter      -->
+
+          <!--    Select filter      -->
+          <app-select-filter
+            *ngIf="filterOption.type === 'SELECT'"
+            [filterOption]="filterOption"
+            (completeFilter)="completeFilter($event)"
+            (clickActionBtn)="clickActionBtn($event)"
+          ></app-select-filter>
+          <!--   END: Select filter      -->
+
+          <!--    Multiple choice filter      -->
+          <app-multiple-choice-filter
+            *ngIf="filterOption.type === 'MULTIPLE_CHOICE'"
+            [filterOption]="filterOption"
+            (completeFilter)="completeFilter($event)"
+            (clickActionBtn)="clickActionBtn($event)"
+          ></app-multiple-choice-filter>
+          <!--   END: Multiple choice filter      -->
+
+          <!--    Search select filter      -->
+          <app-search-select-filter
+            *ngIf="filterOption.type === 'SEARCH_SELECT'"
+            [filterOption]="filterOption"
+            (completeFilter)="completeFilter($event)"
+            (clickActionBtn)="clickActionBtn($event)"
+          ></app-search-select-filter>
+          <!--    END: Search select filter      -->
+
+        </ng-container>
+
+        <div class="text-center">
+          <button
+            (click)="panelOpenState = !panelOpenState"
+            mat-flat-button
+            type="button"
+          >
+            <span class="sprite-group-1-arrow-up"></span>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!-- End: Mobile view -->
+
+  <!-- Desktop view -->
+  <ng-template #desktopView>
+    <ng-container *ngFor="let filterOption of filterOptions">
+      <!--    Date filter      -->
+      <app-datetime-filter
+        *ngIf="filterOption.type === 'DATETIME'"
+        [filterOption]="filterOption"
+        (completeFilter)="completeFilter($event)"
+      ></app-datetime-filter>
+      <!--   END: Date filter      -->
+
+      <!--    Select filter      -->
+      <app-select-filter
+        *ngIf="filterOption.type === 'SELECT'"
+        [filterOption]="filterOption"
+        (completeFilter)="completeFilter($event)"
+        (clickActionBtn)="clickActionBtn($event)"
+      ></app-select-filter>
+      <!--   END: Select filter      -->
+
+      <!--    Multiple choice filter      -->
+      <app-multiple-choice-filter
+        *ngIf="filterOption.type === 'MULTIPLE_CHOICE'"
+        [filterOption]="filterOption"
+        (completeFilter)="completeFilter($event)"
+        (clickActionBtn)="clickActionBtn($event)"
+      ></app-multiple-choice-filter>
+      <!--   END: Multiple choice filter      -->
+
+      <!--    Search select filter      -->
+      <app-search-select-filter
+        *ngIf="filterOption.type === 'SEARCH_SELECT'"
+        [filterOption]="filterOption"
+        (completeFilter)="completeFilter($event)"
+        (clickActionBtn)="clickActionBtn($event)"
+      ></app-search-select-filter>
+      <!--    END: Search select filter      -->
+
+    </ng-container>
+  </ng-template>
+
+  <!-- END: Desktop view -->
+</div>

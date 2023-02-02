@@ -1,0 +1,137 @@
+@import "src/styles/variables";
+@import "src/styles/op/pl-button";
+
+.user-role-tab {
+  padding: 16px;
+
+  .row {
+    .user-role {
+      .select {
+        width: 300px;
+        line-height: 40px;
+        background-color: #F7FBFF;
+        text-align: right;
+        border-radius: 4px;
+
+        ::ng-deep .mat-select-min-line {
+          font-weight: 600 !important;
+          color: #1C1C1E !important;
+        }
+      }
+
+      .icon {
+        position: relative;
+        left: -284px;
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .permission-tree {
+    margin-top: 16px;
+
+    .grid-table {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 16px;
+
+      .table {
+        margin-right: 16px;
+        border: 1px solid #E5E5EA;
+        border-radius: 4px;
+
+        .table-title {
+          background-color: #F7F7FC;
+          padding: 9px 16px;
+          text-transform: uppercase;
+          font-family: $sfPro;
+          font-size: 12px;
+          font-weight: 600;
+          color: #3A3A3C;
+        }
+
+        .table-content {
+          overflow: auto;
+          height: 360px;
+        }
+      }
+
+      .table:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .action {
+    margin-top: 16px;
+  }
+}
+
+::ng-deep .role-select {
+  position: absolute;
+  right: -17px;
+  top: 44px;
+  min-width: 300px !important;
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.05)) drop-shadow(0px 16px 32px rgba(0, 0, 0, 0.05));
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  border: solid 1px #F2F2F7;
+
+  .mat-active {
+    background-color: #F7FBFF !important;
+  }
+
+  .mat-option {
+    border-bottom: solid 1px #F2F2F7;
+
+    .mat-option-text {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .action span {
+        display: none;
+        z-index: 999;
+      }
+    }
+  }
+
+  .mat-option:hover {
+    background-color: #F7FBFF;
+
+    .mat-option-text {
+      .action span {
+        display: block;
+      }
+    }
+  }
+}
+
+::ng-deep .user-role .mat-select-arrow {
+  border: none;
+  background-image: url("../../../../../../assets/img/icon/group-5/svg/select-arrow.svg");
+  width: 20px;
+  height: 20px;
+  margin-left: 8px;
+  margin-right: 16px;
+}
+
+::ng-deep .user-role .mat-select-trigger {
+  z-index: 999;
+}
+
+::ng-deep .add-role .mat-option-text {
+  display: flex;
+  align-items: center;
+  justify-content: start !important;
+  color: #007AFF;
+  font-size: 14px;
+  font-family: $sfPro;
+
+  span {
+    margin-right: 8px;
+  }
+}

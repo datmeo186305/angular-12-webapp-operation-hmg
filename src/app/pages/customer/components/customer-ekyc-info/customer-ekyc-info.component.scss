@@ -1,0 +1,54 @@
+@import "src/styles/variables";
+@import "src/styles/op/pl-button";
+
+.op-customer-ekyc-box {
+  background: $white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: content-box;
+  border-radius: 8px;
+  position: relative;
+  cursor: zoom-in;
+  width: 250px;
+  height: 150px;
+  text-align: center;
+  flex: none;
+  overflow: hidden;
+
+  .op-customer-ekyc-img {
+    width: 250px;
+    height: 150px;
+  }
+
+  .op-customer-ekyc-img-zoom {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+  }
+}
+
+.op-customer-ekyc-img-title {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: $grey-10;
+}
+
+@media (max-width: 768px) {
+  .op-customer-ekyc {
+    width: 200px;
+    height: 100px;
+
+    .op-customer-ekyc-img {
+      width: 200px;
+      height: 100px;
+    }
+  }
+}

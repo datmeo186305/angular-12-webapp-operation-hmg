@@ -1,0 +1,728 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button mat-icon-button tabindex="-1" class="close-btn" mat-dialog-close>
+      <span class="sprite-group-7-close"></span>
+    </button>
+    <div class="card-title title">
+      {{ "customer.individual_info.update_individual_info" | translate }}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="customerIndividualForm" (ngSubmit)="submitForm()">
+        <div class="row">
+          <!-- Avatar -->
+          <section class="col-12 col-sm-12 col-md-4 col-lg-3">
+            <div class="d-flex gap-2">
+              <app-upload-document-area
+                [id]="'selfieSrc'"
+                name="selfieSrc"
+                [classes]="'p-0'"
+                [title]="customerInfo?.firstName"
+                [description]="'customer.individual_info.avatar' | translate"
+                [imgSrc]="selfieSrc"
+                [hiddenDeleteBtn]="true"
+                [hiddenUploadBtn]="true"
+                [hiddenDownloadBtn]="true"
+              ></app-upload-document-area>
+            </div>
+          </section>
+
+          <!--  Info  -->
+          <section class="col-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="row">
+              <!-- Left Individual Info -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 pr-2">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.id" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="'customer.individual_info.id' | translate"
+                      [value]="customerIndividualForm.controls.id.value"
+                      disabled
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.fullname" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.fullname' | translate
+                      "
+                      formControlName="firstName"
+                    />
+                    <show-errors
+                      [control]="customerIndividualForm.controls['firstName']"
+                      [controlLabel]="
+                        'customer.individual_info.fullname' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.phone_number" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      appPhoneNumberOnly
+                      phone-number-validate
+                      [placeholder]="
+                        'customer.individual_info.phone_number' | translate
+                      "
+                      formControlName="mobileNumber"
+                    />
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['mobileNumber']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.phone_number' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.email" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.email' | translate
+                      "
+                      formControlName="email"
+                    />
+                    <show-errors
+                      [control]="customerIndividualForm.controls['email']"
+                      [controlLabel]="
+                        'customer.individual_info.email' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div class="d-flex gap-3">
+                  <mat-form-field appearance="outline" class="w-50">
+                    <mat-label>{{
+                      "customer.individual_info.date_of_birth" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      [placeholder]="
+                        'customer.individual_info.date_of_birth' | translate
+                      "
+                      formControlName="dateOfBirth"
+                      [min]="minDateTime"
+                      [max]="maxDateTime"
+                    />
+                    <show-errors
+                      [control]="customerIndividualForm.controls['dateOfBirth']"
+                      [controlLabel]="
+                        'customer.individual_info.date_of_birth' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="w-50">
+                    <mat-label>{{
+                      "customer.individual_info.gender" | translate
+                    }}</mat-label>
+                    <mat-select formControlName="gender">
+                      <mat-option
+                        *ngFor="let gender of genderOptions"
+                        [value]="gender.value"
+                        [matTooltip]="gender.name"
+                      >
+                        {{ gender.name }}
+                      </mat-option>
+                    </mat-select>
+                    <show-errors
+                      [control]="customerIndividualForm.controls['gender']"
+                      [controlLabel]="
+                        'customer.individual_info.gender' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.cmnd" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      appNumberOnly
+                      [placeholder]="
+                        'customer.individual_info.cmnd' | translate
+                      "
+                      formControlName="identityNumberOne"
+                    />
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['identityNumberOne']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.cmnd' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.permanent_address" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.permanent_address' | translate
+                      "
+                      formControlName="addressTwoLine1"
+                    />
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['addressTwoLine1']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.permanent_address' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.current_residence" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.current_residence' | translate
+                      "
+                      formControlName="addressOneLine1"
+                    />
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['addressOneLine1']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.current_residence' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.city" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <input-->
+                <!--                      matInput-->
+                <!--                      [placeholder]="-->
+                <!--                        'customer.individual_info.city' | translate-->
+                <!--                      "-->
+                <!--                      formControlName="city"-->
+                <!--                    />-->
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['city']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.city' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.district" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <input-->
+                <!--                      matInput-->
+                <!--                      [placeholder]="-->
+                <!--                        'customer.individual_info.district' | translate-->
+                <!--                      "-->
+                <!--                      formControlName="district"-->
+                <!--                    />-->
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['district']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.district' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.commune" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <input-->
+                <!--                      matInput-->
+                <!--                      [placeholder]="-->
+                <!--                        'customer.individual_info.commune' | translate-->
+                <!--                      "-->
+                <!--                      formControlName="commune"-->
+                <!--                    />-->
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['commune']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.commune' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.city" | translate-->
+                <!--                      }}</mat-label>-->
+
+                <!--                    <mat-select required formControlName="cityId" (openedChange)="toggleSelect()"-->
+                <!--                                (selectionChange)="changeCity()">-->
+                <!--                      <mat-option>-->
+                <!--                        <ngx-mat-select-search [formControl]="citiesFilterCtrl"-->
+                <!--                                               placeholderLabel="Tìm Tỉnh/Thành Phố..."-->
+                <!--                                               noEntriesFoundLabel="Tỉnh/Thành Phố không tồn tại"-->
+                <!--                        ></ngx-mat-select-search>-->
+                <!--                      </mat-option>-->
+                <!--                      <mat-option *ngFor="let city of filteredCities" [value]="city.id">-->
+                <!--                        {{city.name}}-->
+                <!--                      </mat-option>-->
+                <!--                    </mat-select>-->
+
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['cityId']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.city' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.district" | translate-->
+                <!--                      }}</mat-label>-->
+
+                <!--                    <mat-select [disabled]="!customerIndividualForm.controls.cityId.value" required-->
+                <!--                                formControlName="districtId" (selectionChange)="changeDistrict()"-->
+                <!--                                (openedChange)="toggleSelect()">-->
+                <!--                      <mat-option>-->
+                <!--                        <ngx-mat-select-search [formControl]="districtsFilterCtrl"-->
+                <!--                                               placeholderLabel="Tìm Quận/Huyện..."-->
+                <!--                                               noEntriesFoundLabel="Quận/Huyện không tồn tại"-->
+                <!--                        ></ngx-mat-select-search>-->
+                <!--                      </mat-option>-->
+                <!--                      <mat-option *ngFor="let district of filteredDistricts" [value]="district.id">-->
+                <!--                        {{district.name}}-->
+                <!--                      </mat-option>-->
+                <!--                    </mat-select>-->
+
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['districtId']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.district' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.commune" | translate-->
+                <!--                      }}</mat-label>-->
+
+                <!--                    <mat-select [disabled]="!customerIndividualForm.controls.districtId.value" required-->
+                <!--                                formControlName="communeId" (openedChange)="toggleSelect()">-->
+                <!--                      <mat-option>-->
+                <!--                        <ngx-mat-select-search [formControl]="communesFilterCtrl"-->
+                <!--                                               placeholderLabel="Tìm Quận/Huyện..."-->
+                <!--                                               noEntriesFoundLabel="Quận/Huyện không tồn tại"-->
+                <!--                        ></ngx-mat-select-search>-->
+                <!--                      </mat-option>-->
+                <!--                      <mat-option *ngFor="let commune of filteredCommunes" [value]="commune.id">-->
+                <!--                        {{commune.name}}-->
+                <!--                      </mat-option>-->
+                <!--                    </mat-select>-->
+
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['communeId']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.commune' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.apartment_number" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <input-->
+                <!--                      matInput-->
+                <!--                      required-->
+                <!--                      [placeholder]="-->
+                <!--                        'customer.individual_info.apartment_number' | translate-->
+                <!--                      "-->
+                <!--                      formControlName="apartmentNumber"-->
+                <!--                    />-->
+                <!--                    <show-errors-->
+                <!--                      [control]="-->
+                <!--                        customerIndividualForm.controls['apartmentNumber']-->
+                <!--                      "-->
+                <!--                      [controlLabel]="-->
+                <!--                        'customer.individual_info.apartment_number' | translate-->
+                <!--                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "customer.individual_info.id_origin" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <input-->
+                <!--                      matInput-->
+                <!--                      [placeholder]="-->
+                <!--                                        'customer.individual_info.id_origin' | translate-->
+                <!--                                      "-->
+                <!--                      formControlName="idOrigin"-->
+                <!--                    />-->
+                <!--                    <show-errors-->
+                <!--                      [control]="customerIndividualForm.controls['idOrigin']"-->
+                <!--                      [controlLabel]="-->
+                <!--                                        'customer.individual_info.id_origin' | translate-->
+                <!--                                      "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+              </div>
+
+              <!-- Right Individual Info -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 pl-2">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.number_of_dependents"
+                        | translate
+                    }}</mat-label>
+                    <input
+                      name="numberOfDependents"
+                      matInput
+                      formControlName="numberOfDependents"
+                      [placeholder]="
+                        'customer.individual_info.number_of_dependents'
+                          | translate
+                      "
+                      required
+                      type="number"
+                      maxlength="255"
+                      min="0"
+                      [matAutocomplete]="auto"
+                    />
+                    <mat-autocomplete
+                      autoActiveFirstOption
+                      #auto="matAutocomplete"
+                    >
+                      <mat-option
+                        *ngFor="
+                          let option of numberOfDependentsOptions?.options
+                        "
+                        [value]="option.value"
+                      >
+                        {{ option.title }}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['numberOfDependents']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.number_of_dependents'
+                          | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.marital_status" | translate
+                    }}</mat-label>
+                    <mat-select formControlName="maritalStatus">
+                      <mat-option
+                        *ngFor="
+                          let maritalStatusOption of maritalStatusOptions.options
+                        "
+                        [value]="maritalStatusOption.value"
+                        [matTooltip]="maritalStatusOption.name"
+                      >
+                        {{ maritalStatusOption.name }}
+                      </mat-option>
+                    </mat-select>
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['maritalStatus']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.marital_status' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.bank_account_number" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      appNumberOnly
+                      [placeholder]="
+                        'customer.individual_info.bank_account_number'
+                          | translate
+                      "
+                      formControlName="accountNumber"
+                    />
+                    <show-errors
+                      [control]="
+                        customerIndividualForm.controls['accountNumber']
+                      "
+                      [controlLabel]="
+                        'customer.individual_info.bank_account_number'
+                          | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.bank_name" | translate
+                    }}</mat-label>
+                    <mat-select
+                      formControlName="bankCode"
+                      (selectionChange)="changeBank($event)"
+                    >
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [formControl]="banksFilterCtrl"
+                          placeholderLabel="Tìm Ngân Hàng"
+                          noEntriesFoundLabel="Ngân Hàng không tồn tại"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <!--                      <mat-option-->
+                      <!--                        [value]="bankNA.bankCode"-->
+                      <!--                        [matTooltip]="bankNA.bankName"-->
+                      <!--                      >-->
+                      <!--                        N/A-->
+                      <!--                      </mat-option>-->
+                      <mat-option
+                        *ngFor="let bankNameOption of filteredBanks"
+                        [value]="bankNameOption.bankCode"
+                        [matTooltip]="
+                          bankNameOption?.bankName +
+                          ' (' +
+                          bankNameOption?.bankCode +
+                          ')'
+                        "
+                      >
+                        <div class="d-flex">
+                          <div class="d-inline-flex">
+                            <img class="bank-logo" [src]="bankNameOption?.avatar" />
+                          </div>
+                          <p>
+                            {{
+                              bankNameOption?.bankName +
+                                " (" +
+                                bankNameOption?.bankCode +
+                                ")"
+                            }}
+                          </p>
+                        </div>
+                      </mat-option>
+                    </mat-select>
+                    <show-errors
+                      [control]="customerIndividualForm.controls['bankCode']"
+                      [controlLabel]="
+                        'customer.individual_info.bank_name' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.va_account_number" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.va_account_number' | translate
+                      "
+                      [value]="
+                        customerIndividualForm.controls.vaAccountNumber.value
+                      "
+                      disabled
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="standard" class="w-100">-->
+                <!--                    <mat-label class="d-flex align-items-center gap-2">-->
+                <!--                      {{ "customer.individual_info.note" | translate }}-->
+                <!--                    </mat-label>-->
+                <!--                    <textarea-->
+                <!--                      matInput-->
+                <!--                      id="review"-->
+                <!--                      name="review"-->
+                <!--                      formControlName="note"-->
+                <!--                      [placeholder]="-->
+                <!--                        'customer.individual_info.type_note' | translate-->
+                <!--                      "-->
+                <!--                    ></textarea>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.created_at" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.created_at' | translate
+                      "
+                      [value]="customerIndividualForm.controls.createdAt.value"
+                      disabled
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "customer.individual_info.updated_at" | translate
+                    }}</mat-label>
+                    <input
+                      matInput
+                      [placeholder]="
+                        'customer.individual_info.updated_at' | translate
+                      "
+                      [value]="customerIndividualForm.controls.updatedAt.value"
+                      disabled
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!--  Actions -->
+
+        <div class="row mt-3">
+          <div class="col-12 d-flex gap-2 justify-content-end">
+            <button
+              type="button"
+              mat-flat-button
+              color="warn"
+              autofocus
+              mat-dialog-close
+            >
+              {{ "customer.individual_info.cancel_update" | translate }}
+            </button>
+            <button type="submit" mat-flat-button color="accent">
+              <span class="sprite-group-5-save-white"></span>
+              {{ "customer.individual_info.save_update" | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

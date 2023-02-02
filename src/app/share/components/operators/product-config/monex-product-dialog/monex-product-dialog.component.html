@@ -1,0 +1,283 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+
+    <div class="card-title title">
+      {{dialogTitle}}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="submitForm()" autocomplete="off">
+        <div class="row">
+          <!--  Info  -->
+          <section class="col-12">
+            <div class="row">
+
+              <!-- Left Individual Info -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 pr-2">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100" floatLabel="never">
+                    <mat-label>{{ "monex_product.code" | translate}}</mat-label>
+                    <input [placeholder]="'monex_product.code' | translate"
+                           [value]="form.controls.code.value ? form.controls.code.value : 'MXP-XXX'"
+                           disabled
+                           matInput
+                    >
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100" floatLabel="never">
+                    <mat-label>{{ "monex_product.name" | translate}}</mat-label>
+                    <input (blur)="input1Focus = false"
+                           (focus)="input1Focus = true"
+                           [ngClass]="
+                        input1Focus ? 'is-focused-input' : ''
+                      " [placeholder]="'monex_product.name' | translate"
+                           formControlName="name"
+                           autocomplete="chrome-off"
+                           aria-autocomplete="none"
+                           required
+                           matInput
+                           type="text"
+                    >
+                    <show-errors
+                      [control]="form.controls['name']"
+                      [controlLabel]="
+                        'monex_product.name' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "monex_product.workflow" | translate
+                      }}</mat-label>
+                    <mat-select required formControlName="workflow">
+                      <mat-option
+                        *ngFor="let workflow of workflows"
+                        [value]="workflow.id"
+                      >{{ workflow.name }}
+                      </mat-option>
+                    </mat-select>
+                    <show-errors
+                      [control]="form.controls['workflow']"
+                      [controlLabel]="
+                              'monex_product.workflow' | translate
+                            "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "monex_product.matrix" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <mat-select-->
+                <!--                      disableOptionCentering="true"-->
+                <!--                      formControlName="matrix"-->
+                <!--                      multiple-->
+                <!--                    >-->
+                <!--                      <mat-select-trigger>-->
+                <!--                              <span-->
+                <!--                                *ngIf="-->
+                <!--                                  form.controls.matrix.value-->
+                <!--                                    .length <= 1;-->
+                <!--                                  else matrixMultipleOptions-->
+                <!--                                "-->
+                <!--                              >{{-->
+                <!--                                form.controls.matrix.value-->
+                <!--                                  ? form.controls.matrix-->
+                <!--                                    .value[0]-->
+                <!--                                  : ""-->
+                <!--                                }}</span-->
+                <!--                              >-->
+                <!--                        <ng-template #matrixMultipleOptions>-->
+                <!--                          Đã chọn-->
+                <!--                          {{-->
+                <!--                          form.controls.matrix.value-->
+                <!--                            .length-->
+                <!--                          }}-->
+                <!--                          Limit Control Matrix-->
+                <!--                        </ng-template>-->
+                <!--                      </mat-select-trigger>-->
+                <!--                      <mat-option-->
+                <!--                        *ngFor="let matrix of matrices"-->
+                <!--                        [value]="matrix.name"-->
+                <!--                      >{{ matrix.name }}</mat-option-->
+                <!--                      >-->
+                <!--                    </mat-select>-->
+                <!--                    <show-errors-->
+                <!--                      [control]="form.controls['matrix']"-->
+                <!--                      [controlLabel]="-->
+                <!--                              'monex_product.matrix' | translate-->
+                <!--                            "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "monex_product.mifos" | translate
+                      }}</mat-label>
+                    <mat-select required formControlName="mifos">
+                      <mat-option
+                        *ngFor="let mifo of mifos"
+                        [value]="mifo.id"
+                      >{{ mifo.name }}
+                      </mat-option>
+                    </mat-select>
+                    <show-errors
+                      [control]="form.controls['mifos']"
+                      [controlLabel]="
+                                              'monex_product.mifos' | translate
+                                            "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Right Individual Info -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 pr-2">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "monex_product.pd_model" | translate
+                      }}</mat-label>
+                    <mat-select
+                      disableOptionCentering="true"
+                      formControlName="pdModel"
+                      multiple
+                    >
+                      <mat-select-trigger>
+                              <span
+                                *ngIf="
+                                  form.controls.pdModel.value
+                                    .length <= 1;
+                                  else pdMultipleOptions
+                                "
+                              >{{
+                                form.controls.pdModel.value
+                                  ? getModelName(form.controls.pdModel.value)
+                                  : ""
+                                }}</span
+                              >
+                        <ng-template #pdMultipleOptions>
+                          Đã chọn
+                          {{
+                          form.controls.pdModel.value
+                            .length
+                          }}
+                          PD Model
+                        </ng-template>
+                      </mat-select-trigger>
+                      <mat-option
+                        *ngFor="let pdModel of pdModels"
+                        [value]="pdModel.id"
+                      >{{ pdModel.name }}</mat-option
+                      >
+                    </mat-select>
+                    <show-errors
+                      [control]="form.controls['pdModel']"
+                      [controlLabel]="
+                              'monex_product.pd_model' | translate
+                            "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+                <!--                <div>-->
+                <!--                  <mat-form-field appearance="outline" class="w-100">-->
+                <!--                    <mat-label>{{-->
+                <!--                      "monex_product.contract" | translate-->
+                <!--                      }}</mat-label>-->
+                <!--                    <mat-select required formControlName="contract">-->
+                <!--                      <mat-option-->
+                <!--                        *ngFor="let contract of contracts"-->
+                <!--                        [value]="contract.name"-->
+                <!--                      >{{ contract.name }}-->
+                <!--                      </mat-option>-->
+                <!--                    </mat-select>-->
+                <!--                    <show-errors-->
+                <!--                      [control]="form.controls['contract']"-->
+                <!--                      [controlLabel]="-->
+                <!--                              'monex_product.contract' | translate-->
+                <!--                            "-->
+                <!--                      [hasIconPrefix]="false"-->
+                <!--                    >-->
+                <!--                    </show-errors>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "monex_product.description" | translate
+                      }}</mat-label>
+                    <textarea
+                      style="height: 168px"
+                      matInput
+                      class="text-area"
+                      id="review"
+                      name="review"
+                      formControlName="description"
+                      [placeholder]="'monex_product.description' | translate"
+                    ></textarea>
+                    <show-errors
+                      [control]="form.controls['description']"
+                      [controlLabel]="
+                        'monex_product.description' | translate
+                      "
+                      [hasIconPrefix]="false"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <!--                <div>-->
+                <!--                  <mat-checkbox formControlName="status"-->
+                <!--                                class="example-margin">{{"monex_product.active" | translate}}</mat-checkbox>-->
+                <!--                </div>-->
+
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!--  Actions -->
+        <div class="row mt-2">
+          <div class="col-12 d-flex gap-2 justify-content-end">
+            <button class="bg-grey"
+                    mat-button
+                    mat-dialog-close
+            >
+              {{ "account.info.cancel_update" | translate }}
+            </button>
+            <button
+              type="submit"
+              color="accent"
+              mat-flat-button>
+              <span class="sprite-group-5-save-white"></span>
+              <span class="ms-1">{{ "account.info.save_update" | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,113 @@
+<mat-tab-group dynamicHeight class="op-tab-group">
+  <!--  Loan Info-->
+  <mat-tab [label]="'loan_app.tabs.loan_info' | translate">
+    <ng-template matTabContent>
+      <app-loan-detail-info
+        (loanDetailDetectChangeStatus)="loanDetailDetectChangeStatusTrigger()"
+        [customerInfo]="userInfo"
+        [groupName]="groupName"
+        [loanDetail]="loanDetail"
+        [loanId]="loanId"
+      ></app-loan-detail-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Contract-->
+  <ng-container
+    *ngxPermissionsOnly="[
+      'paydays:getLoanTNGContractByLoanId',
+      'paydays:getLoanVACContractByLoanId',
+      'hmgPaydayLoans:getLoanContractByLoanId'
+    ]"
+  >
+    <mat-tab [label]="'loan_app.tabs.loan_contract' | translate">
+      <ng-template matTabContent>
+        <app-loan-contract
+          (triggerUpdateLoanAfterSign)="triggerUpdateLoanAfterSign()"
+          [loanDetail]="loanDetail"
+          [loanId]="loanId"
+          [customerInfo]="userInfo"
+        ></app-loan-contract>
+      </ng-template>
+    </mat-tab>
+  </ng-container>
+
+  <!--  Document Info-->
+  <mat-tab [label]="'loan_app.tabs.documents' | translate">
+    <ng-template matTabContent>
+      <app-customer-document-info
+        [customerId]="customerId"
+        [loanDetail]="loanDetail"
+        [customerInfo]="userInfo"
+        (refreshContent)="refreshContent()"
+      ></app-customer-document-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Rating Info-->
+  <mat-tab
+    *ngIf="loanDetail?.ratingInfo?.isRated"
+    [label]="'loan_app.tabs.rating' | translate"
+  >
+    <ng-template matTabContent>
+      <app-loan-rating
+        [loanDetail]="loanDetail"
+        [loanId]="loanId"
+      ></app-loan-rating>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Company Info-->
+  <mat-tab [label]="'loan_app.tabs.company_info' | translate">
+    <ng-template matTabContent>
+      <app-customer-company-info
+        (triggerUpdateInfo)="updateCustomerInfo($event)"
+        [bankOptions]="bankOptions"
+        [companyOptions]="companyOptions"
+        [customerId]="customerId"
+        [customerInfo]="userInfo"
+        [disabledColumns]="disabledColumns"
+        [hiddenColumns]="hiddenColumns"
+      ></app-customer-company-info>
+    </ng-template>
+    >
+  </mat-tab>
+
+  <!--  Loan Note-->
+  <mat-tab [label]="'loan_app.tabs.note' | translate">
+    <ng-template matTabContent>
+      <app-loan-note
+        (loanDetailDetectChangeStatus)="loanDetailDetectChangeStatusTrigger()"
+        [groupName]="groupName"
+        [loanDetail]="loanDetail"
+        [loanId]="loanId"
+      ></app-loan-note>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Info Verification-->
+  <mat-tab
+    *ngIf="groupName === 'VAC'"
+    [label]="'loan_app.tabs.info-verification' | translate"
+  >
+    <ng-template matTabContent>
+      <ng-container *ngIf="loanDetail?.status === 'DOCUMENT_AWAITING'; else compareContent">
+        <app-info-verification
+          [loanId]="loanId"
+          [loanDetail]="loanDetail"
+          [bankOptions]="bankOptions"
+          [customerInfo]="userInfo"
+          (loanDetailDetectChangeStatus)="loanDetailDetectChangeStatusTrigger()"
+        ></app-info-verification>
+      </ng-container>
+      <ng-template #compareContent>
+        <app-compare-info-verification
+          [loanId]="loanId"
+          [loanDetail]="loanDetail"
+          [customerId]="customerId"
+        >
+        </app-compare-info-verification>
+      </ng-template>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

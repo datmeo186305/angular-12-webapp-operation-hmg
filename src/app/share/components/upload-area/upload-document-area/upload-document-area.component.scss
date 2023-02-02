@@ -1,0 +1,69 @@
+@import "src/styles/op/pl-button";
+@import "src/styles/variables";
+
+.op-customer-avatar {
+  background: $white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: content-box;
+  border-radius: 8px;
+  position: relative;
+  cursor: zoom-in;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  flex: none;
+  overflow: hidden;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .op-customer-avatar-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .op-customer-avatar-img-zoom {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+  }
+}
+
+.op-upload-img-area-desc {
+  .op-upload-img-area-desc-content {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $grey-10;
+    word-break: break-word;
+  }
+
+  .op-upload-img-area-description {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: $grey-06;
+  }
+}
+
+.upload-img-area-title {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: $grey-10;
+}
+

@@ -1,0 +1,42 @@
+<div class="container-fluid">
+  <div class="card-body no-padding-bot">
+    <div class="row">
+      <div class="d-flex justify-content-center">
+        <div
+          class="qr-code position-relative cursor-pointer"
+          (click)="printQr()"
+          *ngIf="_merchantQr"
+        >
+          <img
+            id="merchant-qr-code-img"
+            [src]="'data:image/jpg;base64,' + _merchantQr"
+            alt=""
+          />
+          <img src="./assets/img/logo/favicon.svg" id="logo-monex-center" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <article class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <ul class="pl-list">
+          <li
+            *ngFor="let leftCompanyInfo of leftCompanyInfos"
+            class="pl-list-item"
+          >
+            <p class="pl-list-item-label">
+              {{ leftCompanyInfo.title }}
+            </p>
+            <p class="pl-list-item-content">
+              <app-format-data
+                [format]="leftCompanyInfo?.format"
+                [type]="leftCompanyInfo?.type"
+                [value]="leftCompanyInfo?.value"
+              ></app-format-data>
+            </p>
+          </li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</div>

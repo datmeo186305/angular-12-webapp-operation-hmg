@@ -1,0 +1,10 @@
+<div
+  class="gap-1 d-flex p-1"
+  [ngClass]="[documentBtnInfo.containerClass, classes]"
+  (click)="triggerClickBtn(documentType)"
+>
+  <span [ngClass]="documentBtnInfo.iconClass"></span>
+  <span [ngClass]="documentBtnInfo.titleClass">{{
+    documentBtnInfo.title
+  }}</span>
+</div>

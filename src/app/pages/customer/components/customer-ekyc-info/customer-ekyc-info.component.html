@@ -1,0 +1,122 @@
+<div class="container-fluid">
+  <div class="row p-3">
+    <!--  Info  -->
+    <section class="col-12">
+      <div class="row">
+        <!-- Left ekyc Info -->
+        <article class="col-12 col-sm-12 col-md-12 col-lg-6 mt-3">
+          <div class="row d-flex align-items-center">
+            <!-- Front ID  -->
+            <div class="col-12 text-center">
+              <section class="ekyc-img-container d-inline-block">
+                <article class="op-customer-ekyc-box">
+                  <img
+                    *ngIf="frontIdSrc; else hasNotFrontId"
+                    class="op-customer-ekyc-img"
+                    [src]="frontIdSrc"
+                    alt=""
+                    ngxViewer
+                    [viewerOptions]="viewerOptions"
+                  />
+
+                  <ng-template #hasNotFrontId>
+                    <img
+                      class="op-customer-ekyc-img"
+                      src="assets/img/payday-loan/avatar-default.png"
+                      alt=""
+                    />
+                  </ng-template>
+
+                  <div class="op-customer-ekyc-img-zoom">
+                    <span class="sprite-group-5-Zoom"></span>
+                  </div>
+                </article>
+                <article
+                  class="d-flex align-items-center justify-content-between mt-2"
+                >
+                  <div class="op-customer-ekyc-img-title">
+                    {{ "customer.identity.front_id" | translate }}
+                  </div>
+                  <div
+                    class="op-img-download-btn gap-1 d-flex p-1"
+                    (click)="downloadDocumentByPath(customerInfo?.frontId)"
+                  >
+                    <span class="sprite-group-5-download-green"></span>
+                    <span class="op-img-download-btn-title">{{
+                      "customer.identity.download" | translate
+                    }}</span>
+                  </div>
+                </article>
+              </section>
+            </div>
+
+            <!-- Back ID  -->
+            <div class="col-12 text-center mt-3">
+              <section class="ekyc-img-container d-inline-block">
+                <article class="op-customer-ekyc-box">
+                  <img
+                    *ngIf="backIdSrc; else hasNotBackId"
+                    class="op-customer-ekyc-img"
+                    [src]="backIdSrc"
+                    alt=""
+                    ngxViewer
+                    [viewerOptions]="viewerOptions"
+                  />
+
+                  <ng-template #hasNotBackId>
+                    <img
+                      class="op-customer-ekyc-img"
+                      src="assets/img/payday-loan/avatar-default.png"
+                      alt=""
+                    />
+                  </ng-template>
+
+                  <div class="op-customer-ekyc-img-zoom">
+                    <span class="sprite-group-5-Zoom"></span>
+                  </div>
+                </article>
+                <article
+                  class="d-flex align-items-center justify-content-between mt-2"
+                >
+                  <div class="op-customer-ekyc-img-title">
+                    {{ "customer.identity.back_id" | translate }}
+                  </div>
+                  <div
+                    class="op-img-download-btn gap-1 d-flex p-1"
+                    (click)="downloadDocumentByPath(customerInfo?.backId)"
+                  >
+                    <span class="sprite-group-5-download-green"></span>
+                    <span class="op-img-download-btn-title">{{
+                      "customer.identity.download" | translate
+                    }}</span>
+                  </div>
+                </article>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <!-- Right ekyc Info -->
+        <article class="col-12 col-sm-12 col-md-12 col-lg-6">
+          <ul class="pl-list">
+            <li
+              class="pl-list-item"
+              *ngFor="let rightEkycInfo of rightEkycInfos"
+            >
+              <p class="pl-list-item-label">
+                {{ rightEkycInfo.title }}
+              </p>
+              <p class="pl-list-item-content">
+                <app-format-data
+                  [type]="rightEkycInfo?.type"
+                  [format]="rightEkycInfo?.format"
+                  [value]="rightEkycInfo?.value"
+                ></app-format-data>
+              </p>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </div>
+</div>

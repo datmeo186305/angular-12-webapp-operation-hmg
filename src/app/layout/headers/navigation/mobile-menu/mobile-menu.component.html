@@ -1,0 +1,96 @@
+<mat-toolbar id="nav-toolbar-mobile">
+  <span class="fill-remaining-space">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menuMobile"
+      #menuTrigger="matMenuTrigger"
+      (click)="menuTrigger.openMenu()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menuMobile="matMenu" [overlapTrigger]="false">
+      <span>
+        <ng-container *ngFor="let menuItem of menuItems">
+          <!--  Has sub items  -->
+          <div
+            *ngIf="
+              menuItem.subItems && menuItem.subItems.length > 0;
+              else mobileHasNotSubItems
+            "
+          >
+            <mat-accordion *ngxPermissionsOnly="menuItem.canActivate">
+              <mat-expansion-panel
+                class="shadow-none rounded-0"
+                (click)="$event.stopPropagation(); $event.preventDefault()"
+              >
+                <mat-expansion-panel-header
+                  class="pb-2 pt-2 ps-3 pe-3"
+                  [ngClass]="{
+                    active: selectedNavItem === menuItem.navItem
+                  }"
+                >
+                  <mat-panel-title class="gap-2"
+                    ><span
+                      [ngClass]="[
+                        selectedNavItem === menuItem.navItem
+                          ? menuItem.activeIconClass
+                          : menuItem.defaultIconClass
+                      ]"
+                    ></span>
+                    <span>{{ menuItem.title }}</span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="expansion-panel-content">
+                  <ng-container *ngFor="let subItem of menuItem.subItems">
+                    <button
+                      mat-menu-item
+                      *ngxPermissionsOnly="subItem.canActivate"
+                      class="
+                        mobile-menu-item mobile-sub-menu-item
+                        gap-2
+                        d-flex
+                        align-items-center
+                      "
+                      [routerLink]="subItem.path"
+                      [queryParams]="subItem.queryParams"
+                      (click)="menuTrigger.closeMenu()"
+                    >
+                      <span [ngClass]="subItem.iconClass"></span>
+                      <span>{{ subItem.title }}</span>
+                    </button>
+                  </ng-container>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <!--  End: has sub items  -->
+
+          <!--  Has not sub items  -->
+          <ng-template #mobileHasNotSubItems>
+            <button
+              mat-menu-item
+              class="mobile-menu-item gap-2 d-flex align-items-center"
+              [ngClass]="{
+                active: selectedNavItem === menuItem.navItem
+              }"
+              [routerLink]="menuItem.path"
+              [queryParams]="menuItem.queryParams"
+              *ngxPermissionsOnly="menuItem.canActivate"
+            >
+              <span
+                [ngClass]="[
+                  selectedNavItem === menuItem.navItem
+                    ? menuItem.activeIconClass
+                    : menuItem.defaultIconClass
+                ]"
+              ></span>
+              <span>{{ menuItem.title }}</span>
+            </button>
+          </ng-template>
+          <!--  End: Has not sub items  -->
+        </ng-container>
+      </span>
+    </mat-menu>
+  </span>
+  <span class="fill-remaining-space"></span>
+</mat-toolbar>

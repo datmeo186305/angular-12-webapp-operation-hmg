@@ -1,0 +1,50 @@
+<div *ngIf="type === 'DATETIME'">
+  {{ value | date: format }}
+</div>
+
+<span *ngIf="type === 'CURRENCY'">
+  <ng-container *ngIf="value; else currencyZero">
+    {{ value | formatPrice: null }}
+  </ng-container>
+  <ng-template #currencyZero> 0 </ng-template>
+</span>
+
+<span *ngIf="type === 'BOOLEAN'">
+  <div *ngIf="value; else booleanFalse" class="d-flex">
+    <img
+      src="assets/img/icon/group-6-op/svg/Checkbox/Checked.svg"
+      alt="checked"
+    />
+  </div>
+  <ng-template #booleanFalse>
+    <div class="d-flex">
+      <img
+        src="assets/img/icon/group-6-op/svg/Checkbox/Unchecked.svg"
+        alt="unchecked"
+      />
+    </div>
+  </ng-template>
+</span>
+
+<span *ngIf="type === 'PERCENT'">
+  <ng-container *ngIf="value; else zero">
+    {{ value | percent }}
+  </ng-container>
+  <ng-template #zero>
+    {{ 0 | percent }}
+  </ng-template>
+</span>
+
+<div *ngIf="type === 'STATUS'">
+  <app-pl-status-element
+    [statusType]="format"
+    [statusValue]="value"
+    [externalValue]="externalValue"
+    [externalValue2]="externalValue2"
+  >
+  </app-pl-status-element>
+</div>
+
+<div *ngIf="!type || type === 'TEXT'" class="op-table-cell-data">
+  {{ value || "-" }}
+</div>

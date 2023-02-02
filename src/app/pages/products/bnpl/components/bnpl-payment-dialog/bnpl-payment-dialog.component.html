@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+    <div class="card-title title">
+      {{ dialogTitle }}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <!--  Info  -->
+        <section class="col-12">
+          <form [formGroup]="bnplPaymentForm" (submit)="submitForm()">
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12 pr-2">
+                <!-- Period -->
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>{{
+                    "bnpl.loan_info.payment.period" | translate
+                  }}</mat-label>
+                  <mat-select
+                    formControlName="period"
+                    (selectionChange)="changePeriod($event.value)"
+                  >
+                    <mat-option
+                      *ngFor="let periodOption of periodOptions"
+                      [value]="periodOption.value"
+                      [matTooltip]="periodOption.name"
+                    >
+                      {{ periodOption.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- Amount -->
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>{{
+                    "bnpl.loan_info.payment.amount" | translate
+                  }}</mat-label>
+                  <input
+                    #amount
+                    (focusin)="convertAnnualIncomeInputWithoutSeparator()"
+                    (focusout)="formatAnnualIncomeInputWithSeparator()"
+                    [placeholder]="'bnpl.loan_info.payment.amount' | translate"
+                    appNumberOnly
+                    formControlName="amount"
+                    id="amount"
+                    matInput
+                  />
+                  <show-errors
+                    [controlLabel]="'bnpl.loan_info.payment.amount' | translate"
+                    [control]="bnplPaymentForm.controls['amount']"
+                    [hasIconPrefix]="false"
+                  >
+                  </show-errors>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!--  Actions -->
+
+            <div class="row mt-3">
+              <div class="col-12 d-flex gap-2 justify-content-end">
+                <button
+                  autofocus
+                  color="warn"
+                  mat-dialog-close
+                  mat-flat-button
+                  type="button"
+                >
+                  {{ "bnpl.loan_info.payment.cancel_update" | translate }}
+                </button>
+                <button color="accent" mat-flat-button type="submit">
+                  <span class="sprite-group-5-save-white"></span>
+                  {{ "bnpl.loan_info.payment.save_update" | translate }}
+                </button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

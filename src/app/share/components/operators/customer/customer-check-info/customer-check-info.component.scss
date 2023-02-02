@@ -1,0 +1,12 @@
+@import "src/styles/op/pl-table";
+@import "src/styles/op/pl-paginator";
+
+.selected {
+  background-color: #007AFF;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  h2 {
+    color: #fff;
+  }
+}

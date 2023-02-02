@@ -1,0 +1,95 @@
+@import "src/styles/variables";
+
+.op-breadcrumb-container {
+  background: $grey-00;
+  box-shadow: inset 0px -1px 0px $grey-02;
+}
+
+.op-breadcrumb-icon {
+  width: 36px;
+  height: 36px;
+}
+
+#op-breadcrumb-content {
+  min-height: 56px;
+  height: auto;
+}
+
+h2.op-breadcrumb-title {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: $grey-10;
+}
+
+.breadcrumb-search-input {
+  width: 440px;
+
+  .breadcrumb-input-icon {
+    position: absolute;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .breadcrumb-input {
+    width: 100%;
+    padding: 10px 10px 10px 36px;
+    background: $white;
+    border-radius: 8px;
+    border: 1px solid #d1d1d6;
+    text-overflow: ellipsis;
+
+    &::placeholder {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
+}
+
+.op-breadcrumb-add-btn {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 9px 16px;
+  color: $white;
+  background: $system-color-blue;
+  border-radius: 4px;
+}
+
+.op-breadcrumb-export-btn {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 9px 16px;
+  color: $white;
+  background: $monex-color-00;
+  border-radius: 4px;
+}
+
+@media (max-width: 992px) {
+  #op-breadcrumb-content {
+    padding: 10px 0;
+  }
+  .breadcrumb-search-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .input-icons {
+    width: 100%;
+    min-width: 100px;
+  }
+}

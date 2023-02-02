@@ -1,0 +1,74 @@
+<div class="container-fluid op-breadcrumb-container">
+  <div class="container">
+    <div
+      id="op-breadcrumb-content"
+      class="d-flex justify-content-between align-items-center gap-2"
+    >
+      <div class="d-inline-flex row align-items-center gap-3">
+        <section
+          class="d-flex align-items-center gap-2 pe-0"
+          [ngClass]="{ 'col-12 col-sm-12 col-md-6 col-lg-5': searchable }"
+        >
+          <span
+            *ngIf="iconClass; else isIconImgSrc"
+            [ngClass]="iconClass"
+          ></span>
+          <ng-template #isIconImgSrc>
+            <span>
+              <img [src]="iconImgSrc" class="op-breadcrumb-icon" alt="" />
+            </span>
+          </ng-template>
+          <h2 class="op-breadcrumb-title d-inline-flex align-items-center">
+            {{ title }}
+          </h2>
+        </section>
+
+        <section class="col-12 col-sm-12 col-md-6 col-lg-5" *ngIf="searchable">
+          <form
+            [formGroup]="searchForm"
+            class="form-container"
+            (submit)="submitSearch()"
+          >
+            <div
+              class="breadcrumb-search-input"
+              [matTooltip]="searchPlaceholder"
+            >
+              <div class="breadcrumb-input-icon" (click)="submitSearch()">
+                <span class="sprite-group-5-search"></span>
+              </div>
+
+              <input
+                class="breadcrumb-input"
+                formControlName="keyword"
+                [placeholder]="searchPlaceholder"
+                [maxlength]="maxLengthSearchInput"
+                (ngModelChange)="changeInput($event)"
+              />
+            </div>
+          </form>
+        </section>
+      </div>
+      <div class="d-inline-flex gap-3">
+        <button
+          (click)="onClickButtonAdd($event)"
+          mat-button
+          class="op-breadcrumb-add-btn"
+          *ngIf="showBtnAdd"
+        >
+          <span class="sprite-group-5-add-white"></span>
+          <span class="ps-1">{{ btnAddText }}</span>
+        </button>
+
+        <button
+          (click)="onClickButtonExport($event)"
+          mat-button
+          class="op-breadcrumb-export-btn"
+          *ngIf="showBtnExport"
+        >
+          <mat-icon>save_alt</mat-icon>
+          <span class="ps-1">{{ btnExportText }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

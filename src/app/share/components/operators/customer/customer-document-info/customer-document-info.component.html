@@ -1,0 +1,251 @@
+<div class="container-fluid">
+  <div class="row p-3">
+    <!-- CMND/CCCD Document -->
+    <article class="col-12 col-sm-6 col-md-4 col-lg-4 mb-2">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+            <mat-panel-title>{{
+              "customer.document_info.ekyc_info" | translate
+            }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="expansion-panel-content">
+            <div class="row">
+              <!-- Front ID  -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'frontId'"
+                  name="frontId"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.front_id' | translate"
+                  [imgSrc]="frontIdSrc"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.frontId,
+                      documentTypes.FRONT_ID_CARD
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+              <!-- Back ID  -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'backId'"
+                  name="backId"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.back_id' | translate"
+                  [imgSrc]="backIdSrc"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.backId,
+                      documentTypes.BACK_ID_CARD
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+              <!-- Selfie  -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'selfie'"
+                  name="selfie"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.selfie' | translate"
+                  [imgSrc]="selfieSrc"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.selfie,
+                      documentTypes.SELFIE
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </article>
+
+    <!-- Salary Document -->
+    <article class="col-12 col-sm-6 col-md-4 col-lg-4 mb-2">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+            <mat-panel-title>{{
+              "customer.document_info.finance_info" | translate
+            }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="expansion-panel-content">
+            <div class="row">
+              <!-- Salary 1  -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'salary1'"
+                  name="salary1"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.salary_sheet_1' | translate"
+                  [imgSrc]="salary1Src"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.salaryDocument1,
+                      documentTypes.SALARY_INFORMATION_ONE
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+              <!-- Salary 2  -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'salary2'"
+                  name="salary2"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.salary_sheet_2' | translate"
+                  [imgSrc]="salary2Src"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.salaryDocument2,
+                      documentTypes.SALARY_INFORMATION_TWO
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+              <!-- Salary 3  -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'salary3'"
+                  name="salary3"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.salary_sheet_3' | translate"
+                  [imgSrc]="salary3Src"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.salaryDocument3,
+                      documentTypes.SALARY_INFORMATION_THREE
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </article>
+
+    <!-- Collateral document -->
+    <article class="col-12 col-sm-6 col-md-4 col-lg-4 mb-2">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+            <mat-panel-title>{{
+              "customer.document_info.collateral_info" | translate
+            }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="expansion-panel-content">
+            <div class="row">
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'collateralDocument'"
+                  name="collateralDocument"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.collateral_img' | translate"
+                  [imgSrc]="collateralSrc"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.collateralDocument,
+                      documentTypes.VEHICLE_REGISTRATION
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </article>
+
+    <!-- CMND/CCCD Extra -->
+    <article class="col-12 col-sm-6 col-md-4 col-lg-4 mb-2">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+            <mat-panel-title>{{
+              "customer.document_info.extra_ekyc_info" | translate
+            }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="expansion-panel-content">
+            <div class="row">
+              <!-- Front ID 2 -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'frontId2'"
+                  name="frontId2"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.front_id_2' | translate"
+                  [imgSrc]="frontId2Src"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.frontIdTwo,
+                      documentTypes.FRONT_ID_CARD_TWO
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+
+              <!-- Back ID 2 -->
+              <article class="col-12">
+                <app-upload-document-area
+                  [id]="'backId2'"
+                  name="backId2"
+                  [classes]="'p-3'"
+                  [title]="'customer.document_info.back_id_2' | translate"
+                  [imgSrc]="backId2Src"
+                  [hiddenDeleteBtn]="hiddenDeleteBtn"
+                  [hiddenUploadBtn]="hiddenUploadBtn"
+                  [hiddenUpdateBtn]="hiddenUpdateBtn"
+                  (onChangeDocument)="
+                    onChangeDocument(
+                      $event,
+                      customerInfo?.backIdTwo,
+                      documentTypes.BACK_ID_CARD_TWO
+                    )
+                  "
+                ></app-upload-document-area>
+              </article>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </article>
+  </div>
+</div>

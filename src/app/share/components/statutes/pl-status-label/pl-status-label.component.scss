@@ -1,0 +1,128 @@
+@import "../../../../../styles/variables";
+
+.pl-status-label {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 55px;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.pl-status-label-initialized {
+  background: #575D6E;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-document-awaiting {
+  background: #637C79;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-document-complete {
+  background: #583AC6;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-auction {
+  background: #2C469A;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-funded {
+  background: #F4D500;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-contract-awaiting {
+  background: #E76E00;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-awaiting-disbursement {
+  background: #F3E100;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-disbursed {
+  background: #979227;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-in-repayment {
+  background: #63A532;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-completed {
+  background: #8CC22C;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-rejected {
+  background: #D12D03;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-withdraw {
+  background: #De2939;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.pl-status-label-pending {
+  background: #FFFAF2;
+  border: 1px solid $system-color-orange;
+  color: $system-color-orange;
+}
+
+.pl-status-label-success {
+  background: $dim-light-green;
+  border: 1px solid $system-color-green;;
+  color: $system-color-green;
+}
+
+.pl-status-label-info {
+  background: $dim-light-blue;
+  border: 1px solid $system-color-blue;;
+  color: $system-color-blue;
+}
+
+.pl-status-label-disbursement {
+  background: rgba(88, 86, 214, 0.1);
+  color: $system-color-indigo;
+  border: 1px solid $system-color-indigo;
+}
+
+
+.pl-status-label-rejected2 {
+  background: $grey-00;
+  border: 1px solid $grey-08;
+  color: $grey-08;
+}
+
+
+.pl-status-label-cancel {
+  background: #FFF3F2;
+  color: $system-color-red;
+  border: 1px solid $system-color-red;
+}
+
+.pl-status-label-worse {
+  background: black;
+  color: white;
+  border: 1px solid black;
+}

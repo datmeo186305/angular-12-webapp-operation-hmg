@@ -1,0 +1,358 @@
+<div class="filter-boxes pb-5" [hidden]="filterOption.hidden">
+  <div class="d-flex justify-content-between align-items-center px-3 py-2">
+    <h3 class="filter-title">{{ filterOption.title }}</h3>
+  </div>
+  <div>
+    <ul class="filter-boxes-ul">
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="selectedTimeFilterMethod"
+      >
+        <!-- Time frame  -->
+        <li
+          class="
+            px-3
+            py-2
+            d-flex
+            justify-content-between
+            align-items-center
+            filter-child-item
+            cursor-pointer
+          "
+          [ngClass]="{
+            'mobile-filter-datetime': responsive
+          }"
+        >
+          <!-- Mobile view -->
+          <mat-accordion
+            *ngIf="responsive; else timeFrameDesktopView"
+            class="filter-form-expand-panel-container"
+          >
+            <mat-expansion-panel (click)="selectTimeFilterMethod('TIME_FRAME')">
+              <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+                <mat-panel-title>
+                  <p [matTooltip]="chosenTimeFrameMethod">
+                    {{ chosenTimeFrameMethod }}
+                  </p>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="expansion-panel-content">
+                <div class="card op-card op-drop-shadow">
+                  <div class="card-title d-flex align-items-center gap-1">
+                    {{ "filter.time" | translate }}
+                  </div>
+                  <div class="card-body">
+                    <div
+                      class="all-time-filter-container d-flex flex-wrap gap-3"
+                    >
+                      <div
+                        class="column-options"
+                        *ngFor="let timeOption of timeFilterOptions"
+                      >
+                        <div class="thead">{{ timeOption.mainTitle }}</div>
+                        <div
+                          class="trow"
+                          *ngFor="let ele of timeOption.options"
+                          (click)="
+                            completeFilterDatetime(
+                              ele.startDate,
+                              ele.endDate,
+                              ele.title
+                            )
+                          "
+                        >
+                          {{ ele.title }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <!-- End: Mobile view -->
+
+          <!-- Desktop view -->
+          <ng-template #timeFrameDesktopView>
+            <mat-radio-button
+              [value]="'TIME_FRAME'"
+              color="primary"
+              class="w-100"
+              (click)="displayDetailOption(timeFrameMethodEle, 'TIME_FRAME')"
+            >
+              <div class="d-flex justify-content-between align-items-center">
+                <p [matTooltip]="chosenTimeFrameMethod">
+                  {{ chosenTimeFrameMethod }}
+                </p>
+                <div
+                  class="
+                    d-inline-flex
+                    justify-content-between
+                    align-items-center
+                    gap-1
+                  "
+                >
+                  <span
+                    [ngClass]="
+                      selectedTimeFilterMethod === 'TIME_FRAME'
+                        ? 'sprite-group-5-chevron-right-blue'
+                        : 'sprite-group-5-chevron-right-grey'
+                    "
+                  ></span>
+                </div>
+              </div>
+            </mat-radio-button>
+
+            <div
+              class="filter-form-container-expand"
+              id="timeFrameMethodEle"
+              (mouseleave)="timeFrameMethodEle.style.display = 'none'"
+              #timeFrameMethodEle
+            >
+              <div class="arrow">
+                <span class="sprite-group-7-popup-arrow-left"></span>
+              </div>
+              <div class="card op-card op-drop-shadow">
+                <div class="card-title d-flex align-items-center gap-1">
+                  {{ "filter.time" | translate }}
+                </div>
+                <div class="card-body">
+                  <div class="all-time-filter-container d-flex flex-wrap gap-3">
+                    <div
+                      class="column-options"
+                      *ngFor="let timeOption of timeFilterOptions"
+                    >
+                      <div class="thead">{{ timeOption.mainTitle }}</div>
+                      <div
+                        class="trow"
+                        *ngFor="let ele of timeOption.options"
+                        (click)="
+                          chooseTimeFilter(
+                            ele.startDate,
+                            ele.endDate,
+                            ele.title,
+                            timeFrameMethodEle
+                          )
+                        "
+                      >
+                        {{ ele.title }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <!-- END: Desktop view -->
+        </li>
+        <!-- END: Time frame  -->
+
+        <!-- Time range  -->
+        <li
+          class="
+            px-3
+            py-2
+            d-flex
+            justify-content-between
+            align-items-center
+            filter-child-item
+            cursor-pointer
+          "
+          [ngClass]="{
+            'mobile-filter-datetime': responsive
+          }"
+        >
+          <!-- Mobile view -->
+          <mat-accordion
+            *ngIf="responsive; else timeRangeDesktopView"
+            class="filter-form-expand-panel-container"
+          >
+            <mat-expansion-panel (click)="selectTimeFilterMethod('TIME_RANGE')">
+              <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+                <mat-panel-title>
+                  <p [matTooltip]="chosenTimeRangeMethod">
+                    {{ chosenTimeRangeMethod }}
+                  </p></mat-panel-title
+                >
+              </mat-expansion-panel-header>
+              <div class="expansion-panel-content">
+                <div class="card op-card op-drop-shadow">
+                  <div class="card-title d-flex align-items-center gap-1 mb-0">
+                    {{ "filter.choose_range_time" | translate }}
+                    <button
+                      mat-button
+                      class="reset-btn"
+                      (click)="resetSelectedDate()"
+                    >
+                      {{ "common.reset" | translate }}
+                    </button>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="d-flex row">
+                      <!--  From day -->
+                      <div class="datepicker-container col-12 p-4">
+                        <div class="description d-flex gap-1">
+                          <span>{{ "filter.from_day" | translate }}</span>
+                          <span class="selected-date" *ngIf="selectedStartDate">{{
+                            "filter.selected_date"
+                              | translate
+                                : {
+                                    date: selectedStartDay,
+                                    day: selectedStartDateDisplay
+                                  }
+                          }}</span>
+                        </div>
+                        <mat-card class="calendar-card w-100">
+                          <mat-calendar
+                            [selected]="selectedStartDate"
+                            (selectedChange)="onSelectStartDate($event, null)"
+                          ></mat-calendar>
+                        </mat-card>
+                      </div>
+
+                      <!--  To day -->
+                      <div class="datepicker-container col-12 p-4">
+                        <div class="description d-flex gap-1">
+                          <span>{{ "filter.to_day" | translate }}</span>
+                          <span class="selected-date" *ngIf="selectedEndDate">
+                            {{
+                              "filter.selected_date"
+                                | translate
+                                  : {
+                                      date: selectedEndDay,
+                                      day: selectedEndDateDisplay
+                                    }
+                            }}
+                          </span>
+                        </div>
+                        <mat-card class="calendar-card w-100">
+                          <mat-calendar
+                            [selected]="selectedEndDate"
+                            [minDate]="selectedStartDate"
+                            (selectedChange)="onSelectEndDateMobile($event)"
+                          ></mat-calendar>
+                        </mat-card>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+          <!-- End: Mobile view -->
+
+          <!-- Desktop view -->
+          <ng-template #timeRangeDesktopView>
+            <mat-radio-button
+              color="primary"
+              [value]="'TIME_RANGE'"
+              class="w-100"
+              (click)="displayDetailOption(timeRangeMethodEle, 'TIME_RANGE')"
+            >
+              <div class="d-flex justify-content-between align-items-center">
+                <p [matTooltip]="chosenTimeRangeMethod">
+                  {{ chosenTimeRangeMethod }}
+                </p>
+
+                <div
+                  class="
+                    d-inline-flex
+                    justify-content-between
+                    align-items-center
+                    gap-1
+                  "
+                >
+                  <span
+                    [ngClass]="
+                      selectedTimeFilterMethod === 'TIME_RANGE'
+                        ? 'sprite-group-5-chevron-right-blue'
+                        : 'sprite-group-5-chevron-right-grey'
+                    "
+                  ></span>
+                </div>
+              </div>
+            </mat-radio-button>
+            <div
+              class="filter-form-container-expand"
+              id="timeRangeMethodEle"
+              (mouseleave)="timeRangeMethodEle.style.display = 'none'"
+              #timeRangeMethodEle
+            >
+              <div class="arrow">
+                <span class="sprite-group-7-popup-arrow-left"></span>
+              </div>
+
+              <div class="card op-card op-drop-shadow">
+                <div class="card-title d-flex align-items-center gap-1 mb-0">
+                  {{ "filter.choose_range_time" | translate }}
+                  <button
+                    mat-button
+                    class="reset-btn"
+                    (click)="resetSelectedDate()"
+                  >
+                    {{ "common.reset" | translate }}
+                  </button>
+                </div>
+                <div class="card-body p-0">
+                  <div class="d-flex">
+                    <!--  From day -->
+                    <div class="datepicker-container">
+                      <div class="description d-flex gap-1">
+                        <span>{{ "filter.from_day" | translate }}</span>
+                        <span class="selected-date" *ngIf="selectedStartDate">{{
+                          "filter.selected_date"
+                            | translate
+                              : {
+                                  date: selectedStartDay,
+                                  day: selectedStartDateDisplay
+                                }
+                        }}</span>
+                      </div>
+                      <mat-card class="calendar-card">
+                        <mat-calendar
+                          [selected]="selectedStartDate"
+                          (selectedChange)="
+                            onSelectStartDate($event, timeRangeMethodEle)
+                          "
+                        ></mat-calendar>
+                      </mat-card>
+                    </div>
+
+                    <!--  To day -->
+                    <div class="datepicker-container">
+                      <div class="description d-flex gap-1">
+                        <span>{{ "filter.to_day" | translate }}</span>
+                        <span class="selected-date" *ngIf="selectedEndDate">
+                          {{
+                            "filter.selected_date"
+                              | translate
+                                : {
+                                    date: selectedEndDay,
+                                    day: selectedEndDateDisplay
+                                  }
+                          }}
+                        </span>
+                      </div>
+                      <mat-card class="calendar-card">
+                        <mat-calendar
+                          [selected]="selectedEndDate"
+                          [minDate]="selectedStartDate"
+                          (selectedChange)="
+                            onSelectEndDate($event, timeRangeMethodEle)
+                          "
+                        ></mat-calendar>
+                      </mat-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <!-- END: Desktop view -->
+        </li>
+        <!-- END: Time range  -->
+      </mat-radio-group>
+    </ul>
+  </div>
+</div>

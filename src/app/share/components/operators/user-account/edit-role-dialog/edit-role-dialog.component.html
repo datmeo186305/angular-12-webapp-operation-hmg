@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+    <div class="card-title title">
+      {{ dialogTitle }}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <form [formGroup]="updateRoleForm">
+          <!--  Info  -->
+          <section class="col-12">
+            <ng-container class="role-form">
+              <mat-form-field
+                appearance="outline"
+                class="w-100"
+                floatLabel="never"
+              >
+                <mat-label>{{
+                  "system.user_role.add_role_placeholder" | translate
+                  }}</mat-label>
+                <svg
+                  matPrefix
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3.54057 11.6621L8.43759 11.6619C8.1466 12.0142 7.95887 12.4548 7.92075 12.9376L7.91355 13.1205V16.8705C7.91355 17.4246 8.11023 17.9328 8.43759 18.3291L8.33022 18.3297C5.47941 18.3297 3.37695 17.4363 2.09181 15.6326C1.81518 15.2443 1.6665 14.7795 1.6665 14.3028V13.5362C1.6665 12.5012 2.50555 11.6621 3.54057 11.6621ZM12.2886 9.57885H14.7886C15.3279 9.57885 15.7715 9.98868 15.8248 10.514L15.8303 10.6205L15.8298 11.6618L16.8719 11.6622C17.6773 11.6622 18.3303 12.3151 18.3303 13.1205V16.8705C18.3303 17.6759 17.6773 18.3288 16.8719 18.3288H10.2053C9.39984 18.3288 8.74692 17.6759 8.74692 16.8705V13.1205C8.74692 12.3151 9.39984 11.6622 10.2053 11.6622L11.2465 11.6618L11.2469 10.6205C11.2469 10.0812 11.6568 9.63752 12.1821 9.58418L12.2886 9.57885H14.7886H12.2886ZM14.5803 10.8288H12.4969L12.4965 11.6618H14.5798L14.5803 10.8288ZM8.33022 1.66602C10.6314 1.66602 12.4969 3.5315 12.4969 5.83268C12.4969 8.13387 10.6314 9.99935 8.33022 9.99935C6.02903 9.99935 4.16355 8.13387 4.16355 5.83268C4.16355 3.5315 6.02903 1.66602 8.33022 1.66602Z"
+                    fill="#636366"
+                  />
+                </svg>
+                <input
+                  formControlName="groupName"
+                  [value]="updateRoleForm.controls.groupName.value"
+                  required
+                  matInput
+                />
+              </mat-form-field>
+
+              <!--              <mat-form-field-->
+              <!--                appearance="outline"-->
+              <!--                class="w-100"-->
+              <!--                floatLabel="never"-->
+              <!--              >-->
+              <!--                <mat-label>{{ "system.user_role.code" | translate }}</mat-label>-->
+              <!--                <input-->
+              <!--                  formControlName="code"-->
+              <!--                  [value]="updateRoleForm.controls.code.value"-->
+              <!--                  required-->
+              <!--                  matInput-->
+              <!--                />-->
+              <!--              </mat-form-field>-->
+
+              <!--              <mat-form-field-->
+              <!--                appearance="outline"-->
+              <!--                class="w-100"-->
+              <!--                floatLabel="never"-->
+              <!--              >-->
+              <!--                <mat-label>{{-->
+              <!--                  "system.user_role.description" | translate-->
+              <!--                }}</mat-label>-->
+              <!--                <input-->
+              <!--                  formControlName="description"-->
+              <!--                  [value]="updateRoleForm.controls.description.value"-->
+              <!--                  matInput-->
+              <!--                />-->
+              <!--              </mat-form-field>-->
+            </ng-container>
+
+            <div class="row permission-tree">
+              <div class="grid-table">
+                <div *ngFor="let tableData of treeData" class="table">
+                  <div class="table-title">{{ tableData.name }}</div>
+                  <div class="table-content">
+                    <app-permission-tree
+                      #tree
+                      [activePermissions]="activePermissions"
+                      [TREE_DATA]="tableData.permissionTypeLevelTwoResponse"
+                    ></app-permission-tree>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--  Actions -->
+            <div class="row mt-2">
+              <div class="col-12 d-flex gap-2 justify-content-end">
+                <button
+                  type="button"
+                  class="bg-grey"
+                  mat-button
+                  mat-dialog-close
+                >
+                  {{ "account.info.cancel_update" | translate }}
+                </button>
+
+                <ng-container *ngxPermissionsOnly="['groups:delete']">
+                  <button
+                    type="button"
+                    color="warn"
+                    mat-flat-button
+                    *ngIf="groupId && !isDuplicate"
+                    (click)="deleteGroup()"
+                  >
+                    <span class="sprite-group-7-trash"></span>
+                    {{ "system.user_role.delete" | translate }}
+                  </button>
+                </ng-container>
+
+                <button
+                  type="submit"
+                  color="accent"
+                  mat-flat-button
+                  (click)="submitForm()"
+                >
+                  <span class="sprite-group-5-save-white"></span>
+                  {{ "system.user_role.save" | translate }}
+                </button>
+              </div>
+            </div>
+          </section>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

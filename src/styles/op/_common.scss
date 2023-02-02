@@ -1,0 +1,416 @@
+@import "../variables";
+@import "~viewerjs/dist/viewer.css";
+
+$spaceBetweenBox: 40px;
+$spaceBetweenContent: 24px;
+$spaceWithFooter: 56px;
+
+router-outlet ~ * {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  min-height: calc(100% - 94px);
+  overflow: hidden;
+}
+
+.container-fluid {
+  height: auto;
+  padding: 0;
+}
+
+.monex-op-container {
+  max-width: 480px;
+  margin-right: auto;
+  margin-left: auto;
+  align-self: center;
+  width: 100%;
+}
+
+#main-layout-content {
+  font-family: $sfPro;
+  //height: 100%;
+  .ng-trigger {
+    //height: 100%;
+  }
+}
+
+.modal-open {
+  overflow-y: hidden;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.op-mat-icon {
+  font-size: 20px;
+}
+
+.preview-pane-pdfoject {
+  height: 650px;
+  position: relative;
+  z-index: 999;
+}
+
+::ng-deep .custom-dialog-container {
+  .mat-dialog-container {
+    padding: 0;
+    border-radius: 12px;
+    overflow: inherit;
+    box-shadow: none;
+    background: white;
+  }
+
+  .mat-dialog-content {
+    padding: 0;
+    margin: 0;
+    max-height: 100vh;
+    min-width: 300px;
+    height: 100%;
+  }
+}
+
+.custom-info-dialog-container {
+  .card {
+    max-height: 100vh;
+    .card-body {
+      overflow: auto;
+    }
+  }
+}
+
+.mat-dialog-container {
+  border-radius: 4px !important;
+  box-shadow: none;
+  padding: 0 !important;
+}
+
+.pl-sign-contract-prompt-image {
+  margin: 8px auto 0;
+  width: 56px;
+  height: 56px;
+  background: $dim-color-green;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  place-content: center;
+
+  .pl-prompt-image {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+.pl-text-inline {
+  margin: 0;
+  color: $monex-color-00;
+  font-family: $sfPro;
+  font-weight: 500;
+}
+
+.pl-inline-salary-hint {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: $grey-10;
+  font-weight: 600;
+}
+
+.pl-inline-collateral-document-hint {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: $grey-10;
+  font-weight: 600;
+}
+
+.pl-name-inline {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: $system-color-red;
+}
+
+.pl-text-sent-email-inline {
+  margin: 0;
+  color: $monex-color-00;
+  font-family: $sfPro;
+}
+
+.pl-thank-for-sign {
+  margin: 0;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: $grey-08;
+}
+
+.pl-text-sent-confirm-policy-inline {
+  margin: 0;
+  color: $monex-color-00;
+  font-family: $sfPro;
+  display: initial;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+  }
+}
+
+input.pl-text-otp {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 100%;
+  text-align: center;
+  caret-color: $system-color-blue;
+  color: $grey-08;
+  border: none;
+}
+
+.pl-space-between-box {
+  margin: $spaceBetweenBox 0 0 0;
+}
+
+.pl-space-between-content {
+  margin: $spaceBetweenContent 0 0 0;
+}
+
+.pl-inline-block {
+  display: inline-block;
+}
+
+.pl-padding-bottom-default {
+  padding-bottom: $spaceWithFooter !important;
+}
+
+.pl-padding-bottom-with-provider {
+  padding-bottom: 124px !important;
+}
+
+.payment-result-support-contact {
+  display: inline;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: $system-color-orange;
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+    color: $system-color-orange;
+  }
+}
+
+.pl-list {
+  padding: 0;
+  margin: 0;
+
+  .pl-list-item {
+    position: relative;
+    display: flex;
+    align-content: space-between;
+    padding: 14px 16px 13px;
+    margin: 0;
+    border-bottom: 1px solid $grey-02;
+    align-items: center;
+
+    .service-fee {
+      margin-left: 5px;
+
+      svg {
+        display: block;
+      }
+    }
+
+    .service-fee:hover .customer-disable-form-container-expand {
+      display: block;
+    }
+
+    .pl-list-item-label {
+      margin: 0;
+      font-family: $sfPro;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      color: $grey-08;
+      flex: none;
+      letter-spacing: 0.1px;
+      align-items: center;
+    }
+
+    .pl-list-item-content {
+      margin: 0;
+      width: 100%;
+      font-family: $sfPro;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: right;
+      color: $grey-10;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 8px;
+
+      &.highlight {
+        font-weight: 500;
+        color: #34c759;
+      }
+    }
+
+    .pl-list-item-content-empty {
+      color: $grey-06;
+    }
+  }
+}
+
+.pl-headline {
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  margin: 0;
+  color: $grey-10;
+}
+
+.mat-expansion-panel-content {
+  .mat-expansion-panel-body {
+    padding: 0;
+
+    ul {
+      list-style: initial;
+      padding: 12px;
+      margin-top: -24px;
+
+      li {
+        margin-left: 8px;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #636366;
+      }
+    }
+  }
+}
+
+.pl-divider {
+  width: 100%;
+  height: 0.5px;
+  margin: 16px 0;
+  background: $grey-02;
+}
+
+.mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
+  border: none;
+  background-color: $monex-color-00;
+}
+
+.pl-countdown-time {
+  margin: 0;
+  padding-left: 4px;
+  font-family: $sfPro;
+  font-weight: 400;
+}
+
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  max-width: 1440px;
+}
+
+.op-background-container {
+  background: $grey-03;
+  height: calc(100vh - 96px);
+  overflow: auto;
+  position: relative;
+}
+
+.op-drop-shadow {
+  filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.05))
+    drop-shadow(0px 16px 32px rgba(0, 0, 0, 0.05));
+}
+
+.op-card.card {
+  border: none;
+
+  .card-title {
+    padding: 10px 16px;
+    box-shadow: inset 0px -1px 0px $grey-02;
+    color: $grey-10;
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .card-name {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: $grey-10;
+  }
+
+  .card-info-title {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: $grey-06;
+  }
+
+  .card-info-content {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 36px;
+    color: $grey-10;
+    margin-top: 4px;
+  }
+}
+
+::ng-deep .mat-select-search-no-entries-found {
+  font-family: $sfPro;
+}
+
+.gray {
+  background-color: #36b5ff21;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.bg-grey {
+  background-color: #f7f7fc;
+}
+
+.m-content-card-body-dialog {
+  max-height: 75vh;
+  overflow: auto;
+}

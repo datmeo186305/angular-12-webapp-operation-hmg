@@ -1,0 +1,284 @@
+<div class="container-fluid">
+  <form
+    [formGroup]="infoVerificationForm"
+    #ngForm="ngForm"
+    autocomplete="off"
+    (submit)="onSubmit()"
+  >
+    <input autocomplete="false" hidden />
+    <!--  Info  -->
+    <div class="row p-3">
+      <section class="col-12">
+        <div class="row col-md-12">
+          <!-- Left Info -->
+          <article class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <ul class="pl-list">
+              <li class="pl-list-item" *ngFor="let leftInfo of leftInfos">
+                <p class="pl-list-item-label">
+                  {{ leftInfo.title }}
+                </p>
+                <div class="w-100">
+                  <input
+                    *ngIf="
+                      loanDetail?.status === 'DOCUMENT_AWAITING';
+                      else leftView
+                    "
+                    #inputEle
+                    matInput
+                    [formControlName]="leftInfo.value"
+                    class="pl-list-item-content"
+                    [type]="leftInfo.type"
+                    [minlength]="leftInfo?.minLength"
+                    [maxlength]="leftInfo?.maxLength"
+                    [min]="leftInfo?.min"
+                    [max]="leftInfo?.max"
+                  />
+                  <mat-error
+                    class="pl-list-item-error"
+                    *ngIf="
+                      infoVerificationForm.controls[leftInfo.value].errors &&
+                        (infoVerificationForm.controls[leftInfo.value]
+                          .touched ||
+                      ngForm.submitted)
+                    "
+                    >{{ leftInfo.title
+                    }}{{
+                      infoVerificationForm.controls[leftInfo.value].errors
+                        ?.required
+                        ? " không được để trống"
+                        : " không đúng định dạng"
+                    }}</mat-error
+                  >
+                </div>
+                <ng-template #leftView>
+                  <p class="pl-list-item-content">
+                    {{ infoVerificationForm.controls[leftInfo.value].value }}
+                  </p>
+                </ng-template>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Right Info -->
+          <article class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <ul class="pl-list">
+              <li class="pl-list-item" *ngFor="let rightInfo of rightInfos">
+                <p class="pl-list-item-label">
+                  {{ rightInfo.title }}
+                </p>
+                <div class="w-100">
+                  <input
+                    *ngIf="
+                      loanDetail?.status === 'DOCUMENT_AWAITING';
+                      else rightView
+                    "
+                    matInput
+                    [formControlName]="rightInfo.value"
+                    class="pl-list-item-content"
+                    [type]="rightInfo.type"
+                    [minlength]="rightInfo?.minLength"
+                    [maxlength]="rightInfo?.maxLength"
+                    [min]="rightInfo?.min"
+                    [max]="rightInfo?.max"
+                  />
+                  <mat-error
+                    class="pl-list-item-error"
+                    *ngIf="
+                      infoVerificationForm.controls[rightInfo.value].errors &&
+                        (infoVerificationForm.controls[rightInfo.value]
+                          .touched ||
+                      ngForm.submitted)
+                    "
+                    >{{ rightInfo.title
+                    }}{{
+                      infoVerificationForm.controls[rightInfo.value].errors
+                        ?.required
+                        ? " không được để trống"
+                        : " không đúng định dạng"
+                    }}</mat-error
+                  >
+                </div>
+                <ng-template #rightView>
+                  <p class="pl-list-item-content">
+                    {{ infoVerificationForm.controls[rightInfo.value].value }}
+                  </p>
+                </ng-template>
+              </li>
+              <li class="pl-list-item">
+                <p class="pl-list-item-label">
+                  {{ "loan_app.info_verification.salary_bank" | translate }}
+                </p>
+                <div class="w-100">
+                  <mat-form-field
+                    appearance="none"
+                    class="pl-choose-bank"
+                    *ngIf="
+                      loanDetail?.status === 'DOCUMENT_AWAITING';
+                      else bankChoosen
+                    "
+                  >
+                    <mat-select formControlName="bankCode">
+                      <mat-option>
+                        <ngx-mat-select-search
+                          [formControl]="banksFilterCtrl"
+                          placeholderLabel="Tìm Ngân Hàng"
+                          noEntriesFoundLabel="Ngân Hàng không tồn tại"
+                        ></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option
+                        *ngFor="let bankOption of filteredBanks"
+                        [value]="bankOption?.bankCode"
+                        >{{
+                          bankOption?.bankName + " - " + bankOption?.bankCode
+                        }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-error
+                    class="pl-list-item-error"
+                    *ngIf="
+                      infoVerificationForm.controls['bankCode'].errors &&
+                        (infoVerificationForm.controls['bankCode'].touched ||
+                      ngForm.submitted)
+                    "
+                    >{{
+                      "loan_app.info_verification.salary_bank" | translate
+                    }}
+                    không được để trống</mat-error
+                  >
+                </div>
+                <ng-template #bankChoosen>
+                  <p class="pl-list-item-content">
+                    {{
+                      loanDetail.employeeData?.bankName +
+                        " - " +
+                        loanDetail.employeeData?.bankCode
+                    }}
+                  </p>
+                </ng-template>
+              </li>
+              <li class="pl-list-item flex-column align-items-start border-0">
+                <p class="pl-list-item-label">
+                  {{ "loan_app.info_verification.salary_average" | translate }}
+                </p>
+                <div class="w-100">
+                  <mat-error
+                    class="pl-list-item-error"
+                    *ngIf="
+                      ngForm.submitted && (infoVerificationForm.controls['salaryInfomationOne'].errors || infoVerificationForm.controls['salaryInfomationTwo'].errors || infoVerificationForm.controls['salaryInfomationThree'].errors)
+                    "
+                    >{{
+                      "loan_app.info_verification.salary_average" | translate
+                    }}
+                    không được để trống</mat-error
+                  >
+                </div>
+                <div class="pl-list-item-upload row">
+                  <article class="d-flex flex-wrap align-items-center">
+                    <!-- Salary 1 -->
+                    <app-upload-document-area
+                      [id]="'salary1'"
+                      name="salary1"
+                      [classes]="'p-3'"
+                      [imgSrc]="salary1Src"
+                      [hiddenDeleteBtn]="hiddenDeleteBtn"
+                      [hiddenUploadBtn]="hiddenUploadBtn"
+                      [hiddenUpdateBtn]="hiddenUpdateBtn"
+                      [hiddenDownloadBtn]="hiddenDownloadBtn"
+                      (onChangeDocument)="
+                        onChangeDocument(
+                          $event,
+                          customerInfo?.salaryDocument1,
+                          documentTypes.SALARY_INFORMATION_ONE
+                        )
+                      "
+                    ></app-upload-document-area>
+
+                    <!-- Salary 2 -->
+                    <app-upload-document-area
+                      [id]="'salary2'"
+                      name="salary2"
+                      [classes]="'p-3'"
+                      [imgSrc]="salary2Src"
+                      [hiddenDeleteBtn]="hiddenDeleteBtn"
+                      [hiddenUploadBtn]="hiddenUploadBtn"
+                      [hiddenUpdateBtn]="hiddenUpdateBtn"
+                      [hiddenDownloadBtn]="hiddenDownloadBtn"
+                      (onChangeDocument)="
+                        onChangeDocument(
+                          $event,
+                          customerInfo?.salaryDocument2,
+                          documentTypes.SALARY_INFORMATION_TWO
+                        )
+                      "
+                    ></app-upload-document-area>
+
+                    <!-- Salary 3 -->
+                    <app-upload-document-area
+                      [id]="'salary3'"
+                      name="salary3"
+                      [classes]="'p-3'"
+                      [imgSrc]="salary3Src"
+                      [hiddenDeleteBtn]="hiddenDeleteBtn"
+                      [hiddenUploadBtn]="hiddenUploadBtn"
+                      [hiddenUpdateBtn]="hiddenUpdateBtn"
+                      [hiddenDownloadBtn]="hiddenDownloadBtn"
+                      (onChangeDocument)="
+                        onChangeDocument(
+                          $event,
+                          customerInfo?.salaryDocument3,
+                          documentTypes.SALARY_INFORMATION_THREE
+                        )
+                      "
+                    ></app-upload-document-area>
+                  </article>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!--  Actions -->
+
+    <ng-container *ngxPermissionsOnly="['paydays:additionalEmployeeData']">
+      <div
+        class="row mt-3 mb-3"
+        *ngIf="loanDetail?.status === 'DOCUMENT_AWAITING'"
+      >
+        <div class="col-12 d-flex gap-2 justify-content-end">
+          <!-- Save Button -->
+          <button mat-flat-button color="accent" type="submit">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.3335 1.3335V4.50182C9.3335 4.58072 9.2787 4.64682 9.20503 4.66409L9.16683 4.66849H5.16683C5.08793 4.66849 5.02184 4.61367 5.00456 4.54004L5.00016 4.50182V1.3335H9.3335ZM11.506 9.36023C11.598 9.36023 11.6726 9.43483 11.6726 9.5269L11.6722 14.3335H4.33283L4.3335 9.5269C4.3335 9.43483 4.40812 9.36023 4.50016 9.36023H11.506ZM10.4245 1.3335C10.6084 1.3335 10.7862 1.39426 10.9308 1.50494L14.4335 4.50016C14.598 4.65739 14.6668 4.87874 14.6668 5.1063V12.8335C14.6668 13.6619 13.9952 14.3335 13.1668 14.3335H12.6722L12.6726 9.5269C12.6726 8.88256 12.1503 8.36023 11.506 8.36023H4.50016C3.85583 8.36023 3.3335 8.88256 3.3335 9.5269L3.33283 14.3335H2.8335C2.00507 14.3335 1.3335 13.6619 1.3335 12.8335V2.8335C1.3335 2.00507 2.00507 1.3335 2.8335 1.3335H4.00016V4.50182C4.00016 5.11394 4.47157 5.61595 5.07114 5.66462L5.16683 5.66849H9.16683C9.77896 5.66849 10.281 5.19708 10.3296 4.59751L10.3335 4.50182V1.3335H10.4245Z"
+                fill="white"
+              />
+            </svg>
+
+            <span class="ms-1">
+              {{ "common.save" | translate }}
+            </span>
+          </button>
+
+          <!-- Cancel Button -->
+          <button
+            type="button"
+            mat-flat-button
+            color="warn"
+            (click)="onClear()"
+          >
+            {{ "common.cancel" | translate }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+  </form>
+</div>

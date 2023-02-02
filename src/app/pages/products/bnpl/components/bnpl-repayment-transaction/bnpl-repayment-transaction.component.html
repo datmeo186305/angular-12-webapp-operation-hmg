@@ -1,0 +1,100 @@
+<!--  MAT TABLE-->
+<div class="card-body p-2 h-100 d-flex flex-column flex-fill">
+  <div class="overflow-auto h-100">
+    <app-base-expanded-table
+      [allColumns]="allColumns"
+      [dataSource]="dataSource"
+      [hiddenTableMenuFunc]="true"
+      [hiddenPaginator]="true"
+      [sortable]="false"
+    >
+    </app-base-expanded-table>
+  </div>
+
+  <!--  Actions -->
+  <!-- <div class="row mt-3 mb-3">
+    <div class="col-12 d-flex gap-2 justify-content-end">
+      <ng-container *ngxPermissionsOnly="['repayments:updateRepaymentTransaction']">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          *ngIf="
+              loanDetail?.status === 'CONTRACT_ACCEPTED' ||
+              loanDetail?.status === 'DISBURSE'
+            "
+          (click)="repaymentAllPeriod()"
+        >
+          <mat-icon class="op-mat-icon">done_all</mat-icon>
+          {{ "bnpl.loan_info.repayment_all_period" | translate }}
+        </button>
+      </ng-container>
+
+      <ng-container *ngxPermissionsOnly="['repayments:updateRepaymentTransaction']">
+        <button
+          mat-flat-button
+          color="primary"
+          type="button"
+          *ngIf="
+              (loanDetail?.status === 'CONTRACT_ACCEPTED' ||
+                loanDetail?.status === 'DISBURSE') &&
+              !loanDetail?.periodTime4?.complete
+            "
+          (click)="repaymentSinglePeriod()"
+        >
+          <mat-icon class="op-mat-icon">done</mat-icon>
+          {{ "bnpl.loan_info.repayment_single_period" | translate }}
+        </button>
+      </ng-container>
+
+      <ng-container *ngxPermissionsOnly="['application:changeStatus']">
+        <button
+          mat-flat-button
+          color="accent"
+          type="button"
+          *ngIf="
+              loanDetail?.status === 'PENDING' ||
+              loanDetail?.status === 'UNDOAPPROVAL'
+            "
+          (click)="changeLoanStatus('APPROVE')"
+        >
+          <mat-icon class="op-mat-icon">check_circle_outline</mat-icon>
+          {{ "bnpl.loan_info.approve" | translate }}
+        </button>
+      </ng-container>
+
+      <ng-container *ngxPermissionsOnly="['application:changeStatus']">
+        <button
+          mat-flat-button
+          color="warn"
+          type="button"
+          *ngIf="
+              loanDetail?.status === 'PENDING' ||
+              loanDetail?.status === 'UNDOAPPROVAL'
+            "
+          (click)="changeLoanStatus('WITHDRAW')"
+        >
+          <mat-icon class="op-mat-icon">block</mat-icon>
+          {{ "bnpl.loan_info.reject" | translate }}
+        </button>
+      </ng-container>
+
+      <ng-container *ngxPermissionsOnly="['application:changeStatus']">
+        <button
+          mat-flat-button
+          color="warn"
+          type="button"
+          *ngIf="
+              loanDetail?.status === 'APPROVE' ||
+              loanDetail?.status === 'CONTRACT_ACCEPTED' ||
+              loanDetail?.status === 'CONTRACT_AWAITING'
+            "
+          (click)="changeLoanStatus('UNDOAPPROVAL')"
+        >
+          <mat-icon class="op-mat-icon">block</mat-icon>
+          {{ "bnpl.loan_info.undoapproval" | translate }}
+        </button>
+      </ng-container>
+    </div>
+  </div> -->
+</div>

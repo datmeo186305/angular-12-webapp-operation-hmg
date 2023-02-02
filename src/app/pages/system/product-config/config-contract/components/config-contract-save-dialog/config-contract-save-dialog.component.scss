@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+@import "src/styles/op/common";
+@import "src/styles/op/pl-form";
+@import "src/styles/op/pl-ckeditor";
+@import "src/styles/op/pl-expansion-panel";
+@import "src/styles/op/pl-table";
+.content-contract-pdf {
+  color: #3a3a3c;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.position-singing {
+  color: #3a3a3c;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}

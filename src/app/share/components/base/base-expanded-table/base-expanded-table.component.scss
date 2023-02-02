@@ -1,0 +1,20 @@
+@import "src/styles/op/pl-table";
+@import "src/styles/op/pl-paginator";
+
+.card-name {
+  margin-left: 10px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.overview-data {
+  font-weight: normal;
+  display: flex;
+  gap: 12px;
+  line-height: 24px;
+  .value {
+    font-style: italic;
+  }
+}

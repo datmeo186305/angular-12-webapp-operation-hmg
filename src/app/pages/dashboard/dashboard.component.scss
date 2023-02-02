@@ -1,0 +1,18 @@
+@import "src/styles/variables";
+@import "src/styles/op/pl-table";
+@import "src/styles/op/pl-paginator";
+
+.dashboard-content {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+::ng-deep.mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep.cdk-overlay-pane.advance-search-dialog {
+  position: absolute !important;
+  right: 18px;
+  top: 152px;
+}

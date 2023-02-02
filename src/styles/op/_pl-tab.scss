@@ -1,0 +1,51 @@
+@import "../variables";
+
+::ng-deep {
+  .mat-tab-label {
+    padding: 10px 16px !important;
+    opacity: 1 !important;
+
+    .mat-tab-label-content {
+      font-family: $sfPro;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 0.1px;
+      color: $grey-10;
+    }
+
+    &.mat-tab-label-active {
+      .mat-tab-label-content {
+        color: $system-color-blue;
+      }
+    }
+  }
+
+  .mat-tab-group.mat-primary .mat-ink-bar,
+  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $system-color-blue;
+  }
+}
+
+::ng-deep .customer-tab {
+  .mat-tab-labels {
+    justify-content: space-between;
+
+    .mat-tab-label {
+      min-width: 100px !important;
+    }
+  }
+}
+
+::ng-deep .op-tab-group {
+  .mat-tab-body {
+    min-height: 500px;
+  }
+}
+
+::ng-deep .op-tab-dialog {
+  .mat-tab-body {
+    min-height: 450px;
+  }
+}

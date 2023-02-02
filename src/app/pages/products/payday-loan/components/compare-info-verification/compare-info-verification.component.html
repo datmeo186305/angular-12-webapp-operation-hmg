@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <!--  Info  -->
+  <div class="row p-3">
+    <section class="col-12">
+      <div class="row col-md-12">
+        <!-- Customer provide info -->
+        <article class="col-12 col-sm-12 col-md-12 col-lg-6">
+          <h3 class="compare-info-title">
+            {{ "loan_app.info_verification.customer_provide_info" | translate }}
+          </h3>
+          <ul class="pl-list">
+            <li
+              class="pl-list-item"
+              *ngFor="let leftInfo of customerProvideInfos"
+            >
+              <div class="pl-list-item-label d-inline-flex">
+                <div class="pe-1" *ngIf="leftInfo.highlight; else matched">
+                  <span class="sprite-group-3-warning-message-icon"></span>
+                </div>
+                <ng-template #matched>
+                  <div class="pe-1">
+                    <span class="sprite-group-3-success-message-icon"></span>
+                  </div>
+                </ng-template>
+                <p>{{ leftInfo.title }}</p>
+              </div>
+              <div class="w-100">
+                <p class="pl-list-item-content">
+                  {{ leftInfo.value }}
+                </p>
+              </div>
+            </li>
+          </ul>
+        </article>
+
+        <!-- HR provide info -->
+        <article class="col-12 col-sm-12 col-md-12 col-lg-6">
+          <h3 class="compare-info-title">
+            {{ "loan_app.info_verification.hr_provide_info" | translate }}
+          </h3>
+          <ul class="pl-list">
+            <li class="pl-list-item" *ngFor="let rightInfo of hrProvideInfos">
+              <div class="pl-list-item-label d-inline-flex">
+                <div class="pe-1" *ngIf="rightInfo.highlight; else matched">
+                  <span class="sprite-group-3-warning-message-icon"></span>
+                </div>
+                <ng-template #matched>
+                  <div class="pe-1">
+                    <span class="sprite-group-3-success-message-icon"></span>
+                  </div>
+                </ng-template>
+                <p>{{ rightInfo.title }}</p>
+              </div>
+              <div class="w-100">
+                <p class="pl-list-item-content">
+                  {{ rightInfo.value }}
+                </p>
+              </div>
+            </li>
+            <li class="pl-list-item flex-column align-items-start border-0">
+              <p class="pl-list-item-label">
+                {{ "loan_app.info_verification.salary_average" | translate }}
+              </p>
+              <div class="pl-list-item-upload row">
+                <article class="d-flex flex-wrap align-items-center">
+                  <!-- Salary 1 -->
+                  <app-upload-document-area
+                    [id]="'salary1'"
+                    name="salary1"
+                    [classes]="'p-3'"
+                    [imgSrc]="salary1Src"
+                    [hiddenDeleteBtn]="hiddenDeleteBtn"
+                    [hiddenUploadBtn]="hiddenUploadBtn"
+                    [hiddenUpdateBtn]="hiddenUpdateBtn"
+                    [hiddenDownloadBtn]="hiddenDownloadBtn"
+                    (onChangeDocument)="
+                      onChangeDocument(
+                        $event,
+                        customerInfo?.salaryDocument1,
+                        documentTypes.SALARY_INFORMATION_ONE
+                      )
+                    "
+                  ></app-upload-document-area>
+
+                  <!-- Salary 2 -->
+                  <app-upload-document-area
+                    [id]="'salary2'"
+                    name="salary2"
+                    [classes]="'p-3'"
+                    [imgSrc]="salary2Src"
+                    [hiddenDeleteBtn]="hiddenDeleteBtn"
+                    [hiddenUploadBtn]="hiddenUploadBtn"
+                    [hiddenUpdateBtn]="hiddenUpdateBtn"
+                    [hiddenDownloadBtn]="hiddenDownloadBtn"
+                    (onChangeDocument)="
+                      onChangeDocument(
+                        $event,
+                        customerInfo?.salaryDocument2,
+                        documentTypes.SALARY_INFORMATION_TWO
+                      )
+                    "
+                  ></app-upload-document-area>
+
+                  <!-- Salary 3 -->
+                  <app-upload-document-area
+                    [id]="'salary3'"
+                    name="salary3"
+                    [classes]="'p-3'"
+                    [imgSrc]="salary3Src"
+                    [hiddenDeleteBtn]="hiddenDeleteBtn"
+                    [hiddenUploadBtn]="hiddenUploadBtn"
+                    [hiddenUpdateBtn]="hiddenUpdateBtn"
+                    [hiddenDownloadBtn]="hiddenDownloadBtn"
+                    (onChangeDocument)="
+                      onChangeDocument(
+                        $event,
+                        customerInfo?.salaryDocument3,
+                        documentTypes.SALARY_INFORMATION_THREE
+                      )
+                    "
+                  ></app-upload-document-area>
+                </article>
+              </div>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </div>
+</div>

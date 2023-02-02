@@ -1,0 +1,68 @@
+<div class="op-background-container">
+  <app-base-breadcrumb
+    (clickBtnAdd)="clickBtnAdd($event)"
+    (clickBtnExport)="clickBtnExport($event)"
+    (submitSearchForm)="submitSearchForm($event)"
+    [btnAddText]="breadcrumbOptions.btnAddText"
+    [btnExportText]="breadcrumbOptions.btnExportText"
+    [extraActionLabel]="breadcrumbOptions.extraActionLabel"
+    [iconClass]="breadcrumbOptions.iconClass"
+    [iconImgSrc]="breadcrumbOptions.iconImgSrc"
+    [keyword]="breadcrumbOptions.keyword"
+    [searchPlaceholder]="breadcrumbOptions.searchPlaceholder"
+    [searchable]="breadcrumbOptions.searchable"
+    [showBtnAdd]="breadcrumbOptions.showBtnAdd"
+    [showBtnExport]="breadcrumbOptions.showBtnExport"
+    [title]="breadcrumbOptions.title"
+  ></app-base-breadcrumb>
+
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-3 col-xl-2">
+          <app-base-filter-form
+            (triggerFilterAction)="triggerFilterAction($event)"
+            (triggerFilterChange)="triggerFilterChange($event)"
+            [filterOptions]="filterOptions"
+          ></app-base-filter-form>
+        </div>
+        <div
+          class="
+            col-12 col-sm-12 col-md-8 col-lg-9 col-xl-10
+            mt-3
+            mb-3
+            base-layout-content
+          "
+        >
+          <app-base-expanded-table
+            (triggerRefresh)="triggerRefresh($event)"
+            (triggerExpandedElementChange)="triggerExpandElementChange($event)"
+            (triggerPageChange)="triggerPageChange($event)"
+            (triggerSortChange)="triggerSortChange($event)"
+            (triggerTableActionClick)="triggerTableActionClick($event)"
+            (triggerMultipleElementActionClick)="triggerMultipleElementAction($event)"
+            [allColumns]="allColumns"
+            [dataSource]="dataSource"
+            [detailElementTemplate]="detailElementTemplate"
+            [hasSelect]="hasSelect"
+            [orderBy]="orderBy"
+            [pageIndex]="pageIndex"
+            [pageLength]="pageLength"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageSize]="pageSize"
+            [sortDirection]="sortDirection"
+            [tableTitle]="tableTitle"
+            [totalItems]="totalItems"
+            [selectButtons]="selectButtons"
+            [expandElementByDefault]="forceExpandElement"
+            [overviewItems]="overviewItems"
+            [showRefreshBtn]="showRefreshBtn"
+            [hasActions]="hasActions"
+            [actionButtons]="actionButtons"
+          >
+          </app-base-expanded-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

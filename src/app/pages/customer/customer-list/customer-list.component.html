@@ -1,0 +1,38 @@
+<app-base-management-layout
+  [detailElementTemplate]="detailElementTemplate"
+  [filterOptions]="filterOptions"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="pageSizeOptions"
+  [allColumns]="allColumns"
+  [totalItems]="totalItems"
+  [tableTitle]="tableTitle"
+  [pageLength]="pageLength"
+  [dataSource]="dataSource"
+  [showRefreshBtn]="true"
+  [orderBy]="filterForm.controls.orderBy?.value"
+  [sortDirection]="filterForm.controls.sortDirection?.value"
+  [breadcrumbOptions]="breadcrumbOptions"
+  [forceExpandElement]="expandElementFromLoan"
+  [overviewItems]="overviewItems"
+  (onPageChange)="onPageChange($event)"
+  (onSortChange)="onSortChange($event)"
+  (onExpandElementChange)="onExpandElementChange($event)"
+  (onSubmitSearchForm)="onSubmitSearchForm($event)"
+  (onFilterChange)="onFilterFormChange($event)"
+  (onFilterActionTrigger)="onFilterActionTrigger($event)"
+  (onRefreshTrigger)="onRefreshTrigger($event)"
+>
+</app-base-management-layout>
+
+<ng-template #detailElementTemplate>
+  <app-customer-detail-element
+    *ngxPermissionsOnly="[listPermission.getCustomerById]"
+    class="w-100"
+    [customerId]="expandedElementId"
+    [userInfo]="expandedElementCustomer"
+    [bankOptions]="bankOptions"
+    [companyOptions]="companyList"
+    (updateElementInfo)="updateElementInfo($event)"
+  ></app-customer-detail-element>
+</ng-template>

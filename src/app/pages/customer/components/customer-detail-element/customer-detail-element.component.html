@@ -1,0 +1,88 @@
+<mat-tab-group dynamicHeight class="op-tab-group customer-tab">
+  <!--  Individual Info-->
+  <mat-tab [label]="'customer.tabs.individual_info' | translate">
+    <ng-template matTabContent>
+      <app-customer-individual-info
+        [customerId]="customerId"
+        [customerInfo]="userInfo"
+        [bankOptions]="bankOptions"
+        (triggerUpdateInfo)="updateCustomerInfo($event)"
+      ></app-customer-individual-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  EKYC Info-->
+  <mat-tab [label]="'customer.tabs.ekyc_info' | translate">
+    <ng-template matTabContent>
+      <app-customer-ekyc-info
+        [customerId]="customerId"
+        [customerInfo]="userInfo"
+      ></app-customer-ekyc-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Company Info-->
+  <mat-tab [label]="'customer.tabs.company_info' | translate">
+    <ng-template matTabContent>
+      <app-customer-company-info
+        [customerId]="customerId"
+        [customerInfo]="userInfo"
+        [bankOptions]="bankOptions"
+        [companyOptions]="companyOptions"
+        [disabledColumns]="disabledColumns"
+        [hiddenColumns]="hiddenColumns"
+        (triggerUpdateInfo)="updateCustomerInfo($event)"
+      ></app-customer-company-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Document Info-->
+  <mat-tab [label]="'customer.tabs.document_info' | translate">
+    <ng-template matTabContent>
+      <app-customer-document-info
+        [customerId]="customerId"
+        [customerInfo]="userInfo"
+        (refreshContent)="refreshContent()"
+      ></app-customer-document-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Check Info: Ekyc history-->
+  <mat-tab
+    [label]="'customer.tabs.check_info' | translate"
+    *ngxPermissionsOnly="[
+      listPermission.getEKYCInfo,
+      listPermission.getEkycInfoByCustomerId
+    ]"
+  >
+    <ng-template matTabContent>
+      <app-customer-check-info
+        [customerId]="customerId"
+      ></app-customer-check-info>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Transaction history-->
+  <mat-tab [label]="'customer.tabs.transaction_history' | translate">
+    <ng-template matTabContent>
+      <app-customer-transaction-history> </app-customer-transaction-history>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Activity history-->
+  <mat-tab [label]="'customer.tabs.activity_history' | translate">
+    <ng-template matTabContent>
+      <app-customer-activity-history></app-customer-activity-history>
+    </ng-template>
+  </mat-tab>
+
+  <!--  Customer note-->
+  <mat-tab [label]="'customer.tabs.note' | translate">
+    <ng-template matTabContent>
+      <app-customer-note
+        [customerInfo]="userInfo"
+        (triggerUpdateInfo)="updateCustomerInfo($event)"
+      ></app-customer-note>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

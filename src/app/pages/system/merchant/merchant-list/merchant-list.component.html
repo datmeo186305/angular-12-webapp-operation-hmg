@@ -1,0 +1,42 @@
+<app-base-management-layout
+  (onExpandElementChange)="onExpandElementChange($event)"
+  (onFilterActionTrigger)="onFilterActionTrigger($event)"
+  (onFilterChange)="onFilterFormChange($event)"
+  (onPageChange)="onPageChange($event)"
+  (onSortChange)="onSortChange($event)"
+  (onSubmitSearchForm)="onSubmitSearchForm($event)"
+  (onOutputAction)="onOutputAction($event)"
+  (onClickBtnAdd)="onClickBtnAdd($event)"
+  (onRefreshTrigger)="onRefreshTrigger($event)"
+  [allColumns]="allColumns"
+  [breadcrumbOptions]="breadcrumbOptions"
+  [dataSource]="dataSource"
+  [detailElementTemplate]="detailElementTemplate"
+  [filterOptions]="filterOptions"
+  [orderBy]="filterForm.controls.orderBy?.value"
+  [pageIndex]="pageIndex"
+  [pageLength]="pageLength"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSize"
+  [sortDirection]="filterForm.controls.sortDirection?.value"
+  [tableTitle]="tableTitle"
+  [totalItems]="totalItems"
+  [hasSelect]="hasSelect"
+  [selectButtons]="selectButtons"
+  [overviewItems]="overviewItems"
+  [showRefreshBtn]="true"
+  [forceExpandElement]="forceElementMerchant"
+>
+</app-base-management-layout>
+
+<ng-template #detailElementTemplate>
+  <app-merchant-element
+    [merchantId]="expandedElementId"
+    [merchantInfo]="expandedElementMerchant"
+    [allMerchant]="allMerchant"
+    [bdStaffOptions]="bdList"
+    [managerOptions]="managerList"
+    (triggerUpdateElementInfo)="updateElementInfo($event)"
+    class="w-100"
+  ></app-merchant-element>
+</ng-template>

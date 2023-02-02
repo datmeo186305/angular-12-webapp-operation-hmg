@@ -1,0 +1,73 @@
+<div class="container-fluid">
+  <form [formGroup]="merchantInfoForm" autocomplete="off">
+    <div class="card-body no-padding-bot">
+      <div class="row">
+        <section class="col-12">
+          <app-merchant-image-upload
+            [merchantId]="merchantId"
+            [merchantInfo]="merchantInfo"
+            [isViewMode]="true"
+            (refreshContent)="refreshContent()"
+          ></app-merchant-image-upload>
+
+          <div class="mt-2">
+            <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header class="pb-2 pt-2 ps-3 pe-3">
+                  <mat-panel-title>{{
+                    "merchant.merchant_image.introduction" | translate
+                  }}</mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="expansion-panel-content">
+                  <div class="row">
+                    <!-- Logo  -->
+                    <article class="col-12">
+                      <ckeditor
+                        [formControlName]="'description'"
+                        [config]="ckeditorConfig"
+                        [disabled]="true"
+                      ></ckeditor>
+                    </article>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!--  Actions -->
+
+    <div class="row mt-3 mb-3">
+      <div class="col-12 d-flex gap-2 justify-content-end">
+        <button (click)="openUpdateDialog()" color="accent" mat-flat-button>
+          <span class="sprite-group-5-pen-white"></span>
+          {{ "customer.individual_info.update" | translate }}
+        </button>
+        <button
+          (click)="lockPrompt()"
+          *ngIf="status === 'ACTIVE'"
+          color="warn"
+          mat-flat-button
+        >
+          <span class="sprite-group-5-lock-white"></span>
+          {{ "customer.individual_info.lock" | translate }}
+        </button>
+        <button
+          (click)="unlockPrompt()"
+          *ngIf="status === 'LOCKED'"
+          color="primary"
+          mat-flat-button
+        >
+          <span class="sprite-group-7-unlock"></span>
+          {{ "customer.individual_info.unlock" | translate }}
+        </button>
+        <button (click)="deletePrompt()" color="warn" mat-flat-button>
+          <span class="sprite-group-7-trash"></span>
+          {{ "merchant.merchant_detail.delete" | translate }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

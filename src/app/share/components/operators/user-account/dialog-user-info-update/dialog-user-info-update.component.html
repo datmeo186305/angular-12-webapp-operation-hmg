@@ -1,0 +1,562 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+
+    <div class="card-title title">
+      {{ "account.info._info" | translate }}
+    </div>
+    <div class="card-body">
+      <form [formGroup]="accountInfoForm" (ngSubmit)="submitForm()">
+        <div class="row">
+          <!--  Info  -->
+          <section class="col-12">
+            <div class="row">
+              <!-- Left Individual Info -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 pr-2">
+                <div>
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    floatLabel="never"
+                  >
+                    <mat-label>{{ "account.info.name" | translate }}</mat-label>
+                    <mat-icon
+                      [ngClass]="
+                        accountInfoForm.controls.fullName.value != '' ||
+                        isAccountNameInputFocus
+                          ? 'is-focused-icon'
+                          : ''
+                      "
+                      class="profile-icon"
+                      matPrefix
+                    >
+                    </mat-icon>
+                    <input
+                      (blur)="isAccountNameInputFocus = false"
+                      (focus)="isAccountNameInputFocus = true"
+                      [ngClass]="
+                        isAccountNameInputFocus ? 'is-focused-input' : ''
+                      "
+                      [placeholder]="'account.info.name' | translate"
+                      formControlName="fullName"
+                      matInput
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    floatLabel="never"
+                  >
+                    <mat-label>{{
+                      "account.info.log_in" | translate
+                      }}</mat-label>
+                    <mat-icon class="profile-icon" matPrefix></mat-icon>
+                    <input
+                      [placeholder]="'account.info.log_in' | translate"
+                      [value]="accountInfoForm.controls.username.value"
+                      disabled
+                      matInput
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    floatLabel="never"
+                  >
+                    <mat-label>{{ "account.info.role" | translate }}</mat-label>
+                    <mat-icon class="role-icon" matPrefix></mat-icon>
+                    <input
+                      [placeholder]="'account.info.log_in' | translate"
+                      [value]="accountInfoForm.controls.groupName.value"
+                      disabled
+                      matInput
+                    />
+                  </mat-form-field>
+                </div>
+
+                <!--                <div>-->
+                <!--                  <mat-form-field-->
+                <!--                    appearance="outline"-->
+                <!--                    class="w-100"-->
+                <!--                    floatLabel="never"-->
+                <!--                  >-->
+                <!--                    <mat-label>{{ "account.info.role" | translate }}</mat-label>-->
+                <!--                    <mat-icon class="role-icon" matPrefix></mat-icon>-->
+                <!--                    <mat-select disabled formControlName="groupId">-->
+                <!--                      <mat-option-->
+                <!--                        *ngFor="let roleOption of roleOptions"-->
+                <!--                        [value]="roleOption.id"-->
+                <!--                        [matTooltip]="roleOption.name"-->
+                <!--                        >{{ roleOption.name }}</mat-option-->
+                <!--                      >-->
+                <!--                    </mat-select>-->
+                <!--                  </mat-form-field>-->
+                <!--                </div>-->
+
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{
+                      "account.info.position" | translate
+                      }}</mat-label>
+                    <mat-icon class="role-icon" matPrefix></mat-icon>
+                    <mat-select disabled formControlName="position">
+                      <mat-option
+                        *ngFor="let positionOption of positionOptions.options"
+                        [value]="positionOption"
+                      >{{ positionOption }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Right Individual Info -->
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 pr-2">
+                <div>
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    floatLabel="never"
+                  >
+                    <mat-label>{{
+                      "account.info.phone" | translate
+                      }}</mat-label>
+                    <mat-icon
+                      [ngClass]="
+                        accountInfoForm.controls.mobile.value != '' ||
+                        isPhoneInputFocus
+                          ? 'is-focused-icon'
+                          : ''
+                      "
+                      class="phone-icon"
+                      matPrefix
+                    ></mat-icon>
+                    <input
+                      (blur)="isPhoneInputFocus = false"
+                      (focus)="isPhoneInputFocus = true"
+                      [ngClass]="isPhoneInputFocus ? 'is-focused-input' : ''"
+                      [placeholder]="'account.info.phone' | translate"
+                      formControlName="mobile"
+                      required
+                      phone-number-validate
+                      matInput
+                      type="text"
+                    />
+                    <show-errors
+                      [control]="accountInfoForm.controls['mobile']"
+                      [controlLabel]="'account.info.phone'| translate"
+                      [hasIconPrefix]="true"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    floatLabel="never"
+                  >
+                    <mat-label>{{
+                      "account.info.email" | translate
+                      }}</mat-label>
+                    <mat-icon class="email-icon" matPrefix></mat-icon>
+                    <input
+                      [placeholder]="'account.info.email' | translate"
+                      [value]="accountInfoForm.controls.email.value"
+                      disabled
+                      matInput
+                      type="email"
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field
+                    appearance="outline"
+                    class="w-100"
+                    floatLabel="never"
+                  >
+                    <mat-label>{{ "account.info.note" | translate }}</mat-label>
+                    <!--                    [ngClass]="-->
+                    <!--                    accountInfoForm.controls.note.value != '' ||-->
+                    <!--                    isNoteInputFocus-->
+                    <!--                    ? 'is-focused-icon'-->
+                    <!--                    : ''-->
+                    <!--                    "-->
+                    <mat-icon
+                      class="note-icon"
+                      matPrefix
+                    ></mat-icon>
+                    <!--                      (blur)="isNoteInputFocus = false"-->
+                    <!--                      (focus)="isNoteInputFocus = true"-->
+                    <!--                      [ngClass]="isNoteInputFocus ? 'is-focused-input' : ''"-->
+                    <input
+                      [placeholder]="'account.info.note' | translate"
+                      [value]="accountInfoForm.controls.note.value"
+                      formControlName="note"
+                      matInput
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!--  Actions -->
+        <div class="row mt-2">
+          <div class="col-12 d-flex gap-2 justify-content-end">
+            <button class="bg-grey" mat-button mat-dialog-close>
+              {{ "account.info.cancel_update" | translate }}
+            </button>
+            <button type="submit" color="accent" mat-flat-button>
+              <span class="sprite-group-5-save-white"></span>
+              <span class="ms-1">{{
+                "account.info.save_update" | translate
+                }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <ng-container>
+
+      <div class="caption">
+        {{ "account.setting.security_title" | translate }}
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <span class="sprite-group-7-lock-black"></span>
+              <div class="settings ms-4">
+                <div>{{ "account.setting.change_password" | translate }}</div>
+                <p>{{ "account.setting.password_des" | translate }}</p>
+              </div>
+            </div>
+            <div>
+              <button *ngIf="!hasCancelButton" (click)="changePassword()" color="accent" mat-flat-button>
+                <span class="sprite-group-7-edit-white"></span>
+                <span class="ms-1">{{
+                  "account.setting.change_password" | translate
+                  }}</span>
+              </button>
+              <button *ngIf="hasCancelButton" (click)="cancelChangePassword()" class="bg-grey" mat-button>
+                {{ "account.info.cancel_update" | translate }}
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="change-password-section">
+          <div class="row pass-input">
+            <form
+              [formGroup]="changePassForm"
+              (ngSubmit)="submitChangePassForm()"
+              autocomplete="off"
+            >
+              <div class="row">
+                <!-- old password -->
+                <div class="col-md-12">
+                  <mat-form-field
+                    appearance="outline"
+                    floatLabel="never"
+                    class="w-100"
+                  >
+                    <mat-label>{{
+                      "auth.old_password" | translate
+                      }}</mat-label>
+                    <div
+                      class="password-pre-icon"
+                      matPrefix
+                      [ngClass]="
+                  changePassForm.controls.oldPassword.value != '' ||
+                  isOldPasswordInputFocus
+                    ? 'is-focused-icon'
+                    : ''
+                "
+                    ></div>
+                    <input
+                      [type]="isOldPassVisible ? 'text' : 'password'"
+                      matInput
+                      formControlName="oldPassword"
+                      name="old_password"
+                      autocomplete='old-password'
+                      aria-autocomplete="none"
+                      [placeholder]="'auth.old_password' | translate"
+                      (focus)="isOldPasswordInputFocus = true"
+                      (blur)="isOldPasswordInputFocus = false"
+                      [ngClass]="isOldPasswordInputFocus ? 'is-focused-input' : ''"
+                    />
+                    <button
+                      type="button"
+                      tabindex="-1"
+                      *ngIf="changePassForm.controls.oldPassword.value"
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="changePassForm.controls.oldPassword.setValue('')"
+                      disableRipple="true"
+                    >
+                      <div class="clear-icon"></div>
+                    </button>
+                    <button
+                      type="button"
+                      tabindex="-1"
+                      matSuffix
+                      mat-icon-button
+                      class="support-icon"
+                      (click)="isOldPassVisible = !isOldPassVisible"
+                    >
+                      <div
+                        class="password-suffix-icon"
+                        [ngClass]="[
+                    changePassForm.controls.oldPassword.value != '' ||
+                    isOldPasswordInputFocus
+                      ? 'is-focused-icon'
+                      : '',
+                    isOldPassVisible ? 'password-show-icon' : 'password-hide-icon'
+                  ]"
+                      ></div>
+                    </button>
+                    <show-errors
+                      [control]="changePassForm.controls['oldPassword']"
+                      [controlLabel]="'auth.old_password' | translate"
+                      [hasIconPrefix]="true"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <!-- password -->
+                <div class="col-md-12">
+                  <mat-form-field
+                    appearance="outline"
+                    floatLabel="never"
+                    class="w-100"
+                  >
+                    <mat-label>{{
+                      "auth.new_password" | translate
+                      }}</mat-label>
+                    <div
+                      class="password-pre-icon"
+                      matPrefix
+                      [ngClass]="
+                  changePassForm.controls.accountPassword.value != '' ||
+                  isPasswordInputFocus
+                    ? 'is-focused-icon'
+                    : ''
+                "
+                    ></div>
+                    <input
+                      [type]="isPassVisible ? 'text' : 'password'"
+                      matInput
+                      formControlName="accountPassword"
+                      name="new_password"
+                      autocomplete='new-password'
+                      aria-autocomplete="none"
+                      [placeholder]="'auth.new_password' | translate"
+                      (focus)="isPasswordInputFocus = true"
+                      (blur)="isPasswordInputFocus = false"
+                      [ngClass]="isPasswordInputFocus ? 'is-focused-input' : ''"
+                    />
+                    <button
+                      type="button"
+                      tabindex="-1"
+                      *ngIf="changePassForm.controls.accountPassword.value"
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="changePassForm.controls.accountPassword.setValue('')"
+                      disableRipple="true"
+                    >
+                      <div class="clear-icon"></div>
+                    </button>
+                    <button
+                      type="button"
+                      tabindex="-1"
+                      matSuffix
+                      mat-icon-button
+                      class="support-icon"
+                      (click)="isPassVisible = !isPassVisible"
+                    >
+                      <div
+                        class="password-suffix-icon"
+                        [ngClass]="[
+                    changePassForm.controls.accountPassword.value != '' ||
+                    isPasswordInputFocus
+                      ? 'is-focused-icon'
+                      : '',
+                    isPassVisible ? 'password-show-icon' : 'password-hide-icon'
+                  ]"
+                      ></div>
+                    </button>
+                    <show-errors
+                      [control]="changePassForm.controls['accountPassword']"
+                      [controlLabel]="'auth.new_password' | translate"
+                      [hasIconPrefix]="true"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+
+                <!-- confirm password -->
+                <div class="col-md-12">
+                  <mat-form-field
+                    appearance="outline"
+                    floatLabel="never"
+                    class="w-100"
+                  >
+                    <mat-label>{{
+                      "auth.repeat_new_password" | translate
+                      }}</mat-label>
+                    <div
+                      class="password-pre-icon"
+                      matPrefix
+                      [ngClass]="
+                  changePassForm.controls.confirmPassword.value != '' ||
+                  isConfirmPasswordInputFocus
+                    ? 'is-focused-icon'
+                    : ''
+                "
+                    ></div>
+                    <input
+                      [type]="isConfirmPassVisible ? 'text' : 'password'"
+                      matInput
+                      name="new_password"
+                      autocomplete='new-password'
+                      aria-autocomplete="none"
+                      formControlName="confirmPassword"
+                      [placeholder]="
+                  'auth.repeat_new_password' | translate
+                "
+                      confirm-password-validate
+                      (focus)="isConfirmPasswordInputFocus = true"
+                      (blur)="isConfirmPasswordInputFocus = false"
+                      [ngClass]="
+                  isConfirmPasswordInputFocus ? 'is-focused-input' : ''
+                "
+                    />
+                    <button
+                      type="button"
+                      tabindex="-1"
+                      *ngIf="changePassForm.controls.confirmPassword.value"
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="changePassForm.controls.confirmPassword.setValue('')"
+                      disableRipple="true"
+                    >
+                      <div class="clear-icon"></div>
+                    </button>
+                    <button
+                      type="button"
+                      tabindex="-1"
+                      matSuffix
+                      mat-icon-button
+                      class="support-icon"
+                      (click)="isConfirmPassVisible = !isConfirmPassVisible"
+                    >
+                      <div
+                        class="password-suffix-icon"
+                        [ngClass]="[
+                    changePassForm.controls.confirmPassword.value != '' ||
+                    isConfirmPasswordInputFocus
+                      ? 'is-focused-icon'
+                      : '',
+                    isConfirmPassVisible
+                      ? 'password-show-icon'
+                      : 'password-hide-icon'
+                  ]"
+                      ></div>
+                    </button>
+                    <show-errors
+                      [control]="changePassForm.controls['confirmPassword']"
+                      [controlLabel]="
+                  'auth.repeat_new_password' | translate
+                "
+                      [hasIconPrefix]="true"
+                    >
+                    </show-errors>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!--  Actions -->
+              <div class="row">
+                <div class="col-12 d-flex gap-2 justify-content-end">
+                  <button type="submit" color="accent" mat-flat-button>
+                    <span class="sprite-group-5-save-white"></span>
+                    <span class="ms-1">{{
+                      "account.info.save_update" | translate
+                      }}</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Todo -->
+    <ng-container *ngIf="false">
+      <div class="caption">
+        {{ "account.logged_device.title" | translate }}
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <span class="sprite-group-7-pc-icon"></span>
+              <div class="settings ms-4">
+                <div>Máy tính Mac OS</div>
+                <p>
+                  <span class="current">{{
+                    "account.logged_device.status_current" | translate
+                    }}</span
+                  ><span class="ms-2">Chrome, 20/10/2021 14:03</span>
+                </p>
+              </div>
+            </div>
+            <button class="bg-grey fixed-width" mat-button>
+              <span class="ms-1">{{
+                "account.logged_device.log_out" | translate
+                }}</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <span class="sprite-group-7-mobile-icon"></span>
+              <div class="settings ms-4">
+                <div>Điện thoại iPhone 13</div>
+                <p>
+                  <span class="logged_out">{{
+                    "account.logged_device.status_logout" | translate
+                    }}</span
+                  ><span class="ms-2">Safari, 20/10/2021 14:03</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="user-role-tab">
+  <div class="row">
+    <div class="user-role d-flex align-items-center">
+      <mat-select
+        class="select"
+        disableOptionCentering="true"
+        panelClass="role-select"
+        [(ngModel)]="selectedRole"
+        (selectionChange)="getPermissionsByGroupId($event.value)"
+      >
+        <mat-option
+          *ngFor="let role of roleList"
+          [value]="role.id"
+          [matTooltip]="role?.description"
+        >
+          <p>{{ role.name }}</p>
+          <div class="action d-flex align-items-center gap-2">
+            <span
+              *ngxPermissionsOnly="['groups:update']"
+              (click)="openUpdateDialog(role)"
+              class="sprite-group-7-edit-gray"
+            ></span>
+            <span
+              *ngxPermissionsOnly="['groups:create']"
+              (click)="openDuplicateDialog(role)"
+              class="sprite-group-7-copy"
+            ></span>
+          </div>
+        </mat-option>
+
+        <mat-option
+          class="add-role"
+          (click)="openCreateDialog()"
+          *ngxPermissionsOnly="['groups:create']"
+        >
+          <span class="sprite-group-7-add-blue"></span>
+          {{ "system.user_role.add_new_role" | translate }}
+        </mat-option>
+      </mat-select>
+
+      <div class="icon d-flex align-items-center gap-2">
+        <span class="sprite-group-7-user-role"></span>
+        <p>{{ "system.user_role.role" | translate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row permission-tree" [hidden]="!selectedRole">
+    <div class="grid-table">
+      <div *ngFor="let tableData of treeData" class="table">
+        <div class="table-title">{{ tableData.name }}</div>
+        <div class="table-content">
+          <app-permission-tree
+            #tree
+            [activePermissions]="activePermissions"
+            [TREE_DATA]="tableData.permissionTypeLevelTwoResponse"
+          ></app-permission-tree>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action text-end">
+    <ng-container *ngxPermissionsOnly="['groups:update']">
+      <button
+        color="accent"
+        mat-flat-button
+        (click)="updatePermissionForGroup()"
+        *ngIf="selectedRole"
+      >
+        <span class="sprite-group-5-pen-white"></span>
+        {{ "customer.individual_info.update" | translate }}
+      </button>
+    </ng-container>
+  </div>
+</div>

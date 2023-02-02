@@ -1,0 +1,69 @@
+<div class="filter-boxes pb-5" [hidden]="filterOption.hidden">
+  <div class="d-flex justify-content-between align-items-center px-3 py-2">
+    <h3 class="filter-title">{{ filterOption.title }}</h3>
+    <ng-container *ngIf="filterOption.showAction">
+      <button
+        *ngIf="filterOption.showIconAction; else showTitle"
+        mat-icon-button
+        [matTooltip]="filterOption.titleAction"
+        matTooltipPosition="right"
+        class="filter-action-btn"
+        (click)="triggerExtraAction(filterOption)"
+      >
+        <div [ngClass]="filterOption.actionIconClass"></div>
+      </button>
+
+      <ng-template #showTitle>
+        <p
+          [matTooltip]="filterOption.titleAction"
+          (click)="triggerExtraAction(filterOption)"
+          class="filter-action-title"
+        >
+          {{ filterOption.titleAction }}
+        </p>
+      </ng-template>
+    </ng-container>
+  </div>
+  <div>
+    <ul class="filter-boxes-ul">
+      <li
+        class="
+          px-3
+          py-2
+          d-flex
+          justify-content-between
+          align-items-center
+          filter-child-item
+        "
+        *ngFor="let selectedItem of selectedItems"
+      >
+        <mat-checkbox
+          [checked]="selectedItem.selected"
+          color="primary"
+          (change)="filterChange($event, selectedItem)"
+          [matTooltip]="selectedItem.filterItem?.title"
+          >{{ selectedItem.filterItem?.title }}</mat-checkbox
+        >
+        <div
+          class="
+            edit
+            d-inline-flex
+            justify-content-between
+            align-items-center
+            gap-1
+          "
+        >
+          <button
+            mat-icon-button
+            [matTooltip]="selectedItem.filterItem?.actionTitle"
+            matTooltipPosition="right"
+            class="filter-child-item-action"
+            (click)="triggerItemAction(selectedItem.filterItem)"
+          >
+            <span [ngClass]="selectedItem.filterItem?.actionIconClass"></span>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

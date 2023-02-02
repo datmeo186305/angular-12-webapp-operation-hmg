@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div class="card op-card">
+    <button class="close-btn" mat-dialog-close mat-icon-button tabindex="-1">
+      <span class="sprite-group-7-close"></span>
+    </button>
+
+    <div class="card-title title">
+      {{ title }}
+    </div>
+    <div class="card-body">
+      <form
+        [formGroup]="applicationDocumentTypeForm"
+        (ngSubmit)="submitForm()"
+        autocomplete="off"
+      >
+        <div class="row">
+          <!--  Info  -->
+          <div class="col-12 pr-2">
+            <!-- Name -->
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              floatLabel="never"
+            >
+              <mat-label>{{
+                "system.system_config.document_type.name" | translate
+              }}</mat-label>
+              <input
+                [placeholder]="
+                  'system.system_config.document_type.name' | translate
+                "
+                formControlName="name"
+                required
+                matInput
+                appTypeMaxLength
+                maxlength="250"
+                type="text"
+              />
+              <show-errors
+                [control]="applicationDocumentTypeForm.controls['name']"
+                [controlLabel]="
+                  'system.system_config.document_type.name' | translate
+                "
+                [hasIconPrefix]="false"
+              >
+              </show-errors>
+            </mat-form-field>
+
+            <!--  Description  -->
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              floatLabel="never"
+            >
+              <mat-label>{{
+                "system.system_config.document_type.description" | translate
+              }}</mat-label>
+              <textarea
+                matInput
+                class="text-area"
+                name="description"
+                formControlName="description"
+                appTypeMaxLength
+                maxlength="250"
+                [placeholder]="
+                  'system.system_config.document_type.description' | translate
+                "
+              ></textarea>
+              <show-errors
+                [control]="applicationDocumentTypeForm.controls['description']"
+                [controlLabel]="
+                  'system.system_config.document_type.description' | translate
+                "
+                [hasIconPrefix]="false"
+              >
+              </show-errors>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <!--  Actions -->
+        <div class="row mt-2">
+          <div class="col-12 d-flex gap-2 justify-content-end">
+            <button class="bg-grey" mat-button mat-dialog-close>
+              {{ "account.info.cancel_update" | translate }}
+            </button>
+            <button type="submit" color="accent" mat-flat-button>
+              <span class="sprite-group-5-save-white"></span>
+              <span class="ms-1">{{
+                "account.info.save_update" | translate
+              }}</span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

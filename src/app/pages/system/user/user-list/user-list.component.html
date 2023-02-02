@@ -1,0 +1,41 @@
+<app-base-management-layout
+  (onExpandElementChange)="onExpandElementChange($event)"
+  (onFilterActionTrigger)="onFilterActionTrigger($event)"
+  (onFilterChange)="onFilterFormChange($event)"
+  (onPageChange)="onPageChange($event)"
+  (onSortChange)="onSortChange($event)"
+  (onSubmitSearchForm)="onSubmitSearchForm($event)"
+  (onOutputAction)="onOutputAction($event)"
+  (onClickBtnAdd)="onClickBtnAdd($event)"
+  (onRefreshTrigger)="onRefreshTrigger($event)"
+  [allColumns]="allColumns"
+  [breadcrumbOptions]="breadcrumbOptions"
+  [dataSource]="dataSource"
+  [detailElementTemplate]="detailElementTemplate"
+  [filterOptions]="filterOptions"
+  [orderBy]="filterForm.controls.orderBy?.value"
+  [pageIndex]="pageIndex"
+  [pageLength]="pageLength"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageSize]="pageSize"
+  [sortDirection]="filterForm.controls.sortDirection?.value"
+  [tableTitle]="tableTitle"
+  [totalItems]="totalItems"
+  [hasSelect]="hasSelect"
+  [selectButtons]="selectButtons"
+  [showRefreshBtn]="true"
+>
+</app-base-management-layout>
+
+<ng-template #detailElementTemplate>
+  <app-user-element
+    *ngxPermissionsOnly="[listPermission.getByIdAdminAcount]"
+    [roleList]="roleList"
+    [treeData]="treeData"
+    [userId]="expandedElementId"
+    [userInfo]="expandedElementUser"
+    (triggerUpdateElementInfo)="updateElementInfo($event)"
+    (triggerUpdateRoleInfo)="updateRoleInfo()"
+    class="w-100"
+  ></app-user-element>
+</ng-template>

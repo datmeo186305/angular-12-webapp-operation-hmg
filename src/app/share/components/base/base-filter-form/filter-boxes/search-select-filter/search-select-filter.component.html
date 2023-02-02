@@ -1,0 +1,56 @@
+<div class="filter-boxes pb-5" [hidden]="filterOption.hidden">
+  <div class="d-flex justify-content-between align-items-center px-3 py-2">
+    <h3 class="filter-title">{{ filterOption.title }}</h3>
+    <ng-container *ngIf="filterOption.showAction">
+      <button
+        *ngIf="filterOption.showIconAction; else showTitle"
+        mat-icon-button
+        [matTooltip]="filterOption.titleAction"
+        matTooltipPosition="right"
+        class="filter-action-btn"
+        (click)="triggerExtraAction(filterOption)"
+      >
+        <div [ngClass]="filterOption.actionIconClass"></div>
+      </button>
+
+      <ng-template #showTitle>
+        <p
+          [matTooltip]="filterOption.titleAction"
+          (click)="triggerExtraAction(filterOption)"
+          class="filter-action-title"
+        >
+          {{ filterOption.titleAction }}
+        </p>
+      </ng-template>
+    </ng-container>
+  </div>
+  <div class="px-3 py-2 d-flex justify-content-between">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>{{ filterOption.title }}</mat-label>
+      <mat-select
+        class="mt-0"
+        [formControl]="searchSelectFilterCtrl"
+        [multiple]="filterOption.multiple"
+        (selectionChange)="changeSelectedOption($event)"
+        (openedChange)="triggerOpenedChangeSelect($event)"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [formControl]="selectSearchCtrl"
+            [placeholderLabel]="filterOption.searchPlaceholder"
+            [noEntriesFoundLabel]="filterOption.emptyResultText"
+            [showToggleAllCheckbox]="filterOption.showToggleAllCheckbox"
+            (toggleAll)="onToggleAll($event, filterOption)"
+          ></ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let filterItem of filteredItems"
+          [matTooltip]="filterItem?.title"
+          [value]="filterItem?.value"
+        >
+          {{ filterItem?.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

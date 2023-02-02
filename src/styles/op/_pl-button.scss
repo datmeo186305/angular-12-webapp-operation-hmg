@@ -1,0 +1,152 @@
+@import "../variables";
+
+.pl-btn {
+  width: 100%;
+  max-width: 330px;
+  height: 48px;
+  border-radius: 38px;
+  font-family: $sfPro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 24px;
+  box-shadow: none;
+
+  &[type="button"]:not(:disabled),
+  &[type="reset"]:not(:disabled),
+  &[type="submit"]:not(:disabled),
+  &button:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.pl-btn.btn-primary:not(:disabled):not(.disabled).active:focus,
+.pl-btn.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .pl-btn.btn-primary.dropdown-toggle:focus,
+.pl-btn.btn-primary:focus,
+.pl-btn.btn-secondary:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.pl-btn.btn-primary {
+  background: $monex-color-00;
+  border: none !important;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    $monex-color-00;
+    border: none !important;
+  }
+
+  &:disabled {
+    background: $grey-01;
+    color: $grey-05;
+    border: none !important;
+  }
+
+  &:disabled:hover {
+    cursor: auto;
+  }
+}
+
+.pl-btn.btn-secondary {
+  background: $grey-01;
+  border: none !important;
+  cursor: pointer;
+  color: $grey-10;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: $grey-02;
+    border: none !important;
+  }
+
+  &:disabled {
+    background: $grey-11;
+    color: $grey-12;
+    border: none !important;
+  }
+
+  &:disabled:hover {
+    cursor: auto;
+  }
+
+  &:not(:disabled):not(.disabled):active:focus {
+    box-shadow: none;
+  }
+}
+
+.op-img-upload-btn {
+  background: $dim-light-blue;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .op-img-upload-btn-title {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: $system-color-blue;
+  }
+}
+
+.op-img-download-btn {
+  background: $dim-light-green;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .op-img-download-btn-title {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: $monex-color-00;
+  }
+}
+
+.op-img-delete-btn {
+  background: $dim-light-red;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .op-img-delete-btn-title {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+    color: $system-color-red;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .pl-btn {
+    max-width: 271px;
+  }
+}

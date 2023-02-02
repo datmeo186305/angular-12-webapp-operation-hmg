@@ -1,0 +1,35 @@
+<mat-tab-group dynamicHeight class="op-tab-group">
+  <mat-tab [label]="'merchant.merchant_detail.info' | translate">
+    <ng-template matTabContent>
+      <app-merchant-detail
+        [merchantInfo]="merchantInfo"
+        (triggerUpdateInfo)="openUpdateDialog(0)"
+        (triggerLockMerchant)="lockPrompt()"
+        (triggerUnlockMerchant)="unlockPrompt()"
+        (triggerDeleteMerchant)="deletePrompt()"
+      ></app-merchant-detail>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab [label]="'merchant.merchant_image.title' | translate">
+    <ng-template matTabContent>
+      <app-merchant-logo
+        [merchantInfo]="merchantInfo"
+        [merchantId]="merchantId"
+        (triggerUpdateInfo)="openUpdateDialog(1)"
+        (triggerLockMerchant)="lockPrompt()"
+        (triggerUnlockMerchant)="unlockPrompt()"
+        (triggerDeleteMerchant)="deletePrompt()"
+      ></app-merchant-logo>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab [label]="'merchant.merchant_qr.title' | translate">
+    <ng-template matTabContent>
+      <app-merchant-qr
+        [merchantInfo]="merchantInfo"
+        [merchantQr]="merchantQr"
+      ></app-merchant-qr>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

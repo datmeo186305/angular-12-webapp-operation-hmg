@@ -1,0 +1,34 @@
+@import "src/styles/variables";
+
+.mat-expansion-panel {
+  &:not([class*="mat-elevation-z"]) {
+    border: 1px solid $grey-02;
+    box-shadow: none;
+  }
+
+  .mat-expansion-panel-header {
+    height: 32px;
+    background: $grey-00;
+    box-shadow: inset 0px -1px 0px #f2f2f7;
+  }
+
+  .mat-expansion-panel-header.mat-expanded {
+    height: 32px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  ::ng-deep .mat-expansion-indicator {
+    height: 28px;
+  }
+
+  .mat-expansion-panel-header-title {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: $grey-10;
+  }
+}

@@ -1,0 +1,12 @@
+@import "../../../../../styles/variables";
+
+.fullsize-img-content {
+  padding: 0;
+  font-family: $sfPro;
+
+  img {
+    width: auto;
+    max-height: 90vh;
+    max-width: 90vw;
+  }
+}

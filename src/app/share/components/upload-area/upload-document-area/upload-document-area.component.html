@@ -1,0 +1,88 @@
+<div class="d-flex gap-2" [ngClass]="classes">
+  <div>
+    <div class="op-customer-avatar">
+      <img
+        class="op-customer-avatar-img"
+        [src]="imgSrc"
+        alt="img"
+        *ngIf="imgSrc; else isNotImg"
+        ngxViewer
+        [viewerOptions]="viewerOptions"
+      />
+      <ng-template #isNotImg>
+        <img
+          class="op-customer-avatar-img"
+          src="assets/img/payday-loan/img-holder.png"
+          alt=""
+        />
+      </ng-template>
+
+      <div class="op-customer-avatar-img-zoom">
+        <span class="sprite-group-5-Zoom"></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="op-upload-img-area-desc" *ngIf="description; else hasNotDesc">
+      <p class="op-upload-img-area-desc-content">{{ title }}</p>
+      <p class="op-upload-img-area-description">
+        {{ description }}
+      </p>
+    </div>
+
+    <ng-template #hasNotDesc>
+      <p class="mt-1 upload-img-area-title">
+        {{ title }}
+      </p>
+    </ng-template>
+
+    <!--  Upload  -->
+    <app-document-button
+      [documentType]="documentBtnTypes.UPLOAD"
+      [classes]="'mt-1'"
+      [hidden]="hiddenUploadBtn"
+      *ngIf="!imgSrc; else hasImgSrc"
+      (clickBtn)="changeDocument($event)"
+    ></app-document-button>
+
+    <ng-template #hasImgSrc>
+      <!--  update  -->
+      <app-document-button
+        [documentType]="documentBtnTypes.UPDATE"
+        [classes]="'mt-1'"
+        [hidden]="(!hiddenUploadBtn && hiddenUpdateBtn) || hiddenUpdateBtn"
+        (clickBtn)="changeDocument($event)"
+      ></app-document-button>
+
+      <!--  Download  -->
+      <app-document-button
+        [documentType]="documentBtnTypes.DOWNLOAD"
+        [classes]="'mt-1'"
+        [hidden]="hiddenDownloadBtn"
+        (clickBtn)="changeDocument($event)"
+      ></app-document-button>
+
+      <!--  Delete  -->
+      <app-document-button
+        [documentType]="documentBtnTypes.DELETE"
+        [classes]="'mt-1'"
+        [hidden]="hiddenDeleteBtn"
+        (clickBtn)="changeDocument($event)"
+      ></app-document-button>
+    </ng-template>
+
+    <input type="reset" [id]="'reset-manual-upload-input-' + id" hidden/>
+    <input
+      type="file"
+      [(ngModel)]="file"
+      [id]="'manual-upload-input-' + id"
+      #[{{id}}]
+      (change)="onFileChange($event)"
+      [accept]="acceptFileType"
+      [name]="name"
+      appMaxFileSize
+      [maxSizeOfFile]="maxSizeOfFile"
+      hidden
+    />
+  </div>
+</div>

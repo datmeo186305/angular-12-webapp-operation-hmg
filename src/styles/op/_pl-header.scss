@@ -1,0 +1,238 @@
+@import "../variables";
+$main-font: 14px;
+
+header {
+  z-index: 1;
+}
+
+#monex-op-header {
+  background: #0d0d80;
+  font-family: $sfPro;
+  width: 100%;
+}
+
+.header-container {
+  flex-grow: 1;
+  flex-basis: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(200px);
+  font-family: $sfPro;
+}
+
+#profile-toolbar-container {
+  .button-login,
+  .avatar {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $main-font;
+    font-family: $sfPro;
+  }
+
+  .avatar {
+    width: 32px;
+    background-color: $monex-color-00;
+    border-radius: 50%;
+    color: $white;
+    font-size: 16px;
+  }
+
+  #profile-btn {
+    min-width: 52px;
+    background: none;
+    border: none;
+    color: $white;
+  }
+
+  #manager-name {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: right;
+    letter-spacing: 0.1px;
+    color: $white;
+  }
+
+  #manager-role {
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+    text-transform: uppercase;
+    color: $system-color-yellow;
+  }
+}
+
+#logo-monex-container {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  #logo-monex {
+    height: 28px;
+  }
+
+  .divider-monex-logo {
+    padding: 0 12px;
+    color: #5e59db;
+  }
+
+  #title-monex-op {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: $white;
+    font-family: $sfPro;
+  }
+}
+
+.header-nav-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+  border: none;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.1px;
+  color: $white;
+}
+
+#op-top-navigation {
+  padding: 0 16px;
+  display: flex;
+  height: 48px;
+
+  .op-nav-link {
+    padding: 7px 12px;
+    height: 32px;
+    background: transparent;
+    border-radius: 40px;
+    font-family: $sfPro;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+    color: $grey-10;
+
+    &:active,
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+
+    &:hover {
+      background: $dim-light-blue;
+    }
+
+    &.active {
+      color: $white;
+      background: $monex-color-00;
+    }
+  }
+}
+
+#navigation-bar {
+  padding: 0;
+  background: $white;
+  box-shadow: inset 0px -1px 0px #f2f2f7;
+  font-family: $sfPro;
+
+  h2 {
+    color: white;
+    margin: auto;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+#nav-toolbar-mobile {
+  background: transparent;
+  height: auto;
+}
+
+mat-expansion-panel-header.mat-expansion-panel-header {
+  &.mat-expanded {
+    height: 48px;
+  }
+
+  &.active {
+    background: $monex-color-00;
+    color: $white;
+
+    span {
+      color: $white;
+    }
+  }
+
+  ::ng-deep .mat-expansion-indicator::after {
+    margin-top: -6px;
+  }
+}
+
+.mat-expansion-panel:not(.mat-expanded) {
+  .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
+    span {
+      color: black;
+    }
+  }
+}
+
+.mobile-menu-item {
+  &.active {
+    background: $monex-color-00;
+    color: $white;
+  }
+
+}
+
+.mobile-sub-menu-item {
+  padding-left: 40px;
+}
+
+::ng-deep .sub-menu-desktop {
+  button {
+    background-color: #fff !important;
+  }
+
+  button:hover {
+    background-color: $dim-light-blue !important;
+  }
+
+  .mat-menu-content:not(:empty) {
+    padding: 0;
+  }
+}
+
+.sub-menu-desktop-item {
+  &:hover:not([disabled]) {
+    background: $dim-light-blue;
+  }
+}
+
+#monex-op-header-content {
+  padding: 8px 0;
+}
+
+@media (max-width: 768px) {
+  #monex-op-header-content {
+    //padding: 8px 16px;
+  }
+}
